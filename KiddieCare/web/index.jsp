@@ -12,7 +12,7 @@
         <title>Home</title>
     </head>
     <body>
-        <h1>*Kiddie Care*</h1>
+        <h1>****Kiddie Care****</h1>
         <jsp:directive.include file="Components/Navbar.jsp"/>
     </body>
 </html>
