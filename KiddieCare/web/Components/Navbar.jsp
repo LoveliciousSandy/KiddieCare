@@ -13,7 +13,7 @@
          background-color: blueviolet;
      }
  </style>
-<body>
+
 <div class="bs-example">
     <nav class="navbar navbar-expand-md  ">
         <a href="#" class="navbar-brand">Kiddie Care</a>
@@ -31,5 +31,5 @@
         </div>
     </nav>
 </div>
-</body>
+
 </html>
