@@ -16,8 +16,8 @@ import java.sql.SQLException;
 public class DBUtil {
     
    private final String username = "root";
-   private final String password = "123";
-   private final String url = "jdbc:mysql://localhost/CHDR"; 
+   private final String password = "1234";
+   private final String url = "jdbc:mysql://localhost/chdr"; 
    
    public Connection getConnection() {
        Connection conn = null;
