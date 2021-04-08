@@ -245,6 +245,34 @@
                 background: blueviolet;
                 color: #ffffff;
             }
+            .btn-gender{
+                display: inline-block;
+                padding: 120px 120px;
+                background: rgb(220,220,220);
+                font-weight: bold;
+                color: rgb(120,120,120);
+                border: none;
+                outline: none;
+                border-radius: 3px;
+                cursor: pointer;
+                transition: ease .3s;
+                margin-left: 20px;
+            }
+
+            #boy:hover{
+                background-color: dodgerblue;
+            }
+            #girl:hover{
+                background-color: deeppink;
+            }
+
+            #searchnic{
+                padding: 10px 25px;
+                margin-top: 40px;
+                margin-left: -30px;
+                background-color: blueviolet;
+                border: none;
+            }
         </style>
     </head>
     <body>
@@ -310,11 +338,11 @@
                                         data-target="#collapseSubItems4"
                                         aria-controls="collapseSubItems4"
                                         aria-expanded="false"
-                                        >Item 4</a>
+                                        >Growth Tracker</a>
                                     <ul class="nav-second-level collapse" id="collapseSubItems4" data-parent="#navAccordion">
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="#">
-                                                <span class="nav-link-text">Item 4.1</span>
+                                        <li class="nav-item" >
+                                            <a class="nav-link" href="#tabpaneladdrecord" data-toggle="tab" data-target="tabpaneladdrecord" role="tab" aria-selected="true">
+                                                <span class="nav-link-text">Add Record</span>
                                             </a>
                                         </li>
                                         <li class="nav-item">
@@ -371,8 +399,8 @@
                 <div class="col-md-10"> 
                     <div class="tab-content pt-0">
 
-                        <!--        Add Record-->
-                        <div  style="margin-top: 70px" class="tab-pane fade show active " id="tabpanel1" role="tabpanel">
+
+                        <div  style="margin-top: 70px" class="tab-pane fade  " id="tabpanel1" role="tabpanel">
                             <h2>Dashboard</h2>
                         </div>
                         <div  style="margin-top: 70px" class="tab-pane fade" id="tabpanel2" role="tabpanel">
@@ -572,9 +600,9 @@
                                     </div>
                                 </div>
                                 <center>  
-                                <button type="submit">Submit</button>
+                                    <button type="submit">Submit</button>
                                 </center> 
-                                
+
                             </form>
                         </div>
                         <br><br>
@@ -582,35 +610,153 @@
                             <h2>Search Child</h2>
 
                         </div>
+
+                        <!--                            <h2>Add Record</h2>
+                                                    <div  class="container-fluid">
+                                                        <div class="row">
+                                                            <div class="col-md-3">
+                                                                <label>
+                                                                    <input type="text" class="input" placeholder="Search by NIC"> 
+                                                                    <div class="line-box">
+                                                                        <div class="line"></div>
+                                                                    </div>
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <button id="searchnic" type="submit"><i class="fa fa-search"></i></button>
+                                                               
+                                                            </div>
+                                                        </div>
+                                                    </div>-->
+                        <div  style="margin-top: 70px" class="tab-pane fade show active" id="tabpaneladdrecord" role="tabpanel">
+                            <h2>Add Record</h2><br>
+                            <!--                            <form>-->
+                            <div  class="container-fluid">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label>
+                                            <p class="label-txt">Search by NIC</p>
+                                            <input type="text" class="input">
+                                            <div class="line-box">
+                                                <div class="line"></div>
+                                            </div>
+                                        </label>
+                                    </div>	
+                                    <div class="col-md-2">
+                                        <button id="searchnic" type="submit"><i class="fa fa-search"></i></button>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label>
+                                            <select class="custom-select" aria-label="Default select example">
+                                                <option value="1">One</option>
+                                                <option value="2">Two</option>
+                                                <option value="3">Three</option>
+                                            </select>
+                                        </label>
+                                    </div>	
+                                </div>
+                            </div>
+                            <!--                            </form>-->
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label>
+                                            <p class="label-txt">Child Name</p>
+                                            <input type="text" class="input">
+                                            <div class="line-box">
+                                                <div class="line"></div>
+                                            </div>
+                                        </label>
+                                    </div>	
+                                    <div class="col-md-3 ">
+                                        <label>
+                                            <p class="label-txt">Date of Measurement</p>
+                                            <input type="text" class="input">
+                                            <div class="line-box">
+                                                <div class="line"></div>
+                                            </div>
+                                        </label>
+                                    </div>	
+                                    <div class="col-md-2 ">
+                                        <label>
+                                            <p class="label-txt">Weight(in Kg)</p>
+                                            <input type="text" class="input">
+                                            <div class="line-box">
+                                                <div class="line"></div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label>
+                                            <p class="label-txt">Height(in cm)</p>
+                                            <input type="text" class="input">
+                                            <div class="line-box">
+                                                <div class="line"></div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                                 <center>  
+                                <button type="submit">Submit</button>
+                            </center>
+                            </div><br><br>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="table-responsive col-md-12">
+                                        <table id="sort2" class="grid table table-bordered table-sortable">
+                                            <thead>
+                                                <tr><th>Date</th><th>Weight(Kg)</th><th>Height(cm)</th></tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td data-id="11">2021/04/07</td>
+                                                    <td><input type="text" value="name 1" class="form-control"></td>
+                                                    <td><input type="text" value="email 1" class="form-control"></td>
+                                                    <td><button class="btn btn-primary"><i class="far fa-edit"></i>Update</button></td>
+                                                </tr>
+                                               
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
+
                 </div>
             </div>
-        </div> 
+        </div>
         <!-- Static Modal -->
-<div class="modal modal-static fade" id="myModal" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-      
-        <!-- Modal Header -->
-        <div class="modal-header">
-          <h4 class="modal-title">Modal Heading</h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <div class="modal modal-static fade" id="myModal" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Modal Heading</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <div class="container"><div class="row">
+                                <div class="col-md-6 ">
+                                    <button id="boy"class="btn btn-gender">Its a Boy</button></div>
+                                <div class="col-md-6 ">
+                                    <button id="girl" class="btn btn-gender">Its a Girl</button></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+
+                </div>
+            </div>
         </div>
-        
-        <!-- Modal body -->
-        <div class="modal-body">
-            <button>Its a Boy</button>
-              <button>Its a Girl</button>
-        </div>
-        
-        <!-- Modal footer -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        </div>
-        
-      </div>
-    </div>
-  </div>
 
     </body>
     <script>
@@ -621,14 +767,23 @@
             });
         });
 
-//        $(document).ready(function () {
-//            $('.nav-link').click(function () {
-//                $('nav-link').not(this).removeClass('active');
-//                //$(this).add('aria-selected="true"');
-//                $(this).toggleClass('active');
-//                 
-//            });
-//        });
+        //        $(document).ready(function () {
+        //            $('.nav-link').click(function () {
+        //                $('nav-link').not(this).removeClass('active');
+        //                //$(this).add('aria-selected="true"');
+        //                $(this).toggleClass('active');
+        //                 
+        //            });
+        //        });
+
+        $(document).ready(function () {
+            $('.nav-link').click(function () {
+                $('.tab-pane fade').not(this).removeClass('tab-pane fade show active ');
+                $(this).toggleClass('show active');
+
+            });
+        });
+
         $(document).ready(function () {
 
             $('.input').focus(function () {
@@ -643,11 +798,11 @@
             });
 
         });
-//     $( "#m" ).click(function(ev) {
-//    ev.stopImmediatePropagation(); // sometimes click event fires twice in jQuery you can prevent it by this method.
-//    $( "#myModal" ).show(); // you should use native function of Bootstrap.
-//});
-      
+        //     $( "#m" ).click(function(ev) {
+        //    ev.stopImmediatePropagation(); // sometimes click event fires twice in jQuery you can prevent it by this method.
+        //    $( "#myModal" ).show(); // you should use native function of Bootstrap.
+        //});
+
 
     </script>
 </html>
