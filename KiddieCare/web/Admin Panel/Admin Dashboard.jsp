@@ -459,7 +459,7 @@
                                         </div>	
                                         <div class="col-md-4 ">
                                             <label>
-                                                <p class="label-txt">Email</p>
+                                                <p class="label-txt">Contact No</p>
                                                 <input type="text" class="input">
                                                 <div class="line-box">
                                                     <div class="line"></div>
@@ -472,7 +472,16 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <label>
-                                                <p class="label-txt">Contact No</p>
+                                                <p class="label-txt">Email</p>
+                                                <input type="text" class="input">
+                                                <div class="line-box">
+                                                    <div class="line"></div>
+                                                </div>
+                                            </label>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label>
+                                                <p class="label-txt">Password</p>
                                                 <input type="text" class="input">
                                                 <div class="line-box">
                                                     <div class="line"></div>
