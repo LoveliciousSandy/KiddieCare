@@ -31,12 +31,15 @@ public class Login extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
            try (PrintWriter out = response.getWriter()) {
-       out.println("<h1>Servlet Login at " + request.getContextPath() + "</h1>");
-       
-       String userName = request.getParameter("admin");
-       String password = request.getParameter("admin");
-       
-       
+       String userName = request.getParameter("nic");
+       String password = request.getParameter("password");
+      
+               if (userName.equals("admin123")&& password.equals("admin")) {
+                    response.sendRedirect(request.getContextPath()+ "/AdminPanel/AdminDashboard.jsp");
+                   
+               } else {
+                    response.sendRedirect(request.getContextPath()+ "/UserPanel/Login.jsp");
+               }
        
        
        

@@ -49,12 +49,12 @@
                         <h2 class="text-center">Login Now</h2>
                         <form class="login-form" action="../Login" method="POST">
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Username</label>
-                                <input type="text" class="form-control" placeholder="">
+                                <label for="exampleInputEmail1" >User NIC</label>
+                                <input type="text" class="form-control" placeholder=""name="nic">
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Password</label>
-                                <input type="password" class="form-control" placeholder="">
+                                <label for="exampleInputPassword1" >Password</label>
+                                <input type="password" class="form-control" placeholder="" name="password">
                             </div>
                             <div class="form-check">
                                 <label class="form-check-label">
