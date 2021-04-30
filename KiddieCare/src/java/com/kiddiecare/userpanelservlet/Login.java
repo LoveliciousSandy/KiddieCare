@@ -33,7 +33,6 @@ public class Login extends HttpServlet {
            try (PrintWriter out = response.getWriter()) {
        String userName = request.getParameter("nic");
        String password = request.getParameter("password");
-      
                if (userName.equals("admin123")&& password.equals("admin")) {
                     response.sendRedirect(request.getContextPath()+ "/AdminPanel/AdminDashboard.jsp");
                    
