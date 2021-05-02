@@ -811,20 +811,20 @@
 
 
         function searchgNIC() {
-        
-        var nic =   $('#NICNo').val();
+
+            var nic = $('#NICNo').val();
             alert($('#NICNo').val());
 
             var xmlHttpRequest = new XMLHttpRequest();
             xmlHttpRequest.onreadystatechange = function () {
                 if (xmlHttpRequest.readyState === 4 && xmlHttpRequest.status === 200) {
- alert('hshryrhghd');
+                    alert('hshryrhghd');
                 }
             };
-            xmlHttpRequest.open("GET", "../SearchChild?NIC="+nic, true);
-             alert('hsh3444444444');
+            xmlHttpRequest.open("GET", "../SearchChild?NIC=" + nic, true);
+            alert('hsh3444444444');
             xmlHttpRequest.send();
-                alert('hsh');
+            alert('hsh');
 
         }
     </script>

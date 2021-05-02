@@ -3,7 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/D:/NotitiaZone/GITHUB/KiddieCare/KiddieCare/web/UserPanel/Login.jsp</file>
+            <file>file:/D:/NotitiaZone/GITHUB/KiddieCare/KiddieCare/src/java/com/kiddiecare/servlet/ChildRegistraion.java</file>
+            <file>file:/D:/NotitiaZone/GITHUB/KiddieCare/KiddieCare/web/AdminPanel/AdminDashboard.jsp</file>
+            <file>file:/D:/NotitiaZone/GITHUB/KiddieCare/KiddieCare/src/java/com/kiddiecare/dbutil/DAO.java</file>
+            <file>file:/D:/NotitiaZone/GITHUB/KiddieCare/KiddieCare/src/java/com/kiddiecare/dbutil/QueryDAO.java</file>
+            <file>file:/D:/NotitiaZone/GITHUB/KiddieCare/KiddieCare/src/java/com/kiddiecare/servlet/SearchChild.java</file>
             <file>file:/D:/NotitiaZone/GITHUB/KiddieCare/KiddieCare/web/index.jsp</file>
+            <file>file:/D:/NotitiaZone/GITHUB/KiddieCare/KiddieCare/web/Components/Navbar.jsp</file>
         </group>
     </open-files>
 </project-private>

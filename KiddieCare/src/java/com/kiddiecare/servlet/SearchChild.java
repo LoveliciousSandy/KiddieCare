@@ -8,6 +8,11 @@ package com.kiddiecare.servlet;
 import com.kiddiecare.dbutil.QueryDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -43,12 +48,22 @@ public class SearchChild extends HttpServlet {
             out.println("<h1>Servlet SearchChild at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
+            
           String nic =  request.getParameter("NIC");
-          
+            System.out.println(nic);
             QueryDAO queryDAO= new QueryDAO();
-//            String searchNIC= "S"
-//            queryDAO.search();
+            String searchNameByNICQuery= "SELECT child_name FROM chdr.child JOIN chdr.user on child.user_register_no = user.user_register_no where user.nic='"+nic+"'";
+            try {
+                ResultSet resulSet =  queryDAO.search(searchNameByNICQuery);
+                while (resulSet.next()) {                    
+                    System.out.println(resulSet.getString("child_name"));
+                }
+                
+                
 //            
+            } catch (SQLException ex) {
+                Logger.getLogger(SearchChild.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 

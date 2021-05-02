@@ -13,7 +13,7 @@
          background-color: blueviolet;
      }
  </style>
-<body>
+
 <div class="bs-example">
     <nav class="navbar navbar-expand-md  ">
         <a href="#" class="navbar-brand">Kiddie Care</a>
@@ -26,10 +26,10 @@
                 <a href="#" class="nav-item nav-link active">Home</a>
             </div>
             <div class="navbar-nav ml-auto">
-                <a href="<%= request.getContextPath()%>/JSP/Login.jsp" class="nav-item nav-link">Login</a>
+                <a href="<%= request.getContextPath()%>/UserPanel/Login.jsp" class="nav-item nav-link">Login</a>
             </div>
         </div>
     </nav>
 </div>
-</body>
+
 </html>
