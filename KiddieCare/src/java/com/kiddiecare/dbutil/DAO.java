@@ -13,6 +13,6 @@ import java.sql.SQLException;
  */
 public interface DAO {
     
- public void save (String sqlquery) throws SQLException;
+ public boolean save (String sqlquery) throws SQLException;
  
 }

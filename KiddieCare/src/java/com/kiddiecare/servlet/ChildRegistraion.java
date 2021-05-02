@@ -48,18 +48,18 @@ public class ChildRegistraion extends HttpServlet {
             out.println("<h1>Servlet ChildRegistraion at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
-            
+
             QueryDAO queryDAO = new QueryDAO();
             //save user
             String nic = request.getParameter("guardiannic");
-            String guardianName =request.getParameter("guardianname");
-            String email=request.getParameter("email");
+            String guardianName = request.getParameter("guardianname");
+            String email = request.getParameter("email");
             String password = request.getParameter("password");
-            String contactNo=request.getParameter("contactno");
-            String address=request.getParameter("address");
-            String motherName=request.getParameter("mothername");
-            String motherAge=request.getParameter("motherage");
-            String numberOfChildren=request.getParameter("nochildren");
+            String contactNo = request.getParameter("contactno");
+            String address = request.getParameter("address");
+            String motherName = request.getParameter("mothername");
+            String motherAge = request.getParameter("motherage");
+            String numberOfChildren = request.getParameter("nochildren");
 
             //save child
             String childBirthRegisterNo = request.getParameter("childbirthregisterno");
@@ -76,20 +76,27 @@ public class ChildRegistraion extends HttpServlet {
             String length = request.getParameter("birthlength");
 
             String sqlquery1 = "INSERT INTO user VALUES ('" + nic + "','" + guardianName + "','" + email + "','" + contactNo + "','" + address + "',"
-                    + "'" + motherName + "','" + motherAge + "','" + numberOfChildren+"')";
-            
+                    + "'" + motherName + "','" + motherAge + "','" + numberOfChildren + "')";
+
             String sqlquery2 = "INSERT INTO child VALUES('" + childBirthRegisterNo + "','" + userNic + "','" + healthPhysicianNo + "','" + familyHealthPhysicianNo + "','" + childName + "',"
                     + "'" + gender + "','" + dob + "','" + age + "','" + month + "','" + days + "','" + weight + "','" + length + "')";
-            
-            String sqlquery3 = "INSERT INTO login VALUES('"+userNic+"','"+password+"')";
-            
-            
-            queryDAO.save(sqlquery1); 
+
+            String sqlquery3 = "INSERT INTO login VALUES('" + userNic + "','" + password + "')";
+
+            queryDAO.save(sqlquery1);
             queryDAO.save(sqlquery2);
-             queryDAO.save(sqlquery3);
- response.sendRedirect("index.jsp");
-        } catch (SQLException ex) {
-            Logger.getLogger(ChildRegistraion.class.getName()).log(Level.SEVERE, null, ex);
+            queryDAO.save(sqlquery3);
+            
+            if (queryDAO.save(sqlquery1)&& (queryDAO.save(sqlquery2) && (queryDAO.save(sqlquery3)))) {
+                response.sendRedirect(request.getContextPath()+"AdminPanel/AdminDashboard.jsp");
+                
+            } else {
+                response.sendRedirect("Error.jsp");
+                
+            }
+            
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
     }
 

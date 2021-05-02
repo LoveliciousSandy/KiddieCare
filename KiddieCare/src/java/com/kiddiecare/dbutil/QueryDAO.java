@@ -20,9 +20,11 @@ public class QueryDAO implements DAO {
     }
 
     @Override
-    public void save(String sqlquery) throws SQLException {
+    public boolean save(String sqlquery) throws SQLException {
+        boolean rowinserted = false;
         Statement stmt = new DBUtil().getConnection().createStatement();
-        stmt.executeUpdate(sqlquery);
+        rowinserted= stmt.executeUpdate(sqlquery)>0;
+        return rowinserted;
       
 
     }
