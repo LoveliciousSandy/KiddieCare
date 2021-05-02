@@ -46,9 +46,9 @@ public class SearchChild extends HttpServlet {
           String nic =  request.getParameter("NIC");
           
             QueryDAO queryDAO= new QueryDAO();
-            String searchNIC= "S"
-            queryDAO.search();
-            
+//            String searchNIC= "S"
+//            queryDAO.search();
+//            
         }
     }
 
