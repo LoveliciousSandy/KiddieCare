@@ -5,6 +5,7 @@
  */
 package com.kiddiecare.dbutil;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -14,5 +15,6 @@ import java.sql.SQLException;
 public interface DAO {
     
  public boolean save (String sqlquery) throws SQLException;
+public ResultSet search(String sqlquer) throws SQLException;
  
 }

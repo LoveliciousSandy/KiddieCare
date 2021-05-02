@@ -545,14 +545,14 @@
                                                 </div>
                                             </label>
                                         </div>
-                                         <div class="col-md-2">
+                                        <div class="col-md-2">
                                             <label>
                                                 <p class="label-txt">Gender</p>
                                                 <div  style="color: rgb(120,120,120); padding-top: 28px; padding-left: 20px">
                                                     <input class="form-check-input" type="radio" name="gender" id="boy">
-                                                Boy &emsp;&emsp;
-                                                <input class="form-check-input" type="radio" name="gender" id="girl">
-                                                   Girl
+                                                    Boy &emsp;&emsp;
+                                                    <input class="form-check-input" type="radio" name="gender" id="girl">
+                                                    Girl
                                                 </div>
                                             </label>
                                         </div>
@@ -565,12 +565,12 @@
                                                 </div>
                                             </label>
                                         </div>	
-                                      
+
                                     </div>
                                 </div>
                                 <div class="container-fluid">
                                     <div class="row">
-                                          <div class="col-md-1 ">
+                                        <div class="col-md-1 ">
                                             <label>
                                                 <p class="label-txt">Age</p>
                                                 <input type="text" class="input" name="childage">
@@ -600,8 +600,8 @@
 
                                             </label>
                                         </div>
-                                         <div class="col-md-1 ">
-                                          
+                                        <div class="col-md-1 ">
+
                                         </div>
                                         <div class="col-md-2">
                                             <label>
@@ -634,24 +634,6 @@
                             <h2>Search Child</h2>
 
                         </div>
-
-                        <!--                            <h2>Add Record</h2>
-                                                    <div  class="container-fluid">
-                                                        <div class="row">
-                                                            <div class="col-md-3">
-                                                                <label>
-                                                                    <input type="text" class="input" placeholder="Search by NIC"> 
-                                                                    <div class="line-box">
-                                                                        <div class="line"></div>
-                                                                    </div>
-                                                                </label>
-                                                            </div>
-                                                            <div class="col-md-2">
-                                                                <button id="searchnic" type="submit"><i class="fa fa-search"></i></button>
-                                                               
-                                                            </div>
-                                                        </div>
-                                                    </div>-->
                         <div  style="margin-top: 70px" class="tab-pane fade show active" id="tabpaneladdrecord" role="tabpanel">
                             <h2>Add Record</h2><br>
                             <!--                            <form>-->
@@ -660,14 +642,14 @@
                                     <div class="col-md-4">
                                         <label>
                                             <p class="label-txt">Search by NIC</p>
-                                            <input type="text" class="input">
+                                            <input type="text" class="input" id="NICNo">
                                             <div class="line-box">
                                                 <div class="line"></div>
                                             </div>
                                         </label>
                                     </div>	
                                     <div class="col-md-2">
-                                        <button id="searchnic" type="submit"><i class="fa fa-search"></i></button>
+                                        <button id="searchnic" type="submit" onclick="searchgNIC();"><i class="fa fa-search"></i></button>
                                     </div>
                                     <div class="col-md-3">
                                         <label>
@@ -752,35 +734,35 @@
             </div>
         </div>
         <!-- Static Modal -->
-<!--        <div class="modal modal-static fade" id="myModal" role="dialog" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-lg">
-                <div class="modal-content">
-
-                     Modal Header 
-                    <div class="modal-header">
-                        <h4 class="modal-title">Modal Heading</h4>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-
-                     Modal body 
-                    <div class="modal-body">
-                        <div class="container"><div class="row">
-                                <div class="col-md-6 ">
-                                    <button id="boy"class="btn btn-gender" name="boy">Its a Boy</button></div>
-                                <div class="col-md-6 ">
-                                    <button id="girl" class="btn btn-gender" name="girl">Its a Girl</button></div>
+        <!--        <div class="modal modal-static fade" id="myModal" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                        <div class="modal-content">
+        
+                             Modal Header 
+                            <div class="modal-header">
+                                <h4 class="modal-title">Modal Heading</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
                             </div>
+        
+                             Modal body 
+                            <div class="modal-body">
+                                <div class="container"><div class="row">
+                                        <div class="col-md-6 ">
+                                            <button id="boy"class="btn btn-gender" name="boy">Its a Boy</button></div>
+                                        <div class="col-md-6 ">
+                                            <button id="girl" class="btn btn-gender" name="girl">Its a Girl</button></div>
+                                    </div>
+                                </div>
+                            </div>
+        
+                             Modal footer 
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+        
                         </div>
                     </div>
-
-                     Modal footer 
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    </div>
-
-                </div>
-            </div>
-        </div>-->
+                </div>-->
 
     </body>
     <script>
@@ -828,5 +810,22 @@
         //});
 
 
+        function searchgNIC() {
+        
+        var nic =   $('#NICNo').val();
+            alert($('#NICNo').val());
+
+            var xmlHttpRequest = new XMLHttpRequest();
+            xmlHttpRequest.onreadystatechange = function () {
+                if (xmlHttpRequest.readyState === 4 && xmlHttpRequest.status === 200) {
+ alert('hshryrhghd');
+                }
+            };
+            xmlHttpRequest.open("GET", "../SearchChild?NIC="+nic, true);
+             alert('hsh3444444444');
+            xmlHttpRequest.send();
+                alert('hsh');
+
+        }
     </script>
 </html>

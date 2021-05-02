@@ -7,6 +7,7 @@ package com.kiddiecare.dbutil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -27,6 +28,13 @@ public class QueryDAO implements DAO {
         return rowinserted;
       
 
+    }
+
+    @Override
+    public ResultSet search(String sqlquery) throws SQLException {
+        Statement stmt = new DBUtil().getConnection().createStatement();
+        ResultSet resultset = stmt.executeQuery(sqlquery);
+         return resultset;
     }
 
 }

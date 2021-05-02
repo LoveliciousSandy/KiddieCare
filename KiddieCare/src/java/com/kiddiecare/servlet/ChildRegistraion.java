@@ -63,7 +63,7 @@ public class ChildRegistraion extends HttpServlet {
 
             //save child
             String childBirthRegisterNo = request.getParameter("childbirthregisterno");
-            String userNic = request.getParameter("guardiannic");
+          //  String userNic = request.getParameter("guardiannic");user_user_register_no
             String healthPhysicianNo = request.getParameter("physicianno1");
             String familyHealthPhysicianNo = request.getParameter("physicianno2");
             String childName = request.getParameter("childname");
@@ -78,10 +78,12 @@ public class ChildRegistraion extends HttpServlet {
             String sqlquery1 = "INSERT INTO user VALUES ('" + nic + "','" + guardianName + "','" + email + "','" + contactNo + "','" + address + "',"
                     + "'" + motherName + "','" + motherAge + "','" + numberOfChildren + "')";
 
-            String sqlquery2 = "INSERT INTO child VALUES('" + childBirthRegisterNo + "','" + userNic + "','" + healthPhysicianNo + "','" + familyHealthPhysicianNo + "','" + childName + "',"
+            String sqlquery2 = "INSERT INTO child VALUES('" + childBirthRegisterNo + "',(select user_register_no from chdr.user where user.nic = '"+nic+"'),'" + healthPhysicianNo + "','" + familyHealthPhysicianNo + "','" + childName + "',"
                     + "'" + gender + "','" + dob + "','" + age + "','" + month + "','" + days + "','" + weight + "','" + length + "')";
-
-            String sqlquery3 = "INSERT INTO login VALUES('" + userNic + "','" + password + "')";
+//insert into chdr.child values ('63924',(select user_register_no from chdr.user where user.nic = '547410017'),'34928','3279','Poorna','girl','1992/04/16',1,1,2,2.5,50);
+            
+            
+            String sqlquery3 = "INSERT INTO login VALUES('" + nic + "','" + password + "')";
 
             queryDAO.save(sqlquery1);
             queryDAO.save(sqlquery2);
