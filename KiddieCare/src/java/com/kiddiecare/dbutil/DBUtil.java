@@ -17,13 +17,15 @@ public class DBUtil {
     
    private final String username = "root";
    private final String password = "1234";
-   private final String url = "jdbc:mysql://localhost/chdr"; 
+   private final String url = "jdbc:mysql://localhost:3306/chdr"; 
    
    public Connection getConnection() {
+   
        Connection conn = null;
        try {
-        Class.forName("com.mysql.cj.jdbc.Driver");
+        Class.forName("com.mysql.jdbc.Driver");
         conn  = DriverManager.getConnection(url, username, password);
+        
        } catch(ClassNotFoundException e) {
            System.err.print("Cannot load JDBC driver");
        } catch (SQLException e) {
@@ -36,5 +38,9 @@ public class DBUtil {
            System.err.print("Wrong schema");
        }
        return conn;
+    
+   
    }
+   
+    
 }

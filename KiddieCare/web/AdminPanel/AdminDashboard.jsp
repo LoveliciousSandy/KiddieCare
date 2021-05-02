@@ -405,13 +405,13 @@
                         </div>
                         <div  style="margin-top: 70px" class="tab-pane fade" id="tabpanel2" role="tabpanel">
                             <h2>Add Child</h2><br>
-                            <form>
+                            <form action="../ChildRegistraion" method="POST">
                                 <div  class="container-fluid">
                                     <div class="row">
                                         <div class="col-md-4">
                                             <label>
-                                                <p class="label-txt">Health Physicion No</p>
-                                                <input type="text" class="input">
+                                                <p class="label-txt">Health Physician No</p>
+                                                <input type="text" class="input" name="physicianno1">
                                                 <div class="line-box">
                                                     <div class="line"></div>
                                                 </div>
@@ -419,8 +419,8 @@
                                         </div>	
                                         <div class="col-md-4 ">
                                             <label>
-                                                <p class="label-txt">Family Health Physicion No</p>
-                                                <input type="text" class="input">
+                                                <p class="label-txt">Family Health Physician No</p>
+                                                <input type="text" class="input" name="physicianno2">
                                                 <div class="line-box">
                                                     <div class="line"></div>
                                                 </div>
@@ -428,8 +428,8 @@
                                         </div>	
                                         <div class="col-md-4 ">
                                             <label>
-                                                <p class="label-txt">Child Birth Registered Date</p>
-                                                <input type="text" class="input">
+                                                <p class="label-txt">Child Birth Registered No</p>
+                                                <input type="text" class="input" name="childbirthregisterno">
                                                 <div class="line-box">
                                                     <div class="line"></div>
                                                 </div>
@@ -442,7 +442,7 @@
                                         <div class="col-md-4">
                                             <label>
                                                 <p class="label-txt">Guardian NIC</p>
-                                                <input type="text" class="input">
+                                                <input type="text" class="input" name="guardiannic">
                                                 <div class="line-box">
                                                     <div class="line"></div>
                                                 </div>
@@ -451,7 +451,7 @@
                                         <div class="col-md-4 ">
                                             <label>
                                                 <p class="label-txt">Guardian Name</p>
-                                                <input type="text" class="input">
+                                                <input type="text" class="input" name="guardianname">
                                                 <div class="line-box">
                                                     <div class="line"></div>
                                                 </div>
@@ -460,7 +460,7 @@
                                         <div class="col-md-4 ">
                                             <label>
                                                 <p class="label-txt">Contact No</p>
-                                                <input type="text" class="input">
+                                                <input type="text" class="input" name="contactno">
                                                 <div class="line-box">
                                                     <div class="line"></div>
                                                 </div>
@@ -473,7 +473,7 @@
                                         <div class="col-md-4">
                                             <label>
                                                 <p class="label-txt">Email</p>
-                                                <input type="text" class="input">
+                                                <input type="text" class="input" name="email">
                                                 <div class="line-box">
                                                     <div class="line"></div>
                                                 </div>
@@ -482,7 +482,7 @@
                                         <div class="col-md-4">
                                             <label>
                                                 <p class="label-txt">Password</p>
-                                                <input type="text" class="input">
+                                                <input type="text" class="input" name="password">
                                                 <div class="line-box">
                                                     <div class="line"></div>
                                                 </div>
@@ -491,7 +491,7 @@
                                         <div class="col-md-5">
                                             <label>
                                                 <p class="label-txt">Address</p>
-                                                <input type="text" class="input">
+                                                <input type="text" class="input" name="address">
                                                 <div class="line-box">
                                                     <div class="line"></div>
                                                 </div>
@@ -505,7 +505,7 @@
                                         <div class="col-md-4 ">
                                             <label>
                                                 <p class="label-txt">Mother's Name</p>
-                                                <input type="text" class="input">
+                                                <input type="text" class="input" name="mothername">
                                                 <div class="line-box">
                                                     <div class="line"></div>
                                                 </div>
@@ -514,7 +514,7 @@
                                         <div class="col-md-2 ">
                                             <label>
                                                 <p class="label-txt">Mother's Age</p>
-                                                <input type="text" class="input">
+                                                <input type="text" class="input" name="motherage">
                                                 <div class="line-box">
                                                     <div class="line"></div>
                                                 </div>
@@ -524,7 +524,7 @@
                                         <div class="col-md-3 ">
                                             <label>
                                                 <p class="label-txt">Number of Children</p>
-                                                <input type="text" class="input">
+                                                <input type="text" class="input" name="nochildren">
                                                 <div class="line-box">
                                                     <div class="line"></div>
                                                 </div>
@@ -539,25 +539,41 @@
                                         <div class="col-md-4">
                                             <label>
                                                 <p class="label-txt">Child Name</p>
-                                                <input type="text" class="input">
+                                                <input type="text" class="input" name="childname">
                                                 <div class="line-box">
                                                     <div class="line"></div>
+                                                </div>
+                                            </label>
+                                        </div>
+                                         <div class="col-md-2">
+                                            <label>
+                                                <p class="label-txt">Gender</p>
+                                                <div  style="color: rgb(120,120,120); padding-top: 28px; padding-left: 20px">
+                                                    <input class="form-check-input" type="radio" name="gender" id="boy">
+                                                Boy &emsp;&emsp;
+                                                <input class="form-check-input" type="radio" name="gender" id="girl">
+                                                   Girl
                                                 </div>
                                             </label>
                                         </div>
                                         <div class="col-md-3">
                                             <label>
                                                 <p class="label-txt">Date of Birth</p>
-                                                <input type="text" class="input">
+                                                <input type="text" class="input" name="childbirthday">
                                                 <div class="line-box">
                                                     <div class="line"></div>
                                                 </div>
                                             </label>
                                         </div>	
-                                        <div class="col-md-1 ">
+                                      
+                                    </div>
+                                </div>
+                                <div class="container-fluid">
+                                    <div class="row">
+                                          <div class="col-md-1 ">
                                             <label>
                                                 <p class="label-txt">Age</p>
-                                                <input type="text" class="input">
+                                                <input type="text" class="input" name="childage">
                                                 <div class="line-box">
                                                     <div class="line"></div>
                                                 </div>
@@ -567,7 +583,7 @@
                                         <div class="col-md-1 ">
                                             <label>
                                                 <p class="label-txt">Month</p>
-                                                <input type="text" class="input">
+                                                <input type="text" class="input" name="month">
                                                 <div class="line-box">
                                                     <div class="line"></div>
                                                 </div>
@@ -577,21 +593,20 @@
                                         <div class="col-md-1 ">
                                             <label>
                                                 <p class="label-txt">Days</p>
-                                                <input type="text" class="input">
+                                                <input type="text" class="input" name="days">
                                                 <div class="line-box">
                                                     <div class="line"></div>
                                                 </div>
 
                                             </label>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="container-fluid">
-                                    <div class="row">
+                                         <div class="col-md-1 ">
+                                          
+                                        </div>
                                         <div class="col-md-2">
                                             <label>
                                                 <p class="label-txt">Birth Weight(Kg)</p>
-                                                <input type="text" class="input">
+                                                <input type="text" class="input" name="birthweight">
                                                 <div class="line-box">
                                                     <div class="line"></div>
                                                 </div>
@@ -600,7 +615,7 @@
                                         <div class="col-md-2">
                                             <label>
                                                 <p class="label-txt">Birth Length(cm)</p>
-                                                <input type="text" class="input">
+                                                <input type="text" class="input" name="birthlength">
                                                 <div class="line-box">
                                                     <div class="line"></div>
                                                 </div>
@@ -705,9 +720,9 @@
                                         </label>
                                     </div>
                                 </div>
-                                 <center>  
-                                <button type="submit">Submit</button>
-                            </center>
+                                <center>  
+                                    <button type="submit">Submit</button>
+                                </center>
                             </div><br><br>
                             <div class="container">
                                 <div class="row">
@@ -723,7 +738,7 @@
                                                     <td><input type="text" value="email 1" class="form-control"></td>
                                                     <td><button class="btn btn-primary"><i class="far fa-edit"></i>Update</button></td>
                                                 </tr>
-                                               
+
                                             </tbody>
                                         </table>
                                     </div>
@@ -737,35 +752,35 @@
             </div>
         </div>
         <!-- Static Modal -->
-        <div class="modal modal-static fade" id="myModal" role="dialog" aria-hidden="true">
+<!--        <div class="modal modal-static fade" id="myModal" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content">
 
-                    <!-- Modal Header -->
+                     Modal Header 
                     <div class="modal-header">
                         <h4 class="modal-title">Modal Heading</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
 
-                    <!-- Modal body -->
+                     Modal body 
                     <div class="modal-body">
                         <div class="container"><div class="row">
                                 <div class="col-md-6 ">
-                                    <button id="boy"class="btn btn-gender">Its a Boy</button></div>
+                                    <button id="boy"class="btn btn-gender" name="boy">Its a Boy</button></div>
                                 <div class="col-md-6 ">
-                                    <button id="girl" class="btn btn-gender">Its a Girl</button></div>
+                                    <button id="girl" class="btn btn-gender" name="girl">Its a Girl</button></div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Modal footer -->
+                     Modal footer 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
 
                 </div>
             </div>
-        </div>
+        </div>-->
 
     </body>
     <script>

@@ -9,25 +9,20 @@ package com.kiddiecare.javabean;
  *
  * @author Senani
  */
-public class Account {
+public class Login {
 
-    private String usernic;
+    private String userNic;
     private String password;
 
-    public Account() {
+    public Login() {
     }
 
-    public Account(String usernic, String password) {
-        this.usernic = usernic;
-        this.password = password;
+    public String getUserNic() {
+        return userNic;
     }
 
-    public String getUsernic() {
-        return usernic;
-    }
-
-    public void setUsernic(String usernic) {
-        this.usernic = usernic;
+    public void setUserNic(String userNic) {
+        this.userNic = userNic;
     }
 
     public String getPassword() {
@@ -37,5 +32,7 @@ public class Account {
     public void setPassword(String password) {
         this.password = password;
     }
+
+  
 
 }
