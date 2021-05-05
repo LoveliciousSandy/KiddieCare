@@ -549,9 +549,9 @@
                                             <label>
                                                 <p class="label-txt">Gender</p>
                                                 <div  style="color: rgb(120,120,120); padding-top: 28px; padding-left: 20px">
-                                                    <input class="form-check-input" type="radio" name="gender" id="boy">
+                                                    <input class="form-check-input" type="radio" name="gender" id="boy" value="boy">
                                                     Boy &emsp;&emsp;
-                                                    <input class="form-check-input" type="radio" name="gender" id="girl">
+                                                    <input class="form-check-input" type="radio" name="gender" id="girl" value="girl">
                                                     Girl
                                                 </div>
                                             </label>
@@ -819,6 +819,7 @@
             xmlHttpRequest.onreadystatechange = function () {
                 if (xmlHttpRequest.readyState === 4 && xmlHttpRequest.status === 200) {
                     alert('hshryrhghd');
+                   alert(xmlHttpRequest.getResponseHeader());
                 }
             };
             xmlHttpRequest.open("GET", "../SearchChild?NIC=" + nic, true);

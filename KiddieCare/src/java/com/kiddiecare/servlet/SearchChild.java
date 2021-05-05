@@ -55,8 +55,11 @@ public class SearchChild extends HttpServlet {
             String searchNameByNICQuery= "SELECT child_name FROM chdr.child JOIN chdr.user on child.user_register_no = user.user_register_no where user.nic='"+nic+"'";
             try {
                 ResultSet resulSet =  queryDAO.search(searchNameByNICQuery);
-                while (resulSet.next()) {                    
+                while (resulSet.next()) {
                     System.out.println(resulSet.getString("child_name"));
+                   ArrayList <String> childName = new ArrayList<>();
+                   childName.add(resulSet.getString("child_name"));
+                    System.out.println(childName);
                 }
                 
                 

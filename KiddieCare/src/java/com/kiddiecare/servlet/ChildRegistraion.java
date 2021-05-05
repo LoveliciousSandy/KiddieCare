@@ -75,10 +75,10 @@ public class ChildRegistraion extends HttpServlet {
             String weight = request.getParameter("birthweight");
             String length = request.getParameter("birthlength");
 
-            String sqlquery1 = "INSERT INTO user VALUES ('" + nic + "','" + guardianName + "','" + email + "','" + contactNo + "','" + address + "',"
+            String sqlquery1 = "INSERT INTO user (nic,guardian_name,email,contact_no,address,mother_name,age,number_of_children) VALUES ('" + nic + "','" + guardianName + "','" + email + "','" + contactNo + "','" + address + "',"
                     + "'" + motherName + "','" + motherAge + "','" + numberOfChildren + "')";
 
-            String sqlquery2 = "INSERT INTO child VALUES('" + childBirthRegisterNo + "',(select user_register_no from chdr.user where user.nic = '"+nic+"'),'" + healthPhysicianNo + "','" + familyHealthPhysicianNo + "','" + childName + "',"
+            String sqlquery2 = "INSERT INTO child (child_birth_register_no, user_register_no, health_physician_no, family_health_physician_no, child_name, gender, dob, age, month, days, weight, length) VALUES('" + childBirthRegisterNo + "',(select max(user_register_no)  from chdr.user where user.nic = '"+nic+"'),'" + healthPhysicianNo + "','" + familyHealthPhysicianNo + "','" + childName + "',"
                     + "'" + gender + "','" + dob + "','" + age + "','" + month + "','" + days + "','" + weight + "','" + length + "')";
 //insert into chdr.child values ('63924',(select user_register_no from chdr.user where user.nic = '547410017'),'34928','3279','Poorna','girl','1992/04/16',1,1,2,2.5,50);
             
