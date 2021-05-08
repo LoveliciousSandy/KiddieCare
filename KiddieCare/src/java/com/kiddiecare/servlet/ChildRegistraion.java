@@ -85,9 +85,9 @@ public class ChildRegistraion extends HttpServlet {
             
             String sqlquery3 = "INSERT INTO login VALUES('" + nic + "','" + password + "')";
 
-            queryDAO.save(sqlquery1);
-            queryDAO.save(sqlquery2);
-            queryDAO.save(sqlquery3);
+//            queryDAO.save(sqlquery1);
+//            queryDAO.save(sqlquery2);
+//            queryDAO.save(sqlquery3);
             
             if (queryDAO.save(sqlquery1)&& (queryDAO.save(sqlquery2) && (queryDAO.save(sqlquery3)))) {
                 response.sendRedirect(request.getContextPath()+"AdminPanel/AdminDashboard.jsp");

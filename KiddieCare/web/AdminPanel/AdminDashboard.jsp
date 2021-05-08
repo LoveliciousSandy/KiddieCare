@@ -653,10 +653,7 @@
                                     </div>
                                     <div class="col-md-3">
                                         <label>
-                                            <select class="custom-select" aria-label="Default select example">
-                                                <option value="1">One</option>
-                                                <option value="2">Two</option>
-                                                <option value="3">Three</option>
+                                            <select class="custom-select" aria-label="Default select example" id="nameSelector" onchange="setNameToTextFeild(this)">
                                             </select>
                                         </label>
                                     </div>	
@@ -668,7 +665,7 @@
                                     <div class="col-md-4">
                                         <label>
                                             <p class="label-txt">Child Name</p>
-                                            <input type="text" class="input">
+                                            <input type="text" class="input" id="childName">
                                             <div class="line-box">
                                                 <div class="line"></div>
                                             </div>
@@ -677,7 +674,7 @@
                                     <div class="col-md-3 ">
                                         <label>
                                             <p class="label-txt">Date of Measurement</p>
-                                            <input type="text" class="input">
+                                            <input type="text" class="input" id="dateofMeasurement">
                                             <div class="line-box">
                                                 <div class="line"></div>
                                             </div>
@@ -812,21 +809,35 @@
 
         function searchgNIC() {
 
-            var nic = $('#NICNo').val();
-            alert($('#NICNo').val());
+            var nic = $('#NICNo').val();//get nic value
 
             var xmlHttpRequest = new XMLHttpRequest();
             xmlHttpRequest.onreadystatechange = function () {
                 if (xmlHttpRequest.readyState === 4 && xmlHttpRequest.status === 200) {
-                    alert('hshryrhghd');
-                   alert(xmlHttpRequest.getResponseHeader());
+
+                    var response = xmlHttpRequest.responseText;
+                    var child = JSON.parse(response).childName;// get json object values 
+                    for (var i = 0; i < child.length; i++) {// get array values 
+
+                        document.getElementById('nameSelector').appendChild(new Option(child[i], child[i]));//set values to dropdwon option
+                    }
                 }
             };
             xmlHttpRequest.open("GET", "../SearchChild?NIC=" + nic, true);
-            alert('hsh3444444444');
             xmlHttpRequest.send();
-            alert('hsh');
 
         }
+
+        function setNameToTextFeild(name) {
+            // set values for textfeild
+            document.getElementById('childName').value = name.value;
+
+        }
+
+        $(document).ready(function () {
+            var today = new Date();
+            var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+            document.getElementById('dateofMeasurement').value = date;
+        });
     </script>
 </html>
