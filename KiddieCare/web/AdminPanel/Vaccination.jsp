@@ -10,710 +10,435 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <jsp:include page="../Links/Links.jsp"></jsp:include>
+        <style>
+            /*process-box*/
+            body{
+                background: #eee;
+            }
+            .process-box{
+                background: #fff;
+                padding: 10px;
+                border-radius: 15px;
+                position: relative;
+                box-shadow: 2px 2px 7px 0 #00000057;
+            }
+            .process-left:after{
+                content: "";
+                border-top: 15px solid #ffffff;
+                border-bottom: 15px solid #ffffff;
+                border-left: 15px solid #ffffff;
+                border-right: 15px solid #ffffff;
+                display: inline-grid;
+                position: absolute;
+                right: -15px;
+                top: 42%;
+                transform: rotate(45deg);
+                box-shadow: 3px -2px 3px 0px #00000036;
+                z-index: 1;
+            }
+            .process-right:after{
+                content: "";
+                border-top: 15px solid #ffffff00;
+                border-bottom: 15px solid #ffffff;
+                border-left: 15px solid #ffffff;
+                border-right: 15px solid #ffffff00;
+                display: inline-grid;
+                position: absolute;
+                left: -15px;
+                top: 42%;
+                transform: rotate(45deg);
+                box-shadow: -1px 1px 3px 0px #0000001a;
+                z-index: 1;
+            }
+            .process-step{
+                background: blueviolet;
+                text-align: center;
+                width: 80%;
+                margin: 0 auto;
+                color: #fff;
+                height: 100%;
+                padding-top: 8px;
+                position: relative;
+                top: -26px;
+                border-radius: 0px 0px 10px 10px;
+                box-shadow: -6px 8px 0px 0px #00000014;
+            }
+            .process-point-right{
+                background: #ffffff;
+                width: 25px;
+                height: 25px;
+                border-radius: 50%;
+                border: 8px solid #00bcd4;
+                box-shadow: 0 0 0px 4px #5c5c5c;
+                margin: auto 0;
+                position: absolute;
+                bottom: 40px;
+                left: -63px;
+            }
+            .process-point-right:before{
+                content: "";
+                height: 144px;
+                width: 11px;
+                background: #5c5c5c;
+                display: inline-grid;
+                transform: rotate(36deg);
+                position: relative;
+                left: -50px;
+                top: -0px;
+            }
+            .process-point-left{
+                background: #ffffff;
+                width: 25px;
+                height: 25px;
+                border-radius: 50%;
+                border: 8px solid #00bcd4;
+                box-shadow: 0 0 0px 4px #5c5c5c;
+                margin: auto 0;
+                position: absolute;
+                bottom: 40px;
+                right: -63px;
+            }
+            .process-point-left:before {
+                content: "";
+                height: 144px;
+                width: 11px;
+                background: #5c5c5c;
+                display: inline-grid;
+                transform: rotate(-38deg);
+                position: relative;
+                left: 50px;
+                top: 0px;
+
+            }
+
+            .process-last:before{
+                display: none;
+            }
+            .process-box p{
+                z-index: 9;
+            }
+            .process-step p{
+                font-size: 20px;
+            }
+            .process-step h2{
+                font-size: 39px;
+            }
+            .process-step:after{
+                content: "";
+                border-top: 8px solid #04889800;
+                border-bottom: 8px solid #048898;
+                border-left: 8px solid #04889800;
+                border-right: 8px solid #048898;
+                display: inline-grid;
+                position: absolute;
+                left: -16px;
+                top: 0;
+            }
+            .process-step:before{
+                content: "";
+                border-top: 8px solid #ff000000;
+                border-bottom: 8px solid #048898;
+                border-left: 8px solid #048898;
+                border-right: 8px solid #ff000000;
+                display: inline-grid;
+                position: absolute;
+                right: -16px;
+                top: 0;
+            }
+            .process-line-l{
+                background: white;
+                height: 4px;
+                position: absolute;
+                width: 136px;
+                right: -153px;
+                top: 64px;
+                z-index: 9;
+            }
+            .process-line-r{
+                background: white;
+                height: 4px;
+                position: absolute;
+                width: 136px;
+                left: -153px;
+                top: 63px;
+                z-index: 9;
+            }
+
+            /*check box*/
+.btn.active span.nonCheckBoxAllow {
+  display: none;
+}
+
+.btn.active span.checkBoxAllow {
+  display: inline;
+}
+
+.btn span.nonCheckBoxAllow {
+  display: inline;
+}
+
+.btn span.checkBoxAllow {
+  display: none;
+}
+        </style>
     </head>
+
     <body>
-        
-          <div class="container my-4">
+        <section class="our-blog p-0 m-0 bg-silver">
+            <div class="container work-process  pb-5 pt-5">
+                <div class="title mb-5 text-center">
+                    <h3>Our <span class="site-color">Few Process</span></h3>
+                </div>
+                <!-- ============ step 1 =========== -->
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="process-box process-left" data-aos="fade-right" data-aos-duration="1000">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="process-step">
+                                        <p class="m-0 p-0">2021/03/15</p>
+                                        <h2 class="m-0 p-0">At Birth</h2>
+                                    </div>
+                                </div>
+                                <div class="col-md-7">
+                                    <h5>What is Lorem Ipsum?</h5>
+                                    <div class="btn-group" data-toggle="buttons">
+                                        <label class="btn btn-success active" style="width: 56px">
+                                            <span class="checkBoxAllow fas fa-check"></span>
+                                            <span class="nonCheckBoxAllow fas fa-times"></span>
+                                        </label>
+                                    </div>
+                                   BCG
+                                   <div class="btn-group" data-toggle="buttons">
+                                        <label class="btn btn-success active" style="width: 56px">
+                                            <span class="checkBoxAllow fas fa-check"></span>
+                                            <span class="nonCheckBoxAllow fas fa-times"></span>
+                                        </label>
+                                    </div>
+                                   BCG
+                                   <div class="btn-group" data-toggle="buttons">
+                                        <label class="btn btn-success active" style="width: 56px">
+                                            <span class="checkBoxAllow fas fa-check"></span>
+                                            <span class="nonCheckBoxAllow fas fa-times"></span>
+                                        </label>
+                                    </div>
+                                   BCG
+                                </div>
+                            </div>
+                            <div class="process-line-l"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-2"></div>
+                    <div class="col-md-5">
+                        <div class="process-point-right"></div>
+                    </div>
+                </div>
+                <!-- ============ step 2 =========== -->
+                <div class="row">
 
-    <p class="font-weight-bold">An example of combination of bootstrap accordion and bootstrap table.</p>
+                    <div class="col-md-5">
+                        <div class="process-point-left"></div>
+                    </div>
+                    <div class="col-md-2"></div>
+                    <div class="col-md-5">
+                        <div class="process-box process-right" data-aos="fade-left" data-aos-duration="1000">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="process-step">
+                                        <p class="m-0 p-0">2021/05/14</p>
+                                        <h2 class="m-0 p-0">2 nd Month</h2>
+                                    </div>
+                                </div>
+                                <div class="col-md-7">
+                                    <h5>What is Lorem Ipsum?</h5>
+                                    <p><small>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </small></p>
+                                </div>
+                            </div>
+                            <div class="process-line-r"></div>
+                        </div>
+                    </div>
 
-    <p><strong>Detailed documentation and more examples you can find in our <a href="https://mdbootstrap.com/docs/jquery/javascript/accordion/"
-          target="_blank">Bootstrap Accordion Docs</a> </p>
+                </div>
+                <!-- ============ step 3 =========== -->
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="process-box process-left" data-aos="fade-right" data-aos-duration="1000">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="process-step">
+                                        <p class="m-0 p-0">Step</p>
+                                        <h2 class="m-0 p-0">4 th Month</h2>
+                                    </div>
+                                </div>
+                                <div class="col-md-7">
+                                    <h5>What is Lorem Ipsum?</h5>
+                                    <p><small>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </small></p>
+                                </div>
+                            </div>
+                            <div class="process-line-l"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-2"></div>
+                    <div class="col-md-5">
+                        <div class="process-point-right"></div>
+                    </div>
+                </div>
+                <!-- ============ step 4 =========== -->
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="process-point-left"></div>
+                    </div>
+                    <div class="col-md-2"></div>
+                    <div class="col-md-5">
+                        <div class="process-box process-right" data-aos="fade-left" data-aos-duration="1000">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="process-step">
+                                        <p class="m-0 p-0">Step</p>
+                                        <h2 class="m-0 p-0">6 th Month</h2>
+                                    </div>
+                                </div>
+                                <div class="col-md-7">
+                                    <h5>What is Lorem Ipsum?</h5>
+                                    <p><small>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </small></p>
+                                </div>
+                            </div>
+                            <div class="process-line-r"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ============ step 1 =========== -->
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="process-box process-left" data-aos="fade-right" data-aos-duration="1000">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="process-step">
+                                        <p class="m-0 p-0">2021/March/15</p>
+                                        <h2 class="m-0 p-0">9 th Month</h2>
+                                    </div>
+                                </div>
+                                <div class="col-md-7">
+                                    <h5>What is Lorem Ipsum?</h5>
+                                    <p><small>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </small></p>
+                                </div>
+                            </div>
+                            <div class="process-line-l"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-2"></div>
+                    <div class="col-md-5">
+                        <div class="process-point-right"></div>
+                    </div>
+                </div>
+                <!-- =======step 4===== -->
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="process-point-left"></div>
+                    </div>
+                    <div class="col-md-2"></div>
+                    <div class="col-md-5">
+                        <div class="process-box process-right" data-aos="fade-left" data-aos-duration="1000">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="process-step">
+                                        <p class="m-0 p-0">Step</p>
+                                        <h2 class="m-0 p-0">1 Year</h2>
+                                    </div>
+                                </div>
+                                <div class="col-md-7">
+                                    <h5>What is Lorem Ipsum?</h5>
+                                    <p><small>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </small></p>
+                                </div>
+                            </div>
+                            <div class="process-line-r"></div>
+                        </div>
+                    </div>
 
-		<hr>
 
-    <p class="font-weight-bold">Basic example</p>
-    
-    <!--Accordion wrapper-->
-<div class="accordion md-accordion accordion-blocks" id="accordionEx78" role="tablist"
-  aria-multiselectable="true">
+                </div>
+                <!-- =======step 5===== -->
+                <!-- ============ step 1 =========== -->
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="process-box process-left" data-aos="fade-right" data-aos-duration="1000">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="process-step">
+                                        <p class="m-0 p-0">2021/March/15</p>
+                                        <h2 class="m-0 p-0">18 th Month</h2>
+                                    </div>
+                                </div>
+                                <div class="col-md-7">
+                                    <h5>What is Lorem Ipsum?</h5>
+                                    <p><small>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </small></p>
+                                </div>
+                            </div>
+                            <div class="process-line-l"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-2"></div>
+                    <div class="col-md-5">
+                        <div class="process-point-right"></div>
+                    </div>
+                </div>
+                <!------------->
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="process-point-left"></div>
+                    </div>
+                    <div class="col-md-2"></div>
+                    <div class="col-md-5">
+                        <div class="process-box process-right" data-aos="fade-left" data-aos-duration="1000">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="process-step">
+                                        <p class="m-0 p-0">Step</p>
+                                        <h2 class="m-0 p-0">3 Year</h2>
+                                    </div>
+                                </div>
+                                <div class="col-md-7">
+                                    <h5>What is Lorem Ipsum?</h5>
+                                    <p><small>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </small></p>
+                                </div>
+                            </div>
+                            <div class="process-line-r"></div>
+                        </div>
+                    </div>
 
-  <!-- Accordion card -->
-  <div class="card">
 
-    <!-- Card header -->
-    <div class="card-header" role="tab" id="headingUnfiled">
+                </div>
 
-      <!--Options-->
-      <div class="dropdown float-left">
-        <button class="btn btn-info btn-sm m-0 mr-3 p-2 dropdown-toggle" type="button" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false"><i class="fas fa-pencil-alt"></i>
-        </button>
-        <div class="dropdown-menu dropdown-info">
-          <a class="dropdown-item" href="#">Add new condition</a>
-          <a class="dropdown-item" href="#">Rename folder</a>
-          <a class="dropdown-item" href="#">Delete folder</a>
-        </div>
-      </div>
-
-      <!-- Heading -->
-      <a data-toggle="collapse" data-parent="#accordionEx78" href="#collapseUnfiled" aria-expanded="true"
-        aria-controls="collapseUnfiled">
-        <h5 class="mt-1 mb-0">
-          <span>Unfiled items</span>
-          <i class="fas fa-angle-down rotate-icon"></i>
-        </h5>
-      </a>
-
-    </div>
-
-    <!-- Card body -->
-    <div id="collapseUnfiled" class="collapse" role="tabpanel" aria-labelledby="headingUnfiled"
-      data-parent="#accordionEx78">
-      <div class="card-body">
-
-        <!--Top Table UI-->
-        <div class="table-ui p-2 mb-3 mx-3 mb-4">
-
-          <!--Grid row-->
-          <div class="row">
-
-            <!--Grid column-->
-            <div class="col-xl-4 col-lg-6 col-md-12">
-
-              <!--Name-->
-              <select class="mdb-select colorful-select dropdown-info mx-2">
-                <option value="" disabled selected>Bulk actions</option>
-                <option value="1">Delete</option>
-                <option value="2">Change folder</option>
-              </select>
-
+                <!-- =======step 5===== -->
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="process-box process-left" data-aos="fade-right" data-aos-duration="1000">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="process-step">
+                                        <p class="m-0 p-0">Step</p>
+                                        <h2 class="m-0 p-0">5 Year</h2>
+                                    </div>
+                                </div>
+                                <div class="col-md-7">
+                                    <h5>What is Lorem Ipsum?</h5>
+                                    <p><small>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </small></p>
+                                </div>
+                            </div>
+                            <div class="process-line-l"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-2"></div>
+                    <div class="col-md-5">
+                        <div class="process-point-right process-last"></div>
+                    </div>
+                </div>
             </div>
-            <!--Grid column-->
+        </section>
+        <script>
+            AOS.init();
+        </script>
 
-            <!--Grid column-->
-            <div class="col-xl-4 col-lg-6 col-md-6">
-
-              <!--Blue select-->
-              <select class="mdb-select colorful-select dropdown-info mx-2">
-                <option value="" disabled>Show only</option>
-                <option value="1" selected>All <span> (2000)</span></option>
-                <option value="2">Clicks <span> (200)</span></option>
-                <option value="3">Page <span> (1800)</span></option>
-                <option value="4">Scroll <span> (200)</span></option>
-                <option value="5">Forms <span> (50)</span></option>
-                <option value="6">Time <span> (50)</span></option>
-                <option value="7">UTM <span> (50)</span></option>
-              </select>
-              <!--/Blue select-->
-
-            </div>
-            <!--Grid column-->
-
-            <!--Grid column-->
-            <div class="col-xl-4 col-lg-6 col-md-6">
-
-              <!--Blue select-->
-              <select class="mdb-select colorful-select dropdown-info mx-2">
-                <option value="" disabled selected>Filter</option>
-                <option value="1">All <span> (100)</span></option>
-                <option value="1">Active <span> (2000)</span></option>
-                <option value="2">Inactive <span> (1000)</span></option>
-              </select>
-              <!--/Blue select-->
-
-            </div>
-            <!--Grid column-->
-
-          </div>
-          <!--Grid row-->
-
-        </div>
-        <!--Top Table UI-->
-
-        <!-- Table responsive wrapper -->
-        <div class="table-responsive mx-3">
-          <!--Table-->
-          <table class="table table-hover mb-0">
-
-            <!--Table head-->
-            <thead>
-              <tr>
-                <th>
-                  <input class="form-check-input" type="checkbox" id="checkbox">
-                  <label for="checkbox" class="mr-2 label-table"></label>
-                </th>
-                <th class="th-lg"><a>Name <i class="fas fa-sort ml-1"></i></a></th>
-                <th class="th-lg"><a>Condition<i class="fas fa-sort ml-1"></i></a></th>
-                <th class="th-lg"><a>Last edited<i class="fas fa-sort ml-1"></i></a></th>
-                <th></th>
-              </tr>
-            </thead>
-            <!--Table head-->
-
-            <!--Table body-->
-            <tbody>
-              <tr>
-                <th scope="row">
-                  <input class="form-check-input" type="checkbox" id="checkbox1">
-                  <label for="checkbox1" class="label-table"></label>
-                </th>
-                <td>Test subscription</td>
-                <td>Scroll % equals or greater than <strong>80</strong></td>
-                <td>12.06.2017</td>
-                <td>
-                  <a><i class="fas fa-info mx-1" data-toggle="tooltip" data-placement="top"
-                      title="Tooltip on top"></i></a>
-                  <a><i class="fas fa-pen-square mx-1"></i></a>
-                  <a><i class="fas fa-times mx-1"></i></a>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">
-                  <input class="form-check-input" type="checkbox" id="checkbox2">
-                  <label for="checkbox2" class="label-table"></label>
-                </th>
-                <td>Product Hunt Visitor</td>
-                <td>Scroll % equals or greater than <strong>80</strong></td>
-                <td>13.06.2017</td>
-                <td>
-                  <a><i class="fas fa-info mx-1" data-toggle="tooltip" data-placement="top"
-                      title="Tooltip on top"></i></a>
-                  <a><i class="fas fa-pen-square mx-1"></i></a>
-                  <a><i class="fas fa-times mx-1"></i></a>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">
-                  <input class="form-check-input" type="checkbox" id="checkbox3">
-                  <label for="checkbox3" class="label-table"></label>
-                </th>
-                <td>Test subscription</td>
-                <td>Scroll % equals or greater than <strong>80</strong></td>
-                <td>12.06.2017</td>
-                <td>
-                  <a><i class="fas fa-info mx-1" data-toggle="tooltip" data-placement="top"
-                      title="Tooltip on top"></i></a>
-                  <a><i class="fas fa-pen-square mx-1"></i></a>
-                  <a><i class="fas fa-times mx-1"></i></a>
-                </td>
-              </tr>
-            </tbody>
-            <!--Table body-->
-          </table>
-          <!--Table-->
-        </div>
-        <!-- Table responsive wrapper -->
-
-      </div>
-    </div>
-  </div>
-  <!-- Accordion card -->
-
-  <!-- Accordion card -->
-  <div class="card">
-
-    <!-- Card header -->
-    <div class="card-header" role="tab" id="heading79">
-
-      <!--Options-->
-      <div class="dropdown float-left">
-        <button class="btn btn-info btn-sm m-0 mr-3 p-2 dropdown-toggle" type="button" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false"><i class="fas fa-pencil-alt"></i>
-        </button>
-        <div class="dropdown-menu dropdown-info">
-          <a class="dropdown-item" href="#">Add new condition</a>
-          <a class="dropdown-item" href="#">Rename folder</a>
-          <a class="dropdown-item" href="#">Delete folder</a>
-        </div>
-      </div>
-
-      <!-- Heading -->
-      <a data-toggle="collapse" data-parent="#accordionEx78" href="#collapse79" aria-expanded="true"
-        aria-controls="collapse79">
-        <h5 class="mt-1 mb-0">
-          <span>Folder 1</span>
-          <i class="fas fa-angle-down rotate-icon"></i>
-        </h5>
-      </a>
-
-    </div>
-
-    <!-- Card body -->
-    <div id="collapse79" class="collapse show" role="tabpanel" aria-labelledby="heading79"
-      data-parent="#accordionEx78">
-      <div class="card-body">
-
-        <!--Top Table UI-->
-        <div class="table-ui p-2 mb-3 mx-3 mb-4">
-
-          <!--Grid row-->
-          <div class="row">
-
-            <!--Grid column-->
-            <div class="col-xl-4 col-lg-6 col-md-12">
-
-              <!--Name-->
-              <select class="mdb-select colorful-select dropdown-info mx-2">
-                <option value="" disabled selected>Bulk actions</option>
-                <option value="1">Delete</option>
-                <option value="2">Change folder</option>
-              </select>
-
-            </div>
-            <!--Grid column-->
-
-            <!--Grid column-->
-            <div class="col-xl-4 col-lg-6 col-md-6">
-
-              <!--Blue select-->
-              <select class="mdb-select colorful-select dropdown-info mx-2">
-                <option value="" disabled>Show only</option>
-                <option value="1" selected>All <span> (2000)</span></option>
-                <option value="2">Clicks <span> (200)</span></option>
-                <option value="3">Page <span> (1800)</span></option>
-                <option value="4">Scroll <span> (200)</span></option>
-                <option value="5">Forms <span> (50)</span></option>
-                <option value="6">Time <span> (50)</span></option>
-                <option value="7">UTM <span> (50)</span></option>
-              </select>
-              <!--/Blue select-->
-
-            </div>
-            <!--Grid column-->
-
-            <!--Grid column-->
-            <div class="col-xl-4 col-lg-6 col-md-6">
-
-              <!--Blue select-->
-              <select class="mdb-select colorful-select dropdown-info mx-2">
-                <option value="" disabled selected>Filter</option>
-                <option value="1">All <span> (100)</span></option>
-                <option value="1">Active <span> (2000)</span></option>
-                <option value="2">Inactive <span> (1000)</span></option>
-              </select>
-              <!--/Blue select-->
-
-            </div>
-            <!--Grid column-->
-
-          </div>
-          <!--Grid row-->
-
-        </div>
-        <!--Top Table UI-->
-
-        <!-- Table responsive wrapper -->
-        <div class="table-responsive mx-3">
-          <!--Table-->
-          <table class="table table-hover mb-0">
-
-            <!--Table head-->
-            <thead>
-              <tr>
-                <th>
-                  <input class="form-check-input" type="checkbox" id="checkbox4">
-                  <label for="checkbox4" class="mr-2 label-table"></label>
-                </th>
-                <th class="th-lg"><a>Name <i class="fas fa-sort ml-1"></i></a></th>
-                <th class="th-lg"><a>Condition<i class="fas fa-sort ml-1"></i></a></th>
-                <th class="th-lg"><a>Last edited<i class="fas fa-sort ml-1"></i></a></th>
-                <th></th>
-              </tr>
-            </thead>
-            <!--Table head-->
-
-            <!--Table body-->
-            <tbody>
-              <tr>
-                <th scope="row">
-                  <input class="form-check-input" type="checkbox" id="checkbox5">
-                  <label for="checkbox5" class="label-table"></label>
-                </th>
-                <td>Test subscription</td>
-                <td>Scroll % equals or greater than <strong>80</strong></td>
-                <td>12.06.2017</td>
-                <td>
-                  <a><i class="fas fa-info mx-1" data-toggle="tooltip" data-placement="top"
-                      title="Tooltip on top"></i></a>
-                  <a><i class="fas fa-pen-square mx-1"></i></a>
-                  <a><i class="fas fa-times mx-1"></i></a>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">
-                  <input class="form-check-input" type="checkbox" id="checkbox6">
-                  <label for="checkbox6" class="label-table"></label>
-                </th>
-                <td>Product Hunt Visitor</td>
-                <td>Scroll % equals or greater than <strong>80</strong></td>
-                <td>13.06.2017</td>
-                <td>
-                  <a><i class="fas fa-info mx-1" data-toggle="tooltip" data-placement="top"
-                      title="Tooltip on top"></i></a>
-                  <a><i class="fas fa-pen-square mx-1"></i></a>
-                  <a><i class="fas fa-times mx-1"></i></a>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">
-                  <input class="form-check-input" type="checkbox" id="checkbox14">
-                  <label for="checkbox14" class="label-table"></label>
-                </th>
-                <td>Test subscription</td>
-                <td>Scroll % equals or greater than <strong>80</strong></td>
-                <td>12.06.2017</td>
-                <td>
-                  <a><i class="fas fa-info mx-1" data-toggle="tooltip" data-placement="top"
-                      title="Tooltip on top"></i></a>
-                  <a><i class="fas fa-pen-square mx-1"></i></a>
-                  <a><i class="fas fa-times mx-1"></i></a>
-                </td>
-              </tr>
-            </tbody>
-            <!--Table body-->
-          </table>
-          <!--Table-->
-        </div>
-        <!-- Table responsive wrapper -->
-
-      </div>
-    </div>
-  </div>
-  <!-- Accordion card -->
-
-  <!-- Accordion card -->
-  <div class="card">
-
-    <!-- Card header -->
-    <div class="card-header" role="tab" id="heading80">
-      <!--Options-->
-      <div class="dropdown float-left">
-        <button class="btn btn-info btn-sm m-0 mr-3 p-2 dropdown-toggle" type="button" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false"><i class="fas fa-pencil-alt"></i>
-        </button>
-        <div class="dropdown-menu dropdown-info">
-          <a class="dropdown-item" href="#">Add new condition</a>
-          <a class="dropdown-item" href="#">Rename folder</a>
-          <a class="dropdown-item" href="#">Delete folder</a>
-        </div>
-      </div>
-
-      <!-- Heading -->
-      <a data-toggle="collapse" data-parent="#accordionEx78" href="#collapse80" aria-expanded="true"
-        aria-controls="collapse80">
-        <h5 class="mt-1 mb-0">
-          <span>Folder 2</span>
-          <i class="fas fa-angle-down rotate-icon"></i>
-        </h5>
-      </a>
-    </div>
-
-    <!-- Card body -->
-    <div id="collapse80" class="collapse" role="tabpanel" aria-labelledby="heading80"
-      data-parent="#accordionEx78">
-      <div class="card-body">
-
-        <!--Top Table UI-->
-        <div class="table-ui p-2 mb-3 mx-3 mb-4">
-
-          <!--Grid row-->
-          <div class="row">
-
-            <!--Grid column-->
-            <div class="col-xl-4 col-lg-6 col-md-12">
-
-              <!--Name-->
-              <select class="mdb-select colorful-select dropdown-info mx-2">
-                <option value="" disabled selected>Bulk actions</option>
-                <option value="1">Delete</option>
-                <option value="2">Change folder</option>
-              </select>
-
-            </div>
-            <!--Grid column-->
-
-            <!--Grid column-->
-            <div class="col-xl-4 col-lg-6 col-md-6">
-
-              <!--Blue select-->
-              <select class="mdb-select colorful-select dropdown-info mx-2">
-                <option value="" disabled>Show only</option>
-                <option value="1" selected>All <span> (2000)</span></option>
-                <option value="2">Clicks <span> (200)</span></option>
-                <option value="3">Page <span> (1800)</span></option>
-                <option value="4">Scroll <span> (200)</span></option>
-                <option value="5">Forms <span> (50)</span></option>
-                <option value="6">Time <span> (50)</span></option>
-                <option value="7">UTM <span> (50)</span></option>
-              </select>
-              <!--/Blue select-->
-
-            </div>
-            <!--Grid column-->
-
-            <!--Grid column-->
-            <div class="col-xl-4 col-lg-6 col-md-6">
-
-              <!--Blue select-->
-              <select class="mdb-select colorful-select dropdown-info mx-2">
-                <option value="" disabled selected>Filter</option>
-                <option value="1">All <span> (100)</span></option>
-                <option value="1">Active <span> (2000)</span></option>
-                <option value="2">Inactive <span> (1000)</span></option>
-              </select>
-              <!--/Blue select-->
-
-            </div>
-            <!--Grid column-->
-
-          </div>
-          <!--Grid row-->
-
-        </div>
-        <!--Top Table UI-->
-
-        <!-- Table responsive wrapper -->
-        <div class="table-responsive mx-3">
-          <!--Table-->
-          <table class="table table-hover mb-0">
-
-            <!--Table head-->
-            <thead>
-              <tr>
-                <th>
-                  <input class="form-check-input" type="checkbox" id="checkbox7">
-                  <label for="checkbox7" class="mr-2 label-table"></label>
-                </th>
-                <th class="th-lg"><a>Name <i class="fas fa-sort ml-1"></i></a></th>
-                <th class="th-lg"><a>Condition<i class="fas fa-sort ml-1"></i></a></th>
-                <th class="th-lg"><a>Last edited<i class="fas fa-sort ml-1"></i></a></th>
-                <th></th>
-              </tr>
-            </thead>
-            <!--Table head-->
-
-            <!--Table body-->
-            <tbody>
-              <tr>
-                <th scope="row">
-                  <input class="form-check-input" type="checkbox" id="checkbox8">
-                  <label for="checkbox8" class="label-table"></label>
-                </th>
-                <td>Test subscription</td>
-                <td>Scroll % equals or greater than <strong>80</strong></td>
-                <td>12.06.2017</td>
-                <td>
-                  <a><i class="fas fa-info mx-1" data-toggle="tooltip" data-placement="top"
-                      title="Tooltip on top"></i></a>
-                  <a><i class="fas fa-pen-square mx-1"></i></a>
-                  <a><i class="fas fa-times mx-1"></i></a>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">
-                  <input class="form-check-input" type="checkbox" id="checkbox9">
-                  <label for="checkbox9" class="label-table"></label>
-                </th>
-                <td>Product Hunt Visitor</td>
-                <td>Scroll % equals or greater than <strong>80</strong></td>
-                <td>13.06.2017</td>
-                <td>
-                  <a><i class="fas fa-info mx-1" data-toggle="tooltip" data-placement="top"
-                      title="Tooltip on top"></i></a>
-                  <a><i class="fas fa-pen-square mx-1"></i></a>
-                  <a><i class="fas fa-times mx-1"></i></a>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">
-                  <input class="form-check-input" type="checkbox" id="checkbox10">
-                  <label for="checkbox10" class="label-table"></label>
-                </th>
-                <td>Test subscription</td>
-                <td>Scroll % equals or greater than <strong>80</strong></td>
-                <td>12.06.2017</td>
-                <td>
-                  <a><i class="fas fa-info mx-1" data-toggle="tooltip" data-placement="top"
-                      title="Tooltip on top"></i></a>
-                  <a><i class="fas fa-pen-square mx-1"></i></a>
-                  <a><i class="fas fa-times mx-1"></i></a>
-                </td>
-              </tr>
-            </tbody>
-            <!--Table body-->
-          </table>
-          <!--Table-->
-        </div>
-        <!-- Table responsive wrapper -->
-
-      </div>
-    </div>
-  </div>
-  <!-- Accordion card -->
-
-  <!-- Accordion card -->
-  <div class="card">
-
-    <!-- Card header -->
-    <div class="card-header" role="tab" id="heading">
-      <!--Options-->
-      <div class="dropdown float-left">
-        <button class="btn btn-info btn-sm m-0 mr-3 p-2 dropdown-toggle" type="button" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false"><i class="fas fa-pencil-alt"></i>
-        </button>
-        <div class="dropdown-menu dropdown-info">
-          <a class="dropdown-item" href="#">Add new condition</a>
-          <a class="dropdown-item" href="#">Rename folder</a>
-          <a class="dropdown-item" href="#">Delete folder</a>
-        </div>
-      </div>
-
-      <!-- Heading -->
-      <a data-toggle="collapse" data-parent="#accordionEx78" href="#collapse81" aria-expanded="true"
-        aria-controls="collapse81">
-        <h5 class="mt-1 mb-0">
-          <span>Folder 3</span>
-          <i class="fas fa-angle-down rotate-icon"></i>
-        </h5>
-      </a>
-    </div>
-
-    <!-- Card body -->
-    <div id="collapse81" class="collapse" role="tabpanel" aria-labelledby="heading"
-      data-parent="#accordionEx78">
-      <div class="card-body">
-
-        <!--Top Table UI-->
-        <div class="table-ui p-2 mb-3 mx-3 mb-4">
-
-          <!--Grid row-->
-          <div class="row">
-
-            <!--Grid column-->
-            <div class="col-xl-4 col-lg-6 col-md-12">
-
-              <!--Name-->
-              <select class="mdb-select colorful-select dropdown-info mx-2">
-                <option value="" disabled selected>Bulk actions</option>
-                <option value="1">Delete</option>
-                <option value="2">Change folder</option>
-              </select>
-
-            </div>
-            <!--Grid column-->
-
-            <!--Grid column-->
-            <div class="col-xl-4 col-lg-6 col-md-6">
-
-              <!--Blue select-->
-              <select class="mdb-select colorful-select dropdown-info mx-2">
-                <option value="" disabled>Show only</option>
-                <option value="1" selected>All <span> (2000)</span></option>
-                <option value="2">Clicks <span> (200)</span></option>
-                <option value="3">Page <span> (1800)</span></option>
-                <option value="4">Scroll <span> (200)</span></option>
-                <option value="5">Forms <span> (50)</span></option>
-                <option value="6">Time <span> (50)</span></option>
-                <option value="7">UTM <span> (50)</span></option>
-              </select>
-              <!--/Blue select-->
-
-            </div>
-            <!--Grid column-->
-
-            <!--Grid column-->
-            <div class="col-xl-4 col-lg-6 col-md-6">
-
-              <!--Blue select-->
-              <select class="mdb-select colorful-select dropdown-info mx-2">
-                <option value="" disabled selected>Filter</option>
-                <option value="1">All <span> (100)</span></option>
-                <option value="1">Active <span> (2000)</span></option>
-                <option value="2">Inactive <span> (1000)</span></option>
-              </select>
-              <!--/Blue select-->
-
-            </div>
-            <!--Grid column-->
-
-          </div>
-          <!--Grid row-->
-
-        </div>
-        <!--Top Table UI-->
-
-        <!-- Table responsive wrapper -->
-        <div class="table-responsive mx-3">
-          <!--Table-->
-          <table class="table table-hover mb-0">
-
-            <!--Table head-->
-            <thead>
-              <tr>
-                <th>
-                  <input class="form-check-input" type="checkbox" id="checkbox15">
-                  <label for="checkbox15" class="mr-2 label-table"></label>
-                </th>
-                <th class="th-lg"><a>Name <i class="fas fa-sort ml-1"></i></a></th>
-                <th class="th-lg"><a>Condition<i class="fas fa-sort ml-1"></i></a></th>
-                <th class="th-lg"><a>Last edited<i class="fas fa-sort ml-1"></i></a></th>
-                <th></th>
-              </tr>
-            </thead>
-            <!--Table head-->
-
-            <!--Table body-->
-            <tbody>
-              <tr>
-                <th scope="row">
-                  <input class="form-check-input" type="checkbox" id="checkbox11">
-                  <label for="checkbox11" class="label-table"></label>
-                </th>
-                <td>Test subscription</td>
-                <td>Scroll % equals or greater than <strong>80</strong></td>
-                <td>12.06.2017</td>
-                <td>
-                  <a><i class="fas fa-info mx-1" data-toggle="tooltip" data-placement="top"
-                      title="Tooltip on top"></i></a>
-                  <a><i class="fas fa-pen-square mx-1"></i></a>
-                  <a><i class="fas fa-times mx-1"></i></a>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">
-                  <input class="form-check-input" type="checkbox" id="checkbox12">
-                  <label for="checkbox12" class="label-table"></label>
-                </th>
-                <td>Product Hunt Visitor</td>
-                <td>Scroll % equals or greater than <strong>80</strong></td>
-                <td>13.06.2017</td>
-                <td>
-                  <a><i class="fas fa-info mx-1" data-toggle="tooltip" data-placement="top"
-                      title="Tooltip on top"></i></a>
-                  <a><i class="fas fa-pen-square mx-1"></i></a>
-                  <a><i class="fas fa-times mx-1"></i></a>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">
-                  <input class="form-check-input" type="checkbox" id="checkbox13">
-                  <label for="checkbox13" class="label-table"></label>
-                </th>
-                <td>Test subscription</td>
-                <td>Scroll % equals or greater than <strong>80</strong></td>
-                <td>12.06.2017</td>
-                <td>
-                  <a><i class="fas fa-info mx-1" data-toggle="tooltip" data-placement="top"
-                      title="Tooltip on top"></i></a>
-                  <a><i class="fas fa-pen-square mx-1"></i></a>
-                  <a><i class="fas fa-times mx-1"></i></a>
-                </td>
-              </tr>
-            </tbody>
-            <!--Table body-->
-          </table>
-          <!--Table-->
-        </div>
-        <!-- Table responsive wrapper -->
-
-      </div>
-    </div>
-  </div>
-  <!-- Accordion card -->
-</div>
-<!--/.Accordion wrapper-->
-
-  </div>				                            
     </body>
 </html>

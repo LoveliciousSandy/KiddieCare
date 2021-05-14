@@ -639,7 +639,7 @@
                             <!--                            <form>-->
                             <div  class="container-fluid">
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <label>
                                             <p class="label-txt">Search by NIC</p>
                                             <input type="text" class="input" id="NICNo">
@@ -654,6 +654,7 @@
                                     <div class="col-md-3">
                                         <label>
                                             <select class="custom-select" aria-label="Default select example" id="nameSelector" onchange="setNameToTextFeild(this)">
+                                                <option>Select the Child Name</option>
                                             </select>
                                         </label>
                                     </div>	
@@ -662,7 +663,7 @@
                             <!--                            </form>-->
                             <div class="container-fluid">
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <label>
                                             <p class="label-txt">Child Name</p>
                                             <input type="text" class="input" id="childName">
@@ -670,7 +671,16 @@
                                                 <div class="line"></div>
                                             </div>
                                         </label>
-                                    </div>	
+                                    </div>
+                                    <div class="col-md-2 ">
+                                        <label>
+                                            <p class="label-txt">Age of Child</p>
+                                            <input type="text" class="input" id="ageofchild">
+                                            <div class="line-box">
+                                                <div class="line"></div>
+                                            </div>
+                                        </label>
+                                    </div>
                                     <div class="col-md-3 ">
                                         <label>
                                             <p class="label-txt">Date of Measurement</p>
@@ -683,7 +693,7 @@
                                     <div class="col-md-2 ">
                                         <label>
                                             <p class="label-txt">Weight(in Kg)</p>
-                                            <input type="text" class="input">
+                                            <input type="text" class="input" id="weight">
                                             <div class="line-box">
                                                 <div class="line"></div>
                                             </div>
@@ -692,7 +702,7 @@
                                     <div class="col-md-2">
                                         <label>
                                             <p class="label-txt">Height(in cm)</p>
-                                            <input type="text" class="input">
+                                            <input type="text" class="input" id="height">
                                             <div class="line-box">
                                                 <div class="line"></div>
                                             </div>
@@ -700,23 +710,23 @@
                                     </div>
                                 </div>
                                 <center>  
-                                    <button type="submit">Submit</button>
+                                    <button type="submit" onclick="saveRecord()">Submit</button>
                                 </center>
                             </div><br><br>
                             <div class="container">
                                 <div class="row">
                                     <div class="table-responsive col-md-12">
-                                        <table id="sort2" class="grid table table-bordered table-sortable">
+                                        <table id="tableRecordDetails" class="grid table table-bordered table-sortable">
                                             <thead>
-                                                <tr><th>Date</th><th>Weight(Kg)</th><th>Height(cm)</th></tr>
+                                                <tr><th>Date</th><th>Weight(Kg)</th><th>Height(cm)</th><th>Age(Years)</th></tr>
                                             </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td data-id="11">2021/04/07</td>
-                                                    <td><input type="text" value="name 1" class="form-control"></td>
-                                                    <td><input type="text" value="email 1" class="form-control"></td>
-                                                    <td><button class="btn btn-primary"><i class="far fa-edit"></i>Update</button></td>
-                                                </tr>
+                                            <tbody id="tableRecordDetailsBody">
+                                                <!--                                                <tr>
+                                                                                                    <td id="dateid">2021/04/07</td>
+                                                                                                    <td><input id="idweight" type="text" value="name 1" class="form-control"></td>
+                                                                                                    <td><input id="idheight" type="text" value="email 1" class="form-control"></td>
+                                                                                                    <td><button class="btn btn-primary"><i class="far fa-edit"></i>Update</button></td>
+                                                                                                </tr>-->
 
                                             </tbody>
                                         </table>
@@ -808,9 +818,8 @@
 
 
         function searchgNIC() {
-
             var nic = $('#NICNo').val();//get nic value
-
+            $('#nameSelector option:gt(0)').remove(); // remove dropdown load options
             var xmlHttpRequest = new XMLHttpRequest();
             xmlHttpRequest.onreadystatechange = function () {
                 if (xmlHttpRequest.readyState === 4 && xmlHttpRequest.status === 200) {
@@ -829,15 +838,71 @@
         }
 
         function setNameToTextFeild(name) {
-            // set values for textfeild
-            document.getElementById('childName').value = name.value;
+
+           $('#tableRecordDetailsBody tr').remove();// remove tabe rows
+            var childname = document.getElementById('childName').value = name.value;      // set values for textfeild
+            var xmlHttpRequest = new XMLHttpRequest();
+            xmlHttpRequest.onreadystatechange = function () {
+                if (xmlHttpRequest.readyState === 4 && xmlHttpRequest.status === 200) {
+                    var response = xmlHttpRequest.responseText;
+                    var rDetails = JSON.parse(response).recordDetails;
+                    var rowcount = rDetails.length;
+             document.getElementById('ageofchild').value = rDetails[0]['childage'];
+                    for (var i = 0; i < rowcount; i++) {
+                        var table = document.getElementById("tableRecordDetailsBody");
+                        var row = table.insertRow(0);
+                        var cell1 = row.insertCell(0);
+                        var cell2 = row.insertCell(1);
+                        var cell3 = row.insertCell(2);
+                        var cell4 = row.insertCell(3);
+                        cell1.innerHTML = rDetails[i]["date"];
+                        cell2.innerHTML = rDetails[i]["weight"];
+                        cell3.innerHTML = rDetails[i]["height"];
+                        cell4.innerHTML = rDetails[i]["age"];
+                    }
+                }
+            };
+            xmlHttpRequest.open("GET", "../AddedRecordDetails?name=" + childname, true);
+            xmlHttpRequest.send();
 
         }
+
 
         $(document).ready(function () {
             var today = new Date();
             var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
             document.getElementById('dateofMeasurement').value = date;
         });
+
+        function saveRecord() {
+            var nic = $('#NICNo').val();//get nic value
+            var childName = $('#childName').val();
+            var dateMeasurement = $('#dateofMeasurement').val();
+            var weight = $('#weight').val();
+            var height = $('#height').val();
+            var ageofchild = $('ageofchild').val();
+
+            var xmlHttpRequest = new XMLHttpRequest();
+            xmlHttpRequest.onreadystatechange = function () {
+                if (xmlHttpRequest.readyState === 4 && xmlHttpRequest.status === 200) {
+
+                    var respone = xmlHttpRequest.responseText;
+                    if (respone == "OK") {
+
+                        alert('add sucsess');
+                        searchgNIC();
+                    } else {
+
+                        alert('Error');
+                    }
+
+                }
+
+            };
+            xmlHttpRequest.open("GET", "../AddChildRecord?NIC=" + nic + "&childName=" + childName + "&dateMeasurement=" + dateMeasurement + "&weight=" + weight + "&height=" + height+"&ageofchild="+ageofchild, true);
+            xmlHttpRequest.send();
+
+
+        }
     </script>
 </html>

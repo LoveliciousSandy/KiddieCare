@@ -5,13 +5,17 @@
 --%>
 
 
+<%@page import="com.google.gson.Gson"%>
+<%@page import="org.json.JSONObject"%>
+<%@page import="javax.json.JsonObject"%>
+<%@page import="javax.json.Json"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ page import="java.util.*" %>
-<%@ page import="com.google.gson.Gson"%>
-<%@ page import="com.google.gson.JsonObject"%>
 
 <%
     Gson gsonObj = new Gson();
+   //JSONObject jo = new JSONObject();
+            
     Map<Object, Object> map = null;
     List<Map<Object, Object>> list1 = new ArrayList<Map<Object, Object>>();
     List<Map<Object, Object>> list2 = new ArrayList<Map<Object, Object>>();
@@ -48,6 +52,9 @@ map = new HashMap<Object,Object>(); map.put("label", "3"); map.put("y", 15); lis
 //map = new HashMap<Object,Object>(); map.put("label", "FY16"); map.put("y", 155); list.add(map);
     String dataPoints1 = gsonObj.toJson(list1);
     String dataPoints2 = gsonObj.toJson(list2);
+
+
+//    String dataPoints2 = o.toJson(list2);
 %>
 <!DOCTYPE html>
 <html>
