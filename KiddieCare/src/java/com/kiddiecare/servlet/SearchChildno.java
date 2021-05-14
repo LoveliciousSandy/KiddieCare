@@ -26,7 +26,7 @@ import org.json.JSONObject;
  *
  * @author Senani
  */
-public class SearchChild extends HttpServlet {
+public class SearchChildno extends HttpServlet {
 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

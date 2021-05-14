@@ -818,6 +818,7 @@
 
 
         function searchgNIC() {
+            alert('');
             var nic = $('#NICNo').val();//get nic value
             $('#nameSelector option:gt(0)').remove(); // remove dropdown load options
             var xmlHttpRequest = new XMLHttpRequest();
@@ -825,6 +826,7 @@
                 if (xmlHttpRequest.readyState === 4 && xmlHttpRequest.status === 200) {
 
                     var response = xmlHttpRequest.responseText;
+                        alert('3');
                     var child = JSON.parse(response).childName;// get json object values 
                     for (var i = 0; i < child.length; i++) {// get array values 
 
@@ -834,7 +836,7 @@
             };
             xmlHttpRequest.open("GET", "../SearchChild?NIC=" + nic, true);
             xmlHttpRequest.send();
-
+    alert('');
         }
 
         function setNameToTextFeild(name) {
