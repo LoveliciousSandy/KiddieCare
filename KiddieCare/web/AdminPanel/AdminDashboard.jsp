@@ -15,6 +15,10 @@
         <jsp:include page="../Links/Links.jsp"></jsp:include>
 
         <style>
+
+            /*             background: linear-gradient(45deg, #3bade3 0%, #576fe6 25%, #9844b7 51%, #ff357f 100%);*/
+
+
             #mainbutton{
                 width: 200px;
                 height: 200px;
@@ -242,7 +246,7 @@
             }
 
             button:hover {
-                background: blueviolet;
+                background:linear-gradient(45deg, #3bade3 0%, #576fe6 25%, #9844b7 51%, #ff357f 100%);
                 color: #ffffff;
             }
             .btn-gender{
@@ -270,15 +274,210 @@
                 padding: 10px 25px;
                 margin-top: 40px;
                 margin-left: -30px;
-                background-color: blueviolet;
+                background-color:rgb(220,220,220);
                 border: none;
             }
+
+            #vaccinesearchnic{
+                padding: 10px 25px;
+                margin-top: 40px;
+                margin-left: -30px;
+                background-color:rgb(220,220,220);
+                border: none;
+            }
+            .checkout-wrapper{padding-top: 40px; padding-bottom:40px; background-color: #fafbfa;}
+            .checkout{    background-color: #fff;
+                          border:1px solid #eaefe9;
+
+                          font-size: 14px;}
+            .panel{margin-bottom: 0px;}
+            .checkout-step {
+
+                border-top: 1px solid #f2f2f2;
+                color: #666;
+                font-size: 14px;
+                padding: 30px;
+                position: relative;
+            }
+
+            .checkout-step-number {
+                border-radius: 50%;
+                border: 1px solid #666;
+                display: inline-block;
+                font-size: 12px;
+                height: 32px;
+                margin-right: 26px;
+                padding: 6px;
+                text-align: center;
+                width: 32px;
+            }
+            .checkout-step-title{ font-size: 18px;
+                                  font-weight: 500;
+                                  vertical-align: middle;display: inline-block; margin: 0px;
+            }
+
+            .checout-address-step{}
+            .checout-address-step .form-group{margin-bottom: 18px;display: inline-block;
+                                              width: 100%;}
+
+            .checkout-step-body{padding-left: 60px; padding-top: 30px;}
+
+            .checkout-step-active{display: block;}
+            .checkout-step-disabled{display: none;}
+
+            .checkout-login{}
+            .login-phone{display: inline-block;}
+            .login-phone:after {
+                content: '+91 - ';
+                font-size: 14px;
+                left: 36px;
+            }
+            .login-phone:before {
+                content: "";
+                font-style: normal;
+                color: #333;
+                font-size: 18px;
+                left: 12px;
+                display: inline-block;
+                font: normal normal normal 14px/1 FontAwesome;
+                font-size: inherit;
+                text-rendering: auto;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+            }
+            .login-phone:after, .login-phone:before {
+                position: absolute;
+                top: 50%;
+                -webkit-transform: translateY(-50%);
+                transform: translateY(-50%);
+            }
+            .login-phone .form-control {
+                padding-left: 68px;
+                font-size: 14px;
+
+            }
+            .checkout-login .btn{height: 42px;     line-height: 1.8;}
+
+            .otp-verifaction{margin-top: 30px;}
+            .checkout-sidebar{background-color: #fff;
+                              border:1px solid #eaefe9; padding: 30px; margin-bottom: 30px;}
+            .checkout-sidebar-merchant-box{background-color: #fff;
+                                           border:1px solid #eaefe9; margin-bottom: 30px;}
+            .checkout-total{border-bottom: 1px solid #eaefe9; padding-bottom: 10px;margin-bottom: 10px; }
+            .checkout-invoice{display: inline-block;
+                              width: 100%;}
+            .checout-invoice-title{    float: left; color: #30322f;}
+            .checout-invoice-price{    float: right; color: #30322f;}
+            .checkout-charges{display: inline-block;
+                              width: 100%;}
+            .checout-charges-title{float: left; }
+            .checout-charges-price{float: right;}
+            .charges-free{color: #43b02a; font-weight: 600;}
+            .checkout-payable{display: inline-block;
+                              width: 100%; color: #333;}
+            .checkout-payable-title{float: left; }
+            .checkout-payable-price{float: right;}
+
+            .checkout-cart-merchant-box{ padding: 20px;display: inline-block;width: 100%; border-bottom: 1px solid #eaefe9;
+                                         padding-bottom: 20px; }
+            .checkout-cart-merchant-name{color: #30322f; float: left;}
+            .checkout-cart-merchant-item{ float: right; color: #30322f; }
+            .checkout-cart-products{}
+
+            .checkout-cart-products .checkout-charges{ padding: 10px 20px;
+                                                       color: #333;}
+            .checkout-cart-item{ border-bottom: 1px solid #eaefe9;
+                                 box-sizing: border-box;
+                                 display: table;
+                                 font-size: 12px;
+                                 padding: 22px 20px;
+                                 width: 100%;}
+            .checkout-item-list{}
+            .checkout-item-count{ float: left; }
+            .checkout-item-img{width: 60px; float: left;}
+            .checkout-item-name-box{ float: left; }
+            .checkout-item-title{ color: #30322f; font-size: 14px;  }
+            .checkout-item-unit{  }
+            .checkout-item-price{float: right;color: #30322f; font-size: 14px; font-weight: 600;}
+
+
+            .checkout-viewmore-btn{padding: 10px; text-align: center;}
+
+            .header-checkout-item{text-align: right; padding-top: 20px;}
+/*//*/
+.customcheck {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    margin-top: 0px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.customcheck input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    border-radius: 5px;
+}
+
+/* On mouse-over, add a grey background color */
+.customcheck:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.customcheck input:checked ~ .checkmark {
+    background-color: #02cf32;
+    border-radius: 5px;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.customcheck input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.customcheck .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
         </style>
     </head>
     <body>
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-2" style="background-color:yellow;">
+                <div class="col-md-2" >
                     <!--                            side nav bar-->
                     <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
                         <a class="navbar-brand" href="#">Sidebar Nav</a>
@@ -304,59 +503,68 @@
                                     <a class="nav-link" href="#tabpanel1" data-toggle="tab"  role="tab">Dashboard</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a
-                                        class="nav-link nav-link-collapse"
-                                        href="#"
-                                        id="hasSubItems"
-                                        data-toggle="collapse"
-                                        data-target="#collapseSubItems2"
-                                        aria-controls="collapseSubItems2"
-                                        aria-expanded="false"
-                                        >Child</a>
-                                    <ul class="nav-second-level collapse" id="collapseSubItems2" data-parent="#navAccordion">
-                                        <li class="nav-item" data-toggle="modal" data-target="#myModal">
-                                            <a class="nav-link" href="#tabpanel2" data-toggle="tab" data-target="#tabpanel2" role="tab" aria-selected="true">
-                                                <span class="nav-link-text" >Add Child</span>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="#tabpanel3" data-toggle="tab" role="tab">
-                                                <span class="nav-link-text">Search Child</span>
-                                            </a>
-                                        </li>
-                                    </ul>
+                                    <a class="nav-link" href="#tabpanel2" data-toggle="tab"  role="tab">Add New Child </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#tabpanel3" data-toggle="tab"  role="tab">Add Child Record </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#tabpanel4" data-toggle="tab"  role="tab">Search Child </a>
+                                </li>
+                                <!--                                <li class="nav-item">
+                                                                    <a
+                                                                        class="nav-link nav-link-collapse"
+                                                                        href="#"
+                                                                        id="hasSubItems"
+                                                                        data-toggle="collapse"
+                                                                        data-target="#collapseSubItems2"
+                                                                        aria-controls="collapseSubItems2"
+                                                                        aria-expanded="false"
+                                                                        >Child</a>
+                                                                    <ul class="nav-second-level collapse" id="collapseSubItems2" data-parent="#navAccordion">
+                                                                        <li class="nav-item" data-toggle="modal" data-target="#myModal">
+                                                                            <a class="nav-link" href="#tabpanel2" data-toggle="tab" data-target="#tabpanel2" role="tab" aria-selected="true">
+                                                                                <span class="nav-link-text" >Add Child</span>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li class="nav-item">
+                                                                            <a class="nav-link" href="#tabpanel3" data-toggle="tab" role="tab">
+                                                                                <span class="nav-link-text">Search Child</span>
+                                                                            </a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </li>-->
                                 <li class="nav-item">
                                     <a class="nav-link" href="#">Item 3</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a
-                                        class="nav-link nav-link-collapse"
-                                        href="#"
-                                        id="hasSubItems"
-                                        data-toggle="collapse"
-                                        data-target="#collapseSubItems4"
-                                        aria-controls="collapseSubItems4"
-                                        aria-expanded="false"
-                                        >Growth Tracker</a>
-                                    <ul class="nav-second-level collapse" id="collapseSubItems4" data-parent="#navAccordion">
-                                        <li class="nav-item" >
-                                            <a class="nav-link" href="#tabpaneladdrecord" data-toggle="tab" data-target="tabpaneladdrecord" role="tab" aria-selected="true">
-                                                <span class="nav-link-text">Add Record</span>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="#">
-                                                <span class="nav-link-text">Item 4.2</span>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="#">
-                                                <span class="nav-link-text">Item 4.2</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
+                                <!--                                <li class="nav-item">
+                                                                    <a
+                                                                        class="nav-link nav-link-collapse"
+                                                                        href="#"
+                                                                        id="hasSubItems"
+                                                                        data-toggle="collapse"
+                                                                        data-target="#collapseSubItems4"
+                                                                        aria-controls="collapseSubItems4"
+                                                                        aria-expanded="false"
+                                                                        >Growth Tracker</a>
+                                                                    <ul class="nav-second-level collapse" id="collapseSubItems4" data-parent="#navAccordion">
+                                                                        <li class="nav-item" >
+                                                                            <a class="nav-link" href="#tabpaneladdrecord" data-toggle="tab" data-target="tabpaneladdrecord" role="tab" aria-selected="true">
+                                                                                <span class="nav-link-text">Add Record</span>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li class="nav-item">
+                                                                            <a class="nav-link" href="#">
+                                                                                <span class="nav-link-text">Item 4.2</span>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li class="nav-item">
+                                                                            <a class="nav-link" href="#">
+                                                                                <span class="nav-link-text">Item 4.2</span>
+                                                                            </a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </li>-->
                                 <li class="nav-item">
                                     <a class="nav-link" href="#">Item 5</a>
                                 </li>
@@ -630,11 +838,7 @@
                             </form>
                         </div>
                         <br><br>
-                        <div  style="margin-top: 70px" class="tab-pane fade" id="tabpanel3" role="tabpanel">
-                            <h2>Search Child</h2>
-
-                        </div>
-                        <div  style="margin-top: 70px" class="tab-pane fade show active" id="tabpaneladdrecord" role="tabpanel">
+                        <div  style="margin-top: 70px" class="tab-pane fade show active" id="tabpanel3" role="tabpanel">
                             <h2>Add Record</h2><br>
                             <!--                            <form>-->
                             <div  class="container-fluid">
@@ -735,11 +939,165 @@
                             </div>
 
                         </div>
+                        <div  style="margin-top: 70px" class="tab-pane fade" id="tabpanel4" role="tabpanel">
+                            <h2>Search Child</h2>
+
+                            <!--                            <form>-->
+                            <div  class="container-fluid">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <label>
+                                            <p class="label-txt">Search by NIC</p>
+                                            <input type="text" class="input" id="vaccineNicNo">
+                                            <div class="line-box">
+                                                <div class="line"></div>
+                                            </div>
+                                        </label>
+                                    </div>	
+                                    <div class="col-md-1">
+                                        <button id="vaccinesearchnic" type="submit" onclick="searchgNICforVacccine();"><i class="fa fa-search"></i></button>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label>
+                                            <select class="custom-select" aria-label="Default select example" id="vaccinenameSelector" onchange="setNameToVaccineTextFeild(this)">
+                                                <option>Child Name</option>
+                                            </select>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label>
+                                            <p class="label-txt">Child Name</p>
+                                            <input type="text" class="input" id="vaccinechildName">
+                                            <div class="line-box">
+                                                <div class="line"></div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-1 ">
+                                        <label>
+                                            <p class="label-txt">Age</p>
+                                            <input type="text" class="input" name="childage" id="yy">
+                                            <div class="line-box">
+                                                <div class="line"></div>
+                                            </div>
+
+                                        </label>
+                                    </div>
+                                    <div class="col-md-1 ">
+                                        <label>
+                                            <p class="label-txt">Month</p>
+                                            <input type="text" class="input" name="month" id="mm">
+                                            <div class="line-box">
+                                                <div class="line"></div>
+                                            </div>
+
+                                        </label>
+                                    </div>
+                                    <div class="col-md-1 ">
+                                        <label>
+                                            <p class="label-txt">Days</p>
+                                            <input type="text" class="input" name="days" id="dd">
+                                            <div class="line-box">
+                                                <div class="line"></div>
+                                            </div>
+
+                                        </label>
+                                    </div>
+                                    <!--                                    <div class="col-md-2 ">
+                                                                            <label>
+                                                                                <select class="custom-select" aria-label="Default select example" id="vaccinecategorySelector" onchange="loadVaccineDetails(this)">
+                                                                                    <option>Vaccine Category</option>
+                                                                                    <option>At Birth</option>
+                                                                                    <option>2 Months</option>
+                                                                                </select>
+                                                                            </label>
+                                                                        </div>-->
+                                </div>
+                            </div>
+                            <br><br>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div id="accordion" class="checkout">
+                                            <div class="panel checkout-step">
+                                                <div> <span class="checkout-step-number">1</span>
+                                                    <h4 class="checkout-step-title"> <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" >At Birth</a></h4>
+                                                </div>
+                                                <div id="collapseOne" class="collapse in">
+                                                    <div class="checkout-step-body">
+                                                        <div class="row">
+                                                            <div class="table-responsive col-md-12">
+                                                                <table id="tableRecordDetails" class="grid table table-bordered table-sortable">
+                                                                    <thead>
+                                                                        <tr><th>Due Date</th><th>Given Date</th><th>Vaccine </th><th>Status</th></tr>
+                                                                    </thead>
+                                                                    <tbody id="tableVaccineRecordDetailsBody1">
+
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="panel checkout-step">
+                                                <div role="tab" id="headingTwo"> <span class="checkout-step-number">2</span>
+                                                    <h4 class="checkout-step-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" >2 Months </a> </h4>
+                                                </div>
+                                                <div id="collapseTwo" class="panel-collapse collapse">
+                                                    <div class="checkout-step-body">
+                                                        <table class="grid table table-bordered table-sortable">
+                                                            <thead>
+                                                                <tr><th>Due Date</th><th>Given Date</th><th>Vaccine </th><th>Status</th></tr>
+                                                            </thead>
+                                                            <tbody id="tableVaccineRecordDetailsBody2">
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="panel checkout-step">
+                                                <div role="tab" id="headingThree"> <span class="checkout-step-number">3</span>
+                                                    <h4 class="checkout-step-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree"  > 4 Months </a> </h4>
+                                                </div>
+                                                <div id="collapseThree" class="panel-collapse collapse">
+                                                    <div class="checkout-step-body">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="panel checkout-step">
+                                                <div role="tab" id="headingFour"> <span class="checkout-step-number">4</span>
+                                                    <h4 class="checkout-step-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour"  > 6 Months </a> </h4>
+                                                </div>
+                                                <div id="collapseFour" class="panel-collapse collapse">
+                                                    <div class="checkout-step-body">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--                                <div class="row">
+                                                                    <div class="table-responsive col-md-12">
+                                                                        <table id="tableRecordDetails" class="grid table table-bordered table-sortable">
+                                                                            <thead>
+                                                                                <tr><th>Due Date</th><th>Given Date</th><th>Vaccine </th><th>Status</th></tr>
+                                                                            </thead>
+                                                                            <tbody id="tableVaccineRecordDetailsBody">
+                                
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>-->
+                            </div>
+                        </div>
+
                     </div>
 
                 </div>
-            </div>
-        </div>
+            </div></div>
+
         <!-- Static Modal -->
         <!--        <div class="modal modal-static fade" id="myModal" role="dialog" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -817,8 +1175,10 @@
         //});
 
 
+
+
+
         function searchgNIC() {
-            alert('');
             var nic = $('#NICNo').val();//get nic value
             $('#nameSelector option:gt(0)').remove(); // remove dropdown load options
             var xmlHttpRequest = new XMLHttpRequest();
@@ -826,7 +1186,6 @@
                 if (xmlHttpRequest.readyState === 4 && xmlHttpRequest.status === 200) {
 
                     var response = xmlHttpRequest.responseText;
-                        alert('3');
                     var child = JSON.parse(response).childName;// get json object values 
                     for (var i = 0; i < child.length; i++) {// get array values 
 
@@ -836,12 +1195,11 @@
             };
             xmlHttpRequest.open("GET", "../SearchChild?NIC=" + nic, true);
             xmlHttpRequest.send();
-    alert('');
         }
 
         function setNameToTextFeild(name) {
 
-           $('#tableRecordDetailsBody tr').remove();// remove tabe rows
+            $('#tableRecordDetailsBody tr').remove();// remove tabe rows
             var childname = document.getElementById('childName').value = name.value;      // set values for textfeild
             var xmlHttpRequest = new XMLHttpRequest();
             xmlHttpRequest.onreadystatechange = function () {
@@ -849,7 +1207,7 @@
                     var response = xmlHttpRequest.responseText;
                     var rDetails = JSON.parse(response).recordDetails;
                     var rowcount = rDetails.length;
-             document.getElementById('ageofchild').value = rDetails[0]['childage'];
+                    document.getElementById('ageofchild').value = rDetails[0]['childage'];
                     for (var i = 0; i < rowcount; i++) {
                         var table = document.getElementById("tableRecordDetailsBody");
                         var row = table.insertRow(0);
@@ -882,7 +1240,7 @@
             var dateMeasurement = $('#dateofMeasurement').val();
             var weight = $('#weight').val();
             var height = $('#height').val();
-            var ageofchild = $('ageofchild').val();
+            var ageofchild = $('#ageofchild').val();
 
             var xmlHttpRequest = new XMLHttpRequest();
             xmlHttpRequest.onreadystatechange = function () {
@@ -892,6 +1250,7 @@
                     if (respone == "OK") {
 
                         alert('add sucsess');
+                        setNameToTextFeild(childName);
                         searchgNIC();
                     } else {
 
@@ -901,10 +1260,209 @@
                 }
 
             };
-            xmlHttpRequest.open("GET", "../AddChildRecord?NIC=" + nic + "&childName=" + childName + "&dateMeasurement=" + dateMeasurement + "&weight=" + weight + "&height=" + height+"&ageofchild="+ageofchild, true);
+            xmlHttpRequest.open("GET", "../AddChildRecord?NIC=" + nic + "&childName=" + childName + "&dateMeasurement=" + dateMeasurement + "&weight=" + weight + "&height=" + height + "&ageofchild=" + ageofchild, true);
             xmlHttpRequest.send();
 
 
         }
+
+        function searchgNICforVacccine() {
+            var nic = $('#vaccineNicNo').val();//get nic value
+            $('#vaccinenameSelector option:gt(0)').remove(); // remove dropdown load options
+            var xmlHttpRequest = new XMLHttpRequest();
+            xmlHttpRequest.onreadystatechange = function () {
+                if (xmlHttpRequest.readyState === 4 && xmlHttpRequest.status === 200) {
+
+                    var response = xmlHttpRequest.responseText;
+                    var child = JSON.parse(response).childName;// get json object values 
+                    for (var i = 0; i < child.length; i++) {// get array values 
+
+                        document.getElementById('vaccinenameSelector').appendChild(new Option(child[i], child[i]));//set values to dropdwon option
+                    }
+                }
+            };
+            xmlHttpRequest.open("GET", "../SearchChild?NIC=" + nic, true);
+            xmlHttpRequest.send();
+        }
+
+
+        function setNameToVaccineTextFeild(name) {
+            // $('#tableRecordDetailsBody tr').remove();// remove tabe rows
+            var childname = document.getElementById('vaccinechildName').value = name.value;      // set values for textfeild
+            var xmlHttpRequest = new XMLHttpRequest();
+            xmlHttpRequest.onreadystatechange = function () {
+                if (xmlHttpRequest.readyState === 4 && xmlHttpRequest.status === 200) {
+                    var response = xmlHttpRequest.responseText;
+                    console.log(response);
+                    var vaccineDetails = JSON.parse(response).vaccinedetails;
+                    var today = new Date();
+                    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+                    for (var i = 0; i < vaccineDetails.length; i++) {
+                        document.getElementById('yy').value = vaccineDetails[i]['year'];
+                        document.getElementById('mm').value = vaccineDetails[i]['month'];
+                        document.getElementById('dd').value = vaccineDetails[i]['days'];
+
+                        if (i === 0) {
+                            var table = document.getElementById("tableVaccineRecordDetailsBody1");
+
+                            var row = table.insertRow(0);
+                            var cell1 = row.insertCell(0);
+                            var cell2 = row.insertCell(1);
+                            var cell3 = row.insertCell(2);
+                            var cell4 = row.insertCell(3);
+                            cell1.innerHTML = vaccineDetails[i]["duedate"];
+                            cell2.innerHTML = date;
+                            cell3.innerHTML = vaccineDetails[i]["vaccinename"];
+                            cell4.innerHTML = ('<label class="customcheck"><input type="checkbox" checked="checked"><span class="checkmark"></span></label>');
+                        } else if (i === 1) {
+                            var table = document.getElementById("tableVaccineRecordDetailsBody2");
+                            var row = table.insertRow(0);
+                            var cell1 = row.insertCell(0);
+                            var cell2 = row.insertCell(1);
+                            var cell3 = row.insertCell(2);
+                             var cell4 = row.insertCell(3);
+                            cell1.innerHTML = vaccineDetails[i]["duedate"];
+                            cell2.innerHTML = date;
+                            cell3.innerHTML = vaccineDetails[i]["vaccinename"];
+                             cell4.innerHTML = ('<label class="customcheck"><input type="checkbox" checked="checked"><span class="checkmark"></span></label>');
+                        } else if (i === 2) {
+                            var table = document.getElementById("tableVaccineRecordDetailsBody2");
+                            var row = table.insertRow(0);
+                            var cell1 = row.insertCell(0);
+                            var cell2 = row.insertCell(1);
+                            var cell3 = row.insertCell(2);
+                             var cell4 = row.insertCell(3);
+                            cell1.innerHTML = vaccineDetails[i]["duedate"];
+                            cell2.innerHTML = date;
+                            cell3.innerHTML = vaccineDetails[i]["vaccinename"];
+                             cell4.innerHTML = ('<label class="customcheck"><input type="checkbox" checked="checked"><span class="checkmark"></span></label>');
+                        } else if (i === 3) {
+                            var table = document.getElementById("tableVaccineRecordDetailsBody2");
+                            var row = table.insertRow(0);
+                            var cell1 = row.insertCell(0);
+                            var cell2 = row.insertCell(1);
+                            var cell3 = row.insertCell(2);
+                             var cell4 = row.insertCell(3);
+                            cell1.innerHTML = vaccineDetails[i]["duedate"];
+                            cell2.innerHTML = date;
+                            cell3.innerHTML = vaccineDetails[i]["vaccinename"];
+                             cell4.innerHTML = ('<label class="customcheck"><input type="checkbox" checked="checked"><span class="checkmark"></span></label>');
+                        } else if (i === 4) {
+                            var table = document.getElementById("tableVaccineRecordDetailsBody2");
+                            var row = table.insertRow(0);
+                            var cell1 = row.insertCell(0);
+                            var cell2 = row.insertCell(1);
+                            var cell3 = row.insertCell(2);
+                             var cell4 = row.insertCell(3);
+                            cell1.innerHTML = vaccineDetails[i]["duedate"];
+                            cell2.innerHTML = date;
+                            cell3.innerHTML = vaccineDetails[i]["vaccinename"];
+                             cell4.innerHTML = ('<label class="customcheck"><input type="checkbox" checked="checked"><span class="checkmark"></span></label>');
+                        } else if (i === 5) {
+                            var table = document.getElementById("tableVaccineRecordDetailsBody2");
+                            var row = table.insertRow(0);
+                            var cell1 = row.insertCell(0);
+                            var cell2 = row.insertCell(1);
+                            var cell3 = row.insertCell(2);
+                             var cell4 = row.insertCell(3);
+                            cell1.innerHTML = vaccineDetails[i]["duedate"];
+                            cell2.innerHTML = date;
+                            cell3.innerHTML = vaccineDetails[i]["vaccinename"];
+                             cell4.innerHTML = ('<label class="customcheck"><input type="checkbox" checked="checked"><span class="checkmark"></span></label>');
+                        } else if (i === 6) {
+                            var table = document.getElementById("tableVaccineRecordDetailsBody2");
+                            var row = table.insertRow(0);
+                            var cell1 = row.insertCell(0);
+                            var cell2 = row.insertCell(1);
+                            var cell3 = row.insertCell(2);
+                             var cell4 = row.insertCell(3);
+                            cell1.innerHTML = vaccineDetails[i]["duedate"];
+                            cell2.innerHTML = date;
+                            cell3.innerHTML = vaccineDetails[i]["vaccinename"];
+                        } else if (i === 7) {
+                            var table = document.getElementById("tableVaccineRecordDetailsBody2");
+                            var row = table.insertRow(0);
+                            var cell1 = row.insertCell(0);
+                            var cell2 = row.insertCell(1);
+                            var cell3 = row.insertCell(2);
+                             var cell4 = row.insertCell(3);
+                            cell1.innerHTML = vaccineDetails[i]["duedate"];
+                            cell2.innerHTML = date;
+                            cell3.innerHTML = vaccineDetails[i]["vaccinename"];
+                             cell4.innerHTML = ('<label class="customcheck"><input type="checkbox" checked="checked"><span class="checkmark"></span></label>');
+                        } else if (i === 8) {
+                            var table = document.getElementById("tableVaccineRecordDetailsBody2");
+                            var row = table.insertRow(0);
+                            var cell1 = row.insertCell(0);
+                            var cell2 = row.insertCell(1);
+                            var cell3 = row.insertCell(2);
+                             var cell4 = row.insertCell(3);
+                            cell1.innerHTML = vaccineDetails[i]["duedate"];
+                            cell2.innerHTML = date;
+                            cell3.innerHTML = vaccineDetails[i]["vaccinename"];
+                             cell4.innerHTML = ('<label class="customcheck"><input type="checkbox" checked="checked"><span class="checkmark"></span></label>');
+                        } else {
+
+                        }
+
+
+
+                    }
+                }
+            };
+            xmlHttpRequest.open("GET", "../SearchChildAge?name=" + childname, true);
+            xmlHttpRequest.send();
+
+        }
+
+//        function loadVaccineDetails(category) {
+//            var nic = $('#vaccineNicNo').val();//get nic value
+//            $('#tableVaccineRecordDetailsBody tr').remove();// remove tabe rows
+//            var xmlHttpRequest = new XMLHttpRequest();
+//            xmlHttpRequest.onreadystatechange = function () {
+//                if (xmlHttpRequest.readyState === 4 && xmlHttpRequest.status === 200) {
+//                    var response = xmlHttpRequest.responseText;
+//                    var vaccineNames = JSON.parse(response).due_date;
+//                    for (var i = 0; i < due_date.length; i++) {
+//                        var table = document.getElementById("tableVaccineRecordDetailsBody");
+//                        alert();
+//                        var row = table.insertRow(0);
+//                        var cell3 = row.insertCell(0);
+//                        //                        cell1.innerHTML = rDetails[i]["date"];
+//                        //                        cell2.innerHTML = rDetails[i]["weight"];
+//                        cell3.innerHTML = vaccineNames[i];
+//                        //                        cell4.innerHTML = rDetails[i]["age"];
+//                    }
+//
+//
+//
+//                }
+//            };
+//            xmlHttpRequest.open("GET", "../SearchChildforVaccine?NIC=" + nic + "&vaccinecategory=" + category.value, true);
+//            xmlHttpRequest.send();
+//
+//        }
+
+        //        function SearchChildforVaccine() {
+        //            var nic = $('#vaccineNicNo').val();//get nic value
+        //            $('#vaccinenameSelector option:gt(0)').remove(); // remove dropdown load options
+        //            var xmlHttpRequest = new XMLHttpRequest();
+        //            xmlHttpRequest.onreadystatechange = function () {
+        //                if (xmlHttpRequest.readyState === 4 && xmlHttpRequest.status === 200) {
+        //
+        //                    var response = xmlHttpRequest.responseText;
+        //                    var child = JSON.parse(response).childName;// get json object values 
+        //                    for (var i = 0; i < child.length; i++) {// get array values 
+        //
+        //                        document.getElementById('vaccinenameSelector').appendChild(new Option(child[i], child[i]));//set values to dropdwon option
+        //                    }
+        //                }
+        //            }
+        //            ;
+        //                    xmlHttpRequest.open("GET", "../SearchChildforVaccine?NIC=" + nic + "&vaccine=" + , true);
+        //            xmlHttpRequest.send();
+        //            }
+
+
     </script>
 </html>

@@ -24,6 +24,22 @@
         <servlet-name>SearchChild</servlet-name>
         <servlet-class>com.kiddiecare.servlet.SearchChild</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddChildVaccineDetails</servlet-name>
+        <servlet-class>com.kiddiecare.servlet.AddChildVaccineDetails</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchChildAge</servlet-name>
+        <servlet-class>com.kiddiecare.servlet.SearchChildAge</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchVaccineDetails</servlet-name>
+        <servlet-class>com.kiddiecare.servlet.SearchVaccineDetails</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchChildforVaccine</servlet-name>
+        <servlet-class>com.kiddiecare.servlet.SearchChildforVaccine</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -43,6 +59,22 @@
     <servlet-mapping>
         <servlet-name>SearchChild</servlet-name>
         <url-pattern>/SearchChild</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddChildVaccineDetails</servlet-name>
+        <url-pattern>/AddChildVaccineDetails</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchChildAge</servlet-name>
+        <url-pattern>/SearchChildAge</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchVaccineDetails</servlet-name>
+        <url-pattern>/SearchVaccineDetails</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchChildforVaccine</servlet-name>
+        <url-pattern>/SearchChildforVaccine</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
