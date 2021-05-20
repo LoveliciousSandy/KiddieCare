@@ -404,74 +404,74 @@
             .checkout-viewmore-btn{padding: 10px; text-align: center;}
 
             .header-checkout-item{text-align: right; padding-top: 20px;}
-/*//*/
-.customcheck {
-    display: block;
-    position: relative;
-    padding-left: 35px;
-    margin-bottom: 12px;
-    margin-top: 0px;
-    cursor: pointer;
-    font-size: 22px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
+            /*//*/
+            .customcheck {
+                display: block;
+                position: relative;
+                padding-left: 35px;
+                margin-bottom: 12px;
+                margin-top: 0px;
+                cursor: pointer;
+                font-size: 22px;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+            }
 
-/* Hide the browser's default checkbox */
-.customcheck input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-}
+            /* Hide the browser's default checkbox */
+            .customcheck input {
+                position: absolute;
+                opacity: 0;
+                cursor: pointer;
+            }
 
-/* Create a custom checkbox */
-.checkmark {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 25px;
-    width: 25px;
-    background-color: #eee;
-    border-radius: 5px;
-}
+            /* Create a custom checkbox */
+            .checkmark {
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 25px;
+                width: 25px;
+                background-color: #eee;
+                border-radius: 5px;
+            }
 
-/* On mouse-over, add a grey background color */
-.customcheck:hover input ~ .checkmark {
-    background-color: #ccc;
-}
+            /* On mouse-over, add a grey background color */
+            .customcheck:hover input ~ .checkmark {
+                background-color: #ccc;
+            }
 
-/* When the checkbox is checked, add a blue background */
-.customcheck input:checked ~ .checkmark {
-    background-color: #02cf32;
-    border-radius: 5px;
-}
+            /* When the checkbox is checked, add a blue background */
+            .customcheck input:checked ~ .checkmark {
+                background-color: #02cf32;
+                border-radius: 5px;
+            }
 
-/* Create the checkmark/indicator (hidden when not checked) */
-.checkmark:after {
-    content: "";
-    position: absolute;
-    display: none;
-}
+            /* Create the checkmark/indicator (hidden when not checked) */
+            .checkmark:after {
+                content: "";
+                position: absolute;
+                display: none;
+            }
 
-/* Show the checkmark when checked */
-.customcheck input:checked ~ .checkmark:after {
-    display: block;
-}
+            /* Show the checkmark when checked */
+            .customcheck input:checked ~ .checkmark:after {
+                display: block;
+            }
 
-/* Style the checkmark/indicator */
-.customcheck .checkmark:after {
-    left: 9px;
-    top: 5px;
-    width: 5px;
-    height: 10px;
-    border: solid white;
-    border-width: 0 3px 3px 0;
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
-}
+            /* Style the checkmark/indicator */
+            .customcheck .checkmark:after {
+                left: 9px;
+                top: 5px;
+                width: 5px;
+                height: 10px;
+                border: solid white;
+                border-width: 0 3px 3px 0;
+                -webkit-transform: rotate(45deg);
+                -ms-transform: rotate(45deg);
+                transform: rotate(45deg);
+            }
         </style>
     </head>
     <body>
@@ -870,7 +870,7 @@
                                     <div class="col-md-3">
                                         <label>
                                             <p class="label-txt">Child Name</p>
-                                            <input type="text" class="input" id="childName">
+                                            <input type="text" class="input" id="childName" name ="childName">
                                             <div class="line-box">
                                                 <div class="line"></div>
                                             </div>
@@ -937,7 +937,11 @@
                                     </div>
                                 </div>
                             </div>
-
+                            <center> 
+                                <form action="../WeightAge" method="GET">
+                                    <button type="submit" onclick="viewWA()">View Weight/Age Graph</button>
+                                </form>
+                            </center>
                         </div>
                         <div  style="margin-top: 70px" class="tab-pane fade" id="tabpanel4" role="tabpanel">
                             <h2>Search Child</h2>
@@ -1320,62 +1324,62 @@
                             var cell1 = row.insertCell(0);
                             var cell2 = row.insertCell(1);
                             var cell3 = row.insertCell(2);
-                             var cell4 = row.insertCell(3);
+                            var cell4 = row.insertCell(3);
                             cell1.innerHTML = vaccineDetails[i]["duedate"];
                             cell2.innerHTML = date;
                             cell3.innerHTML = vaccineDetails[i]["vaccinename"];
-                             cell4.innerHTML = ('<label class="customcheck"><input type="checkbox" checked="checked"><span class="checkmark"></span></label>');
+                            cell4.innerHTML = ('<label class="customcheck"><input type="checkbox" checked="checked"><span class="checkmark"></span></label>');
                         } else if (i === 2) {
                             var table = document.getElementById("tableVaccineRecordDetailsBody2");
                             var row = table.insertRow(0);
                             var cell1 = row.insertCell(0);
                             var cell2 = row.insertCell(1);
                             var cell3 = row.insertCell(2);
-                             var cell4 = row.insertCell(3);
+                            var cell4 = row.insertCell(3);
                             cell1.innerHTML = vaccineDetails[i]["duedate"];
                             cell2.innerHTML = date;
                             cell3.innerHTML = vaccineDetails[i]["vaccinename"];
-                             cell4.innerHTML = ('<label class="customcheck"><input type="checkbox" checked="checked"><span class="checkmark"></span></label>');
+                            cell4.innerHTML = ('<label class="customcheck"><input type="checkbox" checked="checked"><span class="checkmark"></span></label>');
                         } else if (i === 3) {
                             var table = document.getElementById("tableVaccineRecordDetailsBody2");
                             var row = table.insertRow(0);
                             var cell1 = row.insertCell(0);
                             var cell2 = row.insertCell(1);
                             var cell3 = row.insertCell(2);
-                             var cell4 = row.insertCell(3);
+                            var cell4 = row.insertCell(3);
                             cell1.innerHTML = vaccineDetails[i]["duedate"];
                             cell2.innerHTML = date;
                             cell3.innerHTML = vaccineDetails[i]["vaccinename"];
-                             cell4.innerHTML = ('<label class="customcheck"><input type="checkbox" checked="checked"><span class="checkmark"></span></label>');
+                            cell4.innerHTML = ('<label class="customcheck"><input type="checkbox" checked="checked"><span class="checkmark"></span></label>');
                         } else if (i === 4) {
                             var table = document.getElementById("tableVaccineRecordDetailsBody2");
                             var row = table.insertRow(0);
                             var cell1 = row.insertCell(0);
                             var cell2 = row.insertCell(1);
                             var cell3 = row.insertCell(2);
-                             var cell4 = row.insertCell(3);
+                            var cell4 = row.insertCell(3);
                             cell1.innerHTML = vaccineDetails[i]["duedate"];
                             cell2.innerHTML = date;
                             cell3.innerHTML = vaccineDetails[i]["vaccinename"];
-                             cell4.innerHTML = ('<label class="customcheck"><input type="checkbox" checked="checked"><span class="checkmark"></span></label>');
+                            cell4.innerHTML = ('<label class="customcheck"><input type="checkbox" checked="checked"><span class="checkmark"></span></label>');
                         } else if (i === 5) {
                             var table = document.getElementById("tableVaccineRecordDetailsBody2");
                             var row = table.insertRow(0);
                             var cell1 = row.insertCell(0);
                             var cell2 = row.insertCell(1);
                             var cell3 = row.insertCell(2);
-                             var cell4 = row.insertCell(3);
+                            var cell4 = row.insertCell(3);
                             cell1.innerHTML = vaccineDetails[i]["duedate"];
                             cell2.innerHTML = date;
                             cell3.innerHTML = vaccineDetails[i]["vaccinename"];
-                             cell4.innerHTML = ('<label class="customcheck"><input type="checkbox" checked="checked"><span class="checkmark"></span></label>');
+                            cell4.innerHTML = ('<label class="customcheck"><input type="checkbox" checked="checked"><span class="checkmark"></span></label>');
                         } else if (i === 6) {
                             var table = document.getElementById("tableVaccineRecordDetailsBody2");
                             var row = table.insertRow(0);
                             var cell1 = row.insertCell(0);
                             var cell2 = row.insertCell(1);
                             var cell3 = row.insertCell(2);
-                             var cell4 = row.insertCell(3);
+                            var cell4 = row.insertCell(3);
                             cell1.innerHTML = vaccineDetails[i]["duedate"];
                             cell2.innerHTML = date;
                             cell3.innerHTML = vaccineDetails[i]["vaccinename"];
@@ -1385,22 +1389,22 @@
                             var cell1 = row.insertCell(0);
                             var cell2 = row.insertCell(1);
                             var cell3 = row.insertCell(2);
-                             var cell4 = row.insertCell(3);
+                            var cell4 = row.insertCell(3);
                             cell1.innerHTML = vaccineDetails[i]["duedate"];
                             cell2.innerHTML = date;
                             cell3.innerHTML = vaccineDetails[i]["vaccinename"];
-                             cell4.innerHTML = ('<label class="customcheck"><input type="checkbox" checked="checked"><span class="checkmark"></span></label>');
+                            cell4.innerHTML = ('<label class="customcheck"><input type="checkbox" checked="checked"><span class="checkmark"></span></label>');
                         } else if (i === 8) {
                             var table = document.getElementById("tableVaccineRecordDetailsBody2");
                             var row = table.insertRow(0);
                             var cell1 = row.insertCell(0);
                             var cell2 = row.insertCell(1);
                             var cell3 = row.insertCell(2);
-                             var cell4 = row.insertCell(3);
+                            var cell4 = row.insertCell(3);
                             cell1.innerHTML = vaccineDetails[i]["duedate"];
                             cell2.innerHTML = date;
                             cell3.innerHTML = vaccineDetails[i]["vaccinename"];
-                             cell4.innerHTML = ('<label class="customcheck"><input type="checkbox" checked="checked"><span class="checkmark"></span></label>');
+                            cell4.innerHTML = ('<label class="customcheck"><input type="checkbox" checked="checked"><span class="checkmark"></span></label>');
                         } else {
 
                         }
@@ -1463,6 +1467,9 @@
         //            xmlHttpRequest.send();
         //            }
 
-
+function viewWA() {
+    
+    
+}
     </script>
 </html>

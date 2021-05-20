@@ -1,8 +1,16 @@
 <%-- 
-    Document   : HeightAgeGraph
-    Created on : Apr 8, 2021, 5:13:19 PM
+    Document   : newjsp
+    Created on : Apr 8, 2021, 3:11:53 AM
     Author     : Senani
 --%>
+
+
+<%@page import="com.google.gson.Gson"%>
+<%@page import="org.json.JSONObject"%>
+<%@page import="javax.json.JsonObject"%>
+<%@page import="javax.json.Json"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
+<%@ page import="java.util.*" %>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ page import="java.util.*" %>
@@ -124,3 +132,4 @@ map = new HashMap<Object,Object>(); map.put("label", "60"); map.put("y", 16.0); 
     </script>
 
 </html>
+

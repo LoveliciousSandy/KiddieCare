@@ -40,6 +40,10 @@
         <servlet-name>SearchChildforVaccine</servlet-name>
         <servlet-class>com.kiddiecare.servlet.SearchChildforVaccine</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>WeightAge</servlet-name>
+        <servlet-class>com.kiddiecare.servlet.WeightAge</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -75,6 +79,10 @@
     <servlet-mapping>
         <servlet-name>SearchChildforVaccine</servlet-name>
         <url-pattern>/SearchChildforVaccine</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>WeightAge</servlet-name>
+        <url-pattern>/WeightAge</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
