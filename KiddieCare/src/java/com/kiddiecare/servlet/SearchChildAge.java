@@ -36,6 +36,7 @@ public class SearchChildAge extends HttpServlet {
             throws ServletException, IOException {
         String childname, duedate, vaccinename,vaccinecategory, dob, childagey, childagem, childaged;
         String name = request.getParameter("name");
+        ///correct 0ne
         // String searchchildamd = "SELECT dob, TIMESTAMPDIFF( YEAR, dob, now() ) as _year, TIMESTAMPDIFF( MONTH, dob, now() ) % 12 as _month, FLOOR( TIMESTAMPDIFF( DAY, dob, now() ) % 30.4375 ) as _day FROM chdr.child where child_name = '" + name + "'";// get age query
         //String searchVaccinedetails = "select child_name, due_date,vaccine_category, dob, TIMESTAMPDIFF( YEAR, dob, now() ) as _year, TIMESTAMPDIFF( MONTH, dob, now() ) % 12 as _month, FLOOR( TIMESTAMPDIFF( DAY, dob, now() ) % 30.4375 ) as _day  from chdr.vaccine_schedule_date join child on child_child_birth_register_no= child_birth_register_no join user on child.user_register_no= user.user_register_no where child.child_name='" + name + "' and vaccine_category  ";
         String searchVaccinedetails = "select child_name, due_date,vaccine_name,vaccine_category , dob, TIMESTAMPDIFF( YEAR, dob, now() ) as _year, TIMESTAMPDIFF( MONTH, dob, now() ) % 12 as _month, FLOOR( TIMESTAMPDIFF( DAY, dob, now() ) % 30.4375 ) as _day  from chdr.child_vaccination_details join child on child_child_birth_register_no= child_birth_register_no join user on child.user_register_no= user.user_register_no join  vaccine on vaccine_idvaccine=child_vaccination_details.vaccine_idvaccine where child.child_name= '"+name+"'";
