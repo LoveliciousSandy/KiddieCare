@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Senani
  */
 public class AddChildRecord extends HttpServlet {
-
+//correct
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -35,18 +35,29 @@ public class AddChildRecord extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try (PrintWriter out = response.getWriter()) {
+            String userId = request.getParameter("nicNo");
             String childName = request.getParameter("childName");
             String dateofmeasurement = request.getParameter("dateMeasurement");
             String weight = request.getParameter("weight");
             String height = request.getParameter("height");
-            int age = Integer.parseInt(request.getParameter("ageofchild"));
-            System.out.println(age);
-            String sqlquery = "INSERT INTO chdr.record ( date, weight, height,recordage, child_child_birth_register_no) VALUES ('"+dateofmeasurement+"','"+weight+"','"+height+"','"+age+"',(select chdr.child.child_birth_register_no from chdr.child where child_name= '"+childName+"'))";
-            
+            int years = Integer.parseInt(request.getParameter("years"));
+            int months =Integer.parseInt(request.getParameter("months"));
+            int days = Integer.parseInt(request.getParameter("days"));
+            String status = "No";
             QueryDAO querydao = new QueryDAO();
+            
+             int totalmonths = (years*12)+months;
+           // String sqlquery = "INSERT INTO chdr.record (date, weight, height,years,months,days, totalmonths,child_child_birth_register_no) VALUES ('"+dateofmeasurement+"','"+weight+"','"+height+"','"+years+"','"+months+"','"+days+"','"+totalmonths+"',(select chdr.child.child_birth_register_no from chdr.child where child_name= '"+childName+"'))";
+            String sqlquery = "INSERT INTO chdr.record (date, weight, height,years,months,days, totalmonths,child_child_birth_register_no) VALUES ('"+dateofmeasurement+"','"+weight+"','"+height+"','"+years+"','"+months+"','"+days+"','"+totalmonths+"',(SELECT child_birth_register_no FROM chdr.child JOIN chdr.user on child.user_register_no= user.user_register_no WHERE child_name ='"+childName+"' and user.nic='"+userId+"'))";
+            if (years == 0 && months== 0 && days== 0){
+                status ="Yes";
+            String savevaccine1sdrecord = "insert into chdr.child_vaccination_details (vaccine_idvaccine, vaccinecategory_idvaccinecategory, due_date, given_date, status,child_child_birth_register_no) values(1,1,'"+dateofmeasurement+"','"+dateofmeasurement+"','"+status+"',(select chdr.child.child_birth_register_no from chdr.child where child_name= '"+childName+"'))";
+            querydao.save(savevaccine1sdrecord);
+            }
             
             if (querydao.save(sqlquery)) {
                   response.getWriter().write("OK");
+                  
             } else {
                  response.getWriter().write("Error");
             }

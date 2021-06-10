@@ -1,5 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+    <display-name>EmailSendingWebApp</display-name>
+    <!-- SMTP settings -->
+    <context-param>
+        <param-name>host</param-name>
+        <param-value>smtp.gmail.com</param-value>
+    </context-param>
+    <context-param>
+        <param-name>port</param-name>
+        <param-value>587</param-value>
+    </context-param>
+    <context-param>
+        <param-name>user</param-name>
+        <param-value>kiddiecare2021@gmail.com</param-value>
+    </context-param>
+    <context-param>
+        <param-name>pass</param-name>
+        <param-value>kiddiecare2021kiddiecare2021</param-value>
+    </context-param>
+    <!-- 
+    <welcome-file-list>
+        <welcome-file>EmailForm.jsp</welcome-file>
+    </welcome-file-list>-->
     <servlet>
         <servlet-name>ChildRegistraion</servlet-name>
         <servlet-class>com.kiddiecare.servlet.ChildRegistraion</servlet-class>
@@ -44,6 +66,46 @@
         <servlet-name>WeightAge</servlet-name>
         <servlet-class>com.kiddiecare.servlet.WeightAge</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ChildVaccineRegistraion</servlet-name>
+        <servlet-class>com.kiddiecare.servlet.ChildVaccineRegistraion</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EmailSendingServlet</servlet-name>
+        <servlet-class>com.kiddiecare.servlet.EmailSendingServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Logout</servlet-name>
+        <servlet-class>com.kiddiecare.servlet.Logout</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchCildforUser</servlet-name>
+        <servlet-class>com.kiddiecare.servlet.SearchCildforUser</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserRegisration</servlet-name>
+        <servlet-class>com.kiddiecare.servlet.UserRegisration</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>userName</servlet-name>
+        <servlet-class>com.kiddiecare.servlet.userName</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchWeightDetails</servlet-name>
+        <servlet-class>com.kiddiecare.servlet.SearchWeightDetails</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SelectFoods</servlet-name>
+        <servlet-class>com.kiddiecare.servlet.SelectFoods</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchforMail</servlet-name>
+        <servlet-class>com.kiddiecare.servlet.SearchforMail</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminPanelSearchVaccineDetails</servlet-name>
+        <servlet-class>com.kiddiecare.servlet.AdminPanelSearchVaccineDetails</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -83,6 +145,46 @@
     <servlet-mapping>
         <servlet-name>WeightAge</servlet-name>
         <url-pattern>/WeightAge</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChildVaccineRegistraion</servlet-name>
+        <url-pattern>/ChildVaccineRegistraion</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EmailSendingServlet</servlet-name>
+        <url-pattern>/EmailSendingServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Logout</servlet-name>
+        <url-pattern>/Logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchCildforUser</servlet-name>
+        <url-pattern>/SearchCildforUser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserRegisration</servlet-name>
+        <url-pattern>/UserRegisration</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>userName</servlet-name>
+        <url-pattern>/userName</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchWeightDetails</servlet-name>
+        <url-pattern>/SearchWeightDetails</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SelectFoods</servlet-name>
+        <url-pattern>/SelectFoods</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchforMail</servlet-name>
+        <url-pattern>/SearchforMail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminPanelSearchVaccineDetails</servlet-name>
+        <url-pattern>/AdminPanelSearchVaccineDetails</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

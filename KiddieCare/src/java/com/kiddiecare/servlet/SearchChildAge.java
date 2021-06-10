@@ -34,12 +34,12 @@ public class SearchChildAge extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String childname, duedate, vaccinename,vaccinecategory, dob, childagey, childagem, childaged;
+        String childname, duedate, vaccinename,vaccinecategory, dob,status, childagey, childagem, childaged;
         String name = request.getParameter("name");
         ///correct 0ne
         // String searchchildamd = "SELECT dob, TIMESTAMPDIFF( YEAR, dob, now() ) as _year, TIMESTAMPDIFF( MONTH, dob, now() ) % 12 as _month, FLOOR( TIMESTAMPDIFF( DAY, dob, now() ) % 30.4375 ) as _day FROM chdr.child where child_name = '" + name + "'";// get age query
         //String searchVaccinedetails = "select child_name, due_date,vaccine_category, dob, TIMESTAMPDIFF( YEAR, dob, now() ) as _year, TIMESTAMPDIFF( MONTH, dob, now() ) % 12 as _month, FLOOR( TIMESTAMPDIFF( DAY, dob, now() ) % 30.4375 ) as _day  from chdr.vaccine_schedule_date join child on child_child_birth_register_no= child_birth_register_no join user on child.user_register_no= user.user_register_no where child.child_name='" + name + "' and vaccine_category  ";
-        String searchVaccinedetails = "select child_name, due_date,vaccine_name,vaccine_category , dob, TIMESTAMPDIFF( YEAR, dob, now() ) as _year, TIMESTAMPDIFF( MONTH, dob, now() ) % 12 as _month, FLOOR( TIMESTAMPDIFF( DAY, dob, now() ) % 30.4375 ) as _day  from chdr.child_vaccination_details join child on child_child_birth_register_no= child_birth_register_no join user on child.user_register_no= user.user_register_no join  vaccine on vaccine_idvaccine=child_vaccination_details.vaccine_idvaccine where child.child_name= '"+name+"'";
+        String searchVaccinedetails = "select child_name, due_date,vaccine_name,vaccine_category ,status, dob, TIMESTAMPDIFF( YEAR, dob, now() ) as _year, TIMESTAMPDIFF( MONTH, dob, now() ) % 12 as _month, FLOOR( TIMESTAMPDIFF( DAY, dob, now() ) % 30.4375 ) as _day  from chdr.child_vaccination_details join child on child_child_birth_register_no= child_birth_register_no join user on child.user_register_no= user.user_register_no join  vaccine on vaccine_idvaccine=child_vaccination_details.vaccine_idvaccine where child.child_name= '"+name+"'";
 
         QueryDAO querydao = new QueryDAO();
         JSONObject jo = new JSONObject();
@@ -53,7 +53,10 @@ public class SearchChildAge extends HttpServlet {
                 vaccinename = (resultset.getString("vaccine_name"));
                 vaccinecategory = (resultset.getString("vaccine_category"));
                 dob = (resultset.getString("dob"));
-
+                status = (resultset.getString("status"));
+                if (!status.equals("Yes")) {
+                    status = "No";
+                } 
                 childagey = (resultset.getString("_year"));
                 childagem = (resultset.getString("_month"));
                 childaged = (resultset.getString("_day"));
@@ -64,6 +67,7 @@ public class SearchChildAge extends HttpServlet {
                 jo1.put("vaccinecategory", vaccinecategory);
                 jo1.put("vaccinename", vaccinename);
                 jo1.put("dob", dob);
+                jo1.put("status", status);
                 jo1.put("year", childagey);
                 jo1.put("month", childagem);
                 jo1.put("days", childaged);

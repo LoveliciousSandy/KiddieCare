@@ -41,59 +41,89 @@ public class AddedRecordDetails extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int todaychildage= 0;
-        ArrayList<String> recordDetails1 = new ArrayList<>();
-        JSONArray ja1 = new JSONArray();
-        JSONArray ja2 = new JSONArray();
-        JSONArray ja3 = new JSONArray();
         String name = request.getParameter("name");
-        String searchchildage = "SELECT  YEAR(CURDATE()) - YEAR(dob) AS childage FROM chdr.child where child_name='" + name + "'";// get age query
-        String searchRecordDetailsByName = "SELECT record.date, record.weight,record.height,record.recordage FROM chdr.record JOIN chdr.child on record.child_child_birth_register_no = child.child_birth_register_no WHERE child.child_name= '" + name + "'";
+        String searchRecordDetails = "SELECT record.date, record.weight,record.height,record.totalmonths ,dob, TIMESTAMPDIFF (YEAR, dob, now() ) as _year, TIMESTAMPDIFF( MONTH, dob, now() ) % 12 as _month, FLOOR( TIMESTAMPDIFF( DAY, dob, now() ) % 30.4375 ) as _day  FROM chdr.record JOIN chdr.child on record.child_child_birth_register_no = child.child_birth_register_no WHERE child.child_name='" + name + "'";
+        //String searchchildage = "SELECT dob, TIMESTAMPDIFF( YEAR, dob, now() ) as _year, TIMESTAMPDIFF( MONTH, dob, now() ) % 12 as _month, FLOOR( TIMESTAMPDIFF( DAY, dob, now() ) % 30.4375 ) as _day FROM chdr.child where child_name ='"+name+"'";// get age query
+        //String searchRecordDetailsByName = "SELECT record.date, record.weight,record.height,record.recordage FROM chdr.record JOIN chdr.child on record.child_child_birth_register_no = child.child_birth_register_no WHERE child.child_name= '" + name + "'";
         QueryDAO querydao = new QueryDAO();
-        JSONObject jo2 = new JSONObject();
+        JSONObject jobj = new JSONObject();
         JSONArray ja = new JSONArray();
         try {
-            ResultSet resultset = querydao.search(searchchildage);
-            while (resultset.next()) {
+            ResultSet resultset = querydao.search(searchRecordDetails);
 
-                todaychildage = Integer.parseInt(resultset.getString("childage"));
+            while (resultset.next()) {
+                JSONObject jo = new JSONObject();
+                jo.put("years", resultset.getString("_year"));
+                jo.put("months", resultset.getString("_month"));
+                jo.put("days", resultset.getString("_day"));
+                
+                jo.put("date", resultset.getString("date"));
+                jo.put("weight", resultset.getString("weight"));
+                jo.put("height", resultset.getString("height"));
+                jo.put("totalmonths", resultset.getString("totalmonths"));
+                ja.put(jo);
                 
             }
+             String output = jobj.put("recordDetails", ja).toString();
+            System.out.println(output);
+            response.setContentType("application/json");
+            response.getWriter().write(output);
+            
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        try {
-
-            ResultSet resultset = querydao.search(searchRecordDetailsByName);
-            int rowCount = 0;
-            if (resultset.last()) { // go to last row 
-                rowCount = resultset.getRow();//get row count 
-            }
-            resultset.beforeFirst();
-            while (resultset.next()) {
-
-                JSONObject jo = new JSONObject();
-                jo.put("date", resultset.getString("date"));
-                jo.put("height", resultset.getString("height"));
-                jo.put("weight", resultset.getString("weight"));
-                jo.put("age", resultset.getString("recordage"));
-                jo.put("rowCount", rowCount);
-                jo.put("childage", todaychildage);
-                ja.put(jo);
-                //ja.put((resultset.getString("date"))+","+(resultset.getString("height"))+","+(resultset.getString("weight")));
-
-            }
-            System.out.println("JSON arr" + ja.toString());
-
-            String output = jo2.put("recordDetails", ja).toString();
-            response.setContentType("application/json");
-            response.getWriter().write(output);
-        } catch (Exception ex) {
-
-            ex.printStackTrace();
-        }
+//        try {
+//            ResultSet resultset = querydao.search(searchchildage);
+//            while (resultset.next()) {
+//
+//                //todaychildage = Integer.parseInt(resultset.getString("childage"));
+//               childagey = (resultset.getString("_year"));
+//                childagem = (resultset.getString("_month"));
+//                childaged = (resultset.getString("_day"));
+//                   JSONObject jo = new JSONObject();
+//              jo.put("year", childagey);
+//                jo.put("month", childagem);
+//                jo.put("days", childaged);
+//                
+//            }
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+       // try {
+//
+//            ResultSet resultset = querydao.search(searchRecordDetailsByName);
+//            int rowCount = 0;
+//            if (resultset.last()) { // go to last row 
+//                rowCount = resultset.getRow();//get row count 
+//            }
+//            resultset.beforeFirst();
+//            while (resultset.next()) {
+//
+//                JSONObject jo = new JSONObject();
+//                jo.put("date", resultset.getString("date"));
+//                jo.put("height", resultset.getString("height"));
+//                jo.put("weight", resultset.getString("weight"));
+//                jo.put("rowCount", rowCount);
+//                jo.put("year", childagey);
+//                jo.put("month", childagem);
+//                jo.put("days", childaged);
+//                
+//                ja.put(jo);
+//                //ja.put((resultset.getString("date"))+","+(resultset.getString("height"))+","+(resultset.getString("weight")));
+//
+//            }
+//            System.out.println("JSON arr" + ja.toString());
+//
+//            String output = jo2.put("recordDetails", ja).toString();
+//            response.setContentType("application/json");
+//            response.getWriter().write(output);
+//        } catch (Exception ex) {
+//
+//            ex.printStackTrace();
+//        }
 
     }
 

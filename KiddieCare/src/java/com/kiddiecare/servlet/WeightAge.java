@@ -46,7 +46,7 @@ public class WeightAge extends HttpServlet {
             out.println("</body>");
             out.println("</html>");
           String name =   request.getParameter("childName");
-          String sqlquery = "select record.weight, record.recordage from record join child on child_child_birth_register_no=child_birth_register_no where child.child_name= '"+name+"'";
+          String sqlquery = "select record.weight, record.totalmonths from record join child on child_child_birth_register_no=child_birth_register_no where child.child_name= '"+name+"'";
             
             QueryDAO querydao = new QueryDAO();
                      JSONArray ja = new JSONArray();

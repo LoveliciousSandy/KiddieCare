@@ -39,8 +39,13 @@ map = new HashMap<Object,Object>(); map.put("label", "60"); map.put("y", 24.2); 
 <!--//child-->
 <%
 
- String name =   "senani";
-          String sqlquery = "select record.weight, record.recordage from record join child on child_child_birth_register_no=child_birth_register_no where child.child_name='"+name+"'";
+ String userNIC = request.getParameter("userNIC") ;
+ String name = request.getParameter("childName") ;
+// String name = "hf";
+// String userNIC = "926071378";
+        
+          //SELECT weight, totalmonths FROM chdr.record JOIN chdr.child on child_child_birth_register_no = child_birth_register_no JOIN chdr.user on child.user_register_no = chdr.user.user_register_no WHERE child_name="hf" and nic=926071378;
+         String sqlquery = "SELECT weight, totalmonths FROM chdr.record JOIN chdr.child on child_child_birth_register_no = child_birth_register_no JOIN chdr.user on child.user_register_no = chdr.user.user_register_no WHERE child_name='"+name+"' and nic='"+userNIC+"'";
             
             QueryDAO querydao = new QueryDAO();
                      JSONArray ja = new JSONArray();
@@ -53,11 +58,23 @@ map = new HashMap<Object,Object>(); map.put("label", "60"); map.put("y", 24.2); 
 
             while (resusltset.next()) { 
                 for (int i = 0; i < rowCount ; i++) {
-                map = new HashMap<Object,Object>(); map.put("label",resusltset.getString("recordage")); map.put("y", resusltset.getString("weight")); list3.add(map);
-                }
+                    
+             map = new HashMap<Object,Object>(); map.put("label", resusltset.getString("totalmonths")); map.put("y", Double.parseDouble(resusltset.getString("weight")));
+            //  map = new HashMap<Object,Object>(); map.put("label", i); map.put("y", 3); list3.add(map);
+                      }
+                list3.add(map); 
            
             }
 
+
+
+//map = new HashMap<Object,Object>(); map.put("label", "0"); map.put("y", 3); list3.add(map);
+//    map = new HashMap<Object,Object>(); map.put("label", "5"); map.put("y", 6.0); list3.add(map);
+//    map = new HashMap<Object,Object>(); map.put("label", "10"); map.put("y", 9.2); list3.add(map);
+//map = new HashMap<Object,Object>(); map.put("label", "15"); map.put("y", 9.2); list3.add(map);
+//map = new HashMap<Object,Object>(); map.put("label", "20"); map.put("y", 10.5); list3.add(map);
+//map = new HashMap<Object,Object>(); map.put("label", "25"); map.put("y", 11.8); list3.add(map);
+//map = new HashMap<Object,Object>(); map.put("label", "30"); map.put("y", 13.8); list3.add(map);
 %>
 <%
     //-2SD
@@ -124,23 +141,31 @@ map = new HashMap<Object,Object>(); map.put("label", "60"); map.put("y", 16.0); 
                 },
                 axisY: {
                     title: "Weight(in Kg)",
-                    includeZero: true
+                    includeZero: false
                 },
                 data: [{
                         type: "line",
+                        lineDashType: "dot",
+                        showInLegend: true,
+			name: "1SD",
                         dataPoints: <%out.print(dataPoints1);%>
                         
                     },
             
                     {
                         type: "line",
+                        lineDashType: "dot",
+                        showInLegend: true,
+			name: "-2SD",
                         dataPoints: <%out.print(dataPoints2);%>
                     },
                     {
                         type: "line",
+                        showInLegend: true,
+			name: "Child Line",
                         dataPoints: <%out.print(dataPoints3);%>
                     }]
-                        
+                     
 
 });
             chart.render();

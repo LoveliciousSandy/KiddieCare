@@ -21,7 +21,14 @@ import org.json.JSONObject;
  *
  * @author Senani
  */
-public class SearchVaccineDetails extends HttpServlet {
+public class AdminPanelSearchVaccineDetails extends HttpServlet {
+
+  /*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -40,7 +47,7 @@ public class SearchVaccineDetails extends HttpServlet {
 //        ArrayList l3 = new ArrayList();
 //        ArrayList l4 = new ArrayList();
         ArrayList list = new ArrayList();
-        String userNIC = (String)request.getSession().getAttribute("userNIC");
+        String userNIC = request.getParameter("userNIC");
         String childName = request.getParameter("childName");
 
         String searchchildamd = "SELECT dob, TIMESTAMPDIFF( YEAR, dob, now() ) as _year, TIMESTAMPDIFF( MONTH, dob, now() ) % 12 as _month, FLOOR( TIMESTAMPDIFF( DAY, dob, now() ) % 30.4375 ) as _day FROM chdr.child JOIN chdr.user on child.user_register_no = user.user_register_no WHERE child.child_name='" + childName + "'and user.nic='" + userNIC + "'";// get age query
@@ -115,7 +122,7 @@ public class SearchVaccineDetails extends HttpServlet {
 
             jo1.put("vaccinesName", ja1);
 
-        String sqlvaccinestatus = "SELECT chdr.child_vaccination_details.vaccine_idvaccine FROM chdr.child_vaccination_details JOIN chdr.child on chdr.child_vaccination_details.child_child_birth_register_no = chdr.child.child_birth_register_no JOIN chdr.user on chdr.child.user_register_no = chdr.user.user_register_no WHERE chdr.child.child_name='"+childName+"'and chdr.user.nic='"+userNIC+"'";
+            String sqlvaccinestatus = "SELECT chdr.child_vaccination_details.vaccine_idvaccine FROM chdr.child_vaccination_details JOIN chdr.child on chdr.child_vaccination_details.child_child_birth_register_no = chdr.child.child_birth_register_no JOIN chdr.user on chdr.child.user_register_no = chdr.user.user_register_no WHERE chdr.child.child_name='"+childName+"'and chdr.user.nic='"+userNIC+"'";
             ResultSet rsstatus = querydao.search(sqlvaccinestatus);
             while (rsstatus.next()) {
 

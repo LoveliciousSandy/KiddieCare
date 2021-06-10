@@ -9,12 +9,17 @@ package com.kiddiecare.javabean;
  *
  * @author Senani
  */
-public class Login {
+public class LoginToApp {
 
     private String userNic;
     private String password;
 
-    public Login() {
+    public LoginToApp() {
+    }
+
+    public LoginToApp(String userNic, String password) {
+        this.userNic = userNic;
+        this.password = password;
     }
 
     public String getUserNic() {
@@ -33,6 +38,5 @@ public class Login {
         this.password = password;
     }
 
-  
-
+    
 }

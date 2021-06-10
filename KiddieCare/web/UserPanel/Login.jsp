@@ -18,7 +18,7 @@
             background: linear-gradient(to bottom, mediumpurple , mediumorchid);
         }
         .login-block{
-           /* background: mediumorchid ;   fallback for old browsers */
+            /* background: mediumorchid ;   fallback for old browsers */
             /*background: -webkit-linear-gradient(to bottom, #FFB88C, #DE6262);  /* Chrome 10-25, Safari 5.1-6 */
             /*background: linear-gradient(to bottom, mediumpurple , mediumorchid); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
             float:left;
@@ -40,6 +40,15 @@
         .banner-text h2{color:#fff; font-weight:600;}
         .banner-text h2:after{content:" "; width:100px; height:5px; background:#FFF; display:block; margin-top:20px; border-radius:3px;}
         .banner-text p{color:#fff;}
+
+        .modal-center {
+            display:table;
+            height: 100%;
+            width: 100%;
+        }
+        .modal-align-center {: table-cell;vertical-align: middle;}
+        .modal-content {height:inherit;margin: 0 auto;}
+
     </style>
     <body>
         <section class="login-block">
@@ -47,21 +56,21 @@
                 <div class="row">
                     <div class="col-md-4 login-sec">
                         <h2 class="text-center">Login Now</h2>
-                        <form class="login-form" action="../Login" method="POST">
+                        <form class="login-form" >
                             <div class="form-group">
                                 <label for="exampleInputEmail1" >User NIC</label>
-                                <input type="text" class="form-control" placeholder=""name="nic">
+                                <input type="text" class="form-control" placeholder=""name="nic" id="userNIC">
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputPassword1" >Password</label>
-                                <input type="password" class="form-control" placeholder="" name="password">
+                                <input type="password" class="form-control" placeholder="" name="password" id="password">
                             </div>
                             <div class="form-check">
                                 <label class="form-check-label">
                                     <input type="checkbox" class="form-check-input">
                                     <small>Remember Me</small>
                                 </label>
-                                <button type="submit" class="btn btn-login float-right">Submit</button>
+                                <button type="button" class="btn btn-login float-right" onclick="UserLogin();">Submit</button>
                             </div>
                         </form>
                     </div>
@@ -105,5 +114,57 @@
                     </div>
                 </div>
         </section>
+
+        <div class="modal fade" id="succsessModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-center">
+                <div class="modal-dialog .modal-align-center">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span>
+
+                            </button>
+
+
+                        </div>
+                        <div class="modal-body">...</div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </body>
+    <script>
+        function UserLogin() {
+            var userNIC = $('#userNIC').val(); //get nic value
+            var password = $('#password').val();
+            var xmlHttpRequest = new XMLHttpRequest();
+            xmlHttpRequest.onreadystatechange = function () {
+                if (xmlHttpRequest.readyState === 4 && xmlHttpRequest.status === 200) {
+
+                    var response = xmlHttpRequest.responseText;
+                    if (response === "OK2") {
+                        alert("Awesome Mom You Succesfuly Login");
+                        window.location.href = "<%= request.getContextPath()%>/UserPanel/Dashboard.jsp";
+
+                    } else if (response === "OK1") {
+                        alert("Awesome Mom You Succesfuly Login");
+                        window.location.href = "<%= request.getContextPath()%>/AdminPanel/AdminDashboard.jsp";
+                    } else {
+                        alert("Opps Error");
+                    }
+                }
+            };
+        xmlHttpRequest.open("POST", "../Login", true);
+        xmlHttpRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xmlHttpRequest.send("userNIC=" + userNIC + "&password=" + password);
+
+
+        }
+
+    </script>
 </html>

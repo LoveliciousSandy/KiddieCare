@@ -4,601 +4,116 @@
     Author     : Senani
 --%>
 
+<%@page import="java.sql.ResultSet"%>
+<%@page import="org.json.JSONArray"%>
+<%@page import="com.kiddiecare.dbutil.QueryDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-
+<%      QueryDAO querydao = new QueryDAO();%>
 <html>
 
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Admin Dashboard</title>
         <jsp:include page="../Links/Links.jsp"></jsp:include>
-
-        <style>
-
-            /*             background: linear-gradient(45deg, #3bade3 0%, #576fe6 25%, #9844b7 51%, #ff357f 100%);*/
-
-
-            #mainbutton{
-                width: 200px;
-                height: 200px;
-            }
-
-            .nav-link:hover {
-                transition: all 0.4s;
-            }
-
-            .nav-link-collapse:after {
-                float: right;
-                content: '\f067';
-                font-family: 'FontAwesome';
-            }
-
-            .nav-link-show:after {
-                float: right;
-                content: '\f068';
-                font-family: 'FontAwesome';
-            }
-
-            .nav-item ul.nav-second-level {
-                padding-left: 0;
-            }
-
-            .nav-item ul.nav-second-level > .nav-item {
-                padding-left: 20px;
-            }
-            .navbar-icon-top .navbar-nav .nav-link > .fa {
-                position: relative;
-                width: 36px;
-                font-size: 24px;
-            }
-
-            .navbar-icon-top .navbar-nav .nav-link > .fa > .badge {
-                font-size: 0.75rem;
-                position: absolute;
-                right: 0;
-                font-family: sans-serif;
-            }
-
-            .navbar-icon-top .navbar-nav .nav-link > .fa {
-                top: 3px;
-                line-height: 12px;
-            }
-
-            .navbar-icon-top .navbar-nav .nav-link > .fa > .badge {
-                top: -10px;
-            }
+            <link rel="stylesheet" href="../CSS/AdminUserCss.css">
+            <style>
+                #hedding{
+                    background : linear-gradient(45deg, #3bade3 0%, #576fe6 25%, #9844b7 51%, #ff357f 100%);
+                    height: 80px;
 
 
-            @media (min-width: 992px) {
-                .sidenav {
+                }
+                .card-counter{
+                    box-shadow: 2px 2px 10px #DADADA;
+                    margin: 5px;
+                    padding: 20px 10px;
+                    background-color: #fff;
+                    height: 150px;
+                    border-radius: 5px;
+                    transition: .3s linear all;
+                }
+
+                .card-counter{
+                    background: linear-gradient(45deg, #3bade3 0%, #576fe6 25%, #9844b7 51%, #ff357f 100%);
+                    color: #FFF;
+                }  
+
+                .card-counter i{
+                    font-size: 5em;
+                    opacity: 0.2;
+                }
+
+                .card-counter .count-numbers{
                     position: absolute;
-                    top: 0;
-                    left: 0;
-                    width: 230px;
-                    height: calc(100vh - 3.5rem);
-                    margin-top: 3.5rem;
-                    background: #343a40;
-                    box-sizing: border-box;
-                    border-top: 1px solid rgba(0, 0, 0, 0.3);
-                }
-
-                .navbar-expand-lg .sidenav {
-                    flex-direction: column;
-                }
-            }
-
-            @media (min-width: 576px) {
-                .navbar-icon-top.navbar-expand-sm .navbar-nav .nav-link {
-                    text-align: center;
-                    display: table-cell;
-                    height: 70px;
-                    vertical-align: middle;
-                    padding-top: 0;
-                    padding-bottom: 0;
-                }
-
-                .navbar-icon-top.navbar-expand-sm .navbar-nav .nav-link > .fa {
+                    right: 35px;
+                    top: 20px;
+                    font-size: 32px;
                     display: block;
-                    width: 48px;
-                    margin: 2px auto 4px auto;
-                    top: 0;
-                    line-height: 24px;
                 }
 
-                .navbar-icon-top.navbar-expand-sm .navbar-nav .nav-link > .fa > .badge {
-                    top: -7px;
-                }
-            }
-
-            @media (min-width: 768px) {
-                .navbar-icon-top.navbar-expand-md .navbar-nav .nav-link {
-                    text-align: center;
-                    display: table-cell;
-                    height: 70px;
-                    vertical-align: middle;
-                    padding-top: 0;
-                    padding-bottom: 0;
-                }
-
-                .navbar-icon-top.navbar-expand-md .navbar-nav .nav-link > .fa {
+                .card-counter .count-name{
+                    position: absolute;
+                    right: 35px;
+                    top: 65px;
+                    font-style: italic;
+                    text-transform: capitalize;
+                    opacity: 0.5;
                     display: block;
-                    width: 48px;
-                    margin: 2px auto 4px auto;
-                    top: 0;
-                    line-height: 24px;
+                    font-size: 18px;
                 }
+            </style>
+        </head>
+        <body>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-2" >
+                        <!--                            side nav bar-->
+                        <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
+                            <a class="navbar-brand" href="#">Kiddie Care</a>
+                            <button
+                                class="navbar-toggler"
+                                type="button"
+                                data-toggle="collapse"
+                                data-target="#navbarCollapse"
+                                aria-controls="navbarCollapse"
+                                aria-expanded="false"
+                                aria-label="Toggle navigation"
+                                >
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
 
-                .navbar-icon-top.navbar-expand-md .navbar-nav .nav-link > .fa > .badge {
-                    top: -7px;
-                }
-            }
+                            <div class="collapse navbar-collapse" id="navbarCollapse">
+                                <ul class="navbar-nav mr-auto sidenav" id="navAccordion">
+                                    <br><br>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#tabpanel0" data-toggle="tab"  role="tab">Dashboard</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#tabpanel1" data-toggle="tab"  role="tab">User Registration</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#tabpanel2" data-toggle="tab"  role="tab">Child Registration</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#tabpanel3" data-toggle="tab"  role="tab">Child Growth Tracker</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#tabpanel4" data-toggle="tab"  role="tab">Child Vaccine Tracker</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#tabpanel5" data-toggle="tab"  role="tab">Send Reminder</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#tabpanel6"data-toggle="tab"  role="tab">Search</a>
 
-            @media (min-width: 992px) {
-                .navbar-icon-top.navbar-expand-lg .navbar-nav .nav-link {
-                    text-align: center;
-                    display: table-cell;
-                    height: 70px;
-                    vertical-align: middle;
-                    padding-top: 0;
-                    padding-bottom: 0;
-                }
-
-                .navbar-icon-top.navbar-expand-lg .navbar-nav .nav-link > .fa {
-                    display: block;
-                    width: 48px;
-                    margin: 2px auto 4px auto;
-                    top: 0;
-                    line-height: 24px;
-                }
-
-                .navbar-icon-top.navbar-expand-lg .navbar-nav .nav-link > .fa > .badge {
-                    top: -7px;
-                }
-            }
-
-            @media (min-width: 1200px) {
-                .navbar-icon-top.navbar-expand-xl .navbar-nav .nav-link {
-                    text-align: center;
-                    display: table-cell;
-                    height: 70px;
-                    vertical-align: middle;
-                    padding-top: 0;
-                    padding-bottom: 0;
-                }
-
-                .navbar-icon-top.navbar-expand-xl .navbar-nav .nav-link > .fa {
-                    display: block;
-                    width: 48px;
-                    margin: 2px auto 4px auto;
-                    top: 0;
-                    line-height: 24px;
-                }
-
-                .navbar-icon-top.navbar-expand-xl .navbar-nav .nav-link > .fa > .badge {
-                    top: -7px;
-                }
-            }
-
-            /*            /////////////////////////////////*/
-            label {
-                display: block;
-                position: relative;
-                margin: 40px 0px;
-            }
-            .label-txt {
-                position: absolute;
-                top: -1.6em;
-                padding: 10px;
-                /*                font-family: initial;
-                                font-size: large;*/
-                letter-spacing: 1px;
-                color: rgb(120,120,120);
-                transition: ease .3s;
-            }
-            .input {
-                width: 100%;
-                padding: 10px;
-                background: transparent;
-                border: none;
-                outline: none;
-                /*                font-family: initial;
-                                font-size: larger;*/
-
-            }
-
-            .line-box {
-                position: relative;
-                width: 100%;
-                height: 2px;
-                background: #BCBCBC;
-            }
-
-            .line {
-                position: absolute;
-                width: 0%;
-                height: 2px;
-                top: 0px;
-                left: 50%;
-                transform: translateX(-50%);
-                background:  blueviolet;
-                transition: ease .6s;
-            }
-
-            .input:focus + .line-box .line {
-                width: 100%;
-            }
-
-            .label-active {
-                top: -3em;
-            }
-            button {
-                display: inline-block;
-                padding: 15px 120px;
-                background: rgb(220,220,220);
-                font-weight: bold;
-                color: rgb(120,120,120);
-                border: none;
-                outline: none;
-                border-radius: 3px;
-                cursor: pointer;
-                transition: ease .3s;
-            }
-
-            button:hover {
-                background:linear-gradient(45deg, #3bade3 0%, #576fe6 25%, #9844b7 51%, #ff357f 100%);
-                color: #ffffff;
-            }
-            .btn-gender{
-                display: inline-block;
-                padding: 120px 120px;
-                background: rgb(220,220,220);
-                font-weight: bold;
-                color: rgb(120,120,120);
-                border: none;
-                outline: none;
-                border-radius: 3px;
-                cursor: pointer;
-                transition: ease .3s;
-                margin-left: 20px;
-            }
-
-            #boy:hover{
-                background-color: dodgerblue;
-            }
-            #girl:hover{
-                background-color: deeppink;
-            }
-
-            #searchnic{
-                padding: 10px 25px;
-                margin-top: 40px;
-                margin-left: -30px;
-                background-color:rgb(220,220,220);
-                border: none;
-            }
-
-            #vaccinesearchnic{
-                padding: 10px 25px;
-                margin-top: 40px;
-                margin-left: -30px;
-                background-color:rgb(220,220,220);
-                border: none;
-            }
-            .checkout-wrapper{padding-top: 40px; padding-bottom:40px; background-color: #fafbfa;}
-            .checkout{    background-color: #fff;
-                          border:1px solid #eaefe9;
-
-                          font-size: 14px;}
-            .panel{margin-bottom: 0px;}
-            .checkout-step {
-
-                border-top: 1px solid #f2f2f2;
-                color: #666;
-                font-size: 14px;
-                padding: 30px;
-                position: relative;
-            }
-
-            .checkout-step-number {
-                border-radius: 50%;
-                border: 1px solid #666;
-                display: inline-block;
-                font-size: 12px;
-                height: 32px;
-                margin-right: 26px;
-                padding: 6px;
-                text-align: center;
-                width: 32px;
-            }
-            .checkout-step-title{ font-size: 18px;
-                                  font-weight: 500;
-                                  vertical-align: middle;display: inline-block; margin: 0px;
-            }
-
-            .checout-address-step{}
-            .checout-address-step .form-group{margin-bottom: 18px;display: inline-block;
-                                              width: 100%;}
-
-            .checkout-step-body{padding-left: 60px; padding-top: 30px;}
-
-            .checkout-step-active{display: block;}
-            .checkout-step-disabled{display: none;}
-
-            .checkout-login{}
-            .login-phone{display: inline-block;}
-            .login-phone:after {
-                content: '+91 - ';
-                font-size: 14px;
-                left: 36px;
-            }
-            .login-phone:before {
-                content: "";
-                font-style: normal;
-                color: #333;
-                font-size: 18px;
-                left: 12px;
-                display: inline-block;
-                font: normal normal normal 14px/1 FontAwesome;
-                font-size: inherit;
-                text-rendering: auto;
-                -webkit-font-smoothing: antialiased;
-                -moz-osx-font-smoothing: grayscale;
-            }
-            .login-phone:after, .login-phone:before {
-                position: absolute;
-                top: 50%;
-                -webkit-transform: translateY(-50%);
-                transform: translateY(-50%);
-            }
-            .login-phone .form-control {
-                padding-left: 68px;
-                font-size: 14px;
-
-            }
-            .checkout-login .btn{height: 42px;     line-height: 1.8;}
-
-            .otp-verifaction{margin-top: 30px;}
-            .checkout-sidebar{background-color: #fff;
-                              border:1px solid #eaefe9; padding: 30px; margin-bottom: 30px;}
-            .checkout-sidebar-merchant-box{background-color: #fff;
-                                           border:1px solid #eaefe9; margin-bottom: 30px;}
-            .checkout-total{border-bottom: 1px solid #eaefe9; padding-bottom: 10px;margin-bottom: 10px; }
-            .checkout-invoice{display: inline-block;
-                              width: 100%;}
-            .checout-invoice-title{    float: left; color: #30322f;}
-            .checout-invoice-price{    float: right; color: #30322f;}
-            .checkout-charges{display: inline-block;
-                              width: 100%;}
-            .checout-charges-title{float: left; }
-            .checout-charges-price{float: right;}
-            .charges-free{color: #43b02a; font-weight: 600;}
-            .checkout-payable{display: inline-block;
-                              width: 100%; color: #333;}
-            .checkout-payable-title{float: left; }
-            .checkout-payable-price{float: right;}
-
-            .checkout-cart-merchant-box{ padding: 20px;display: inline-block;width: 100%; border-bottom: 1px solid #eaefe9;
-                                         padding-bottom: 20px; }
-            .checkout-cart-merchant-name{color: #30322f; float: left;}
-            .checkout-cart-merchant-item{ float: right; color: #30322f; }
-            .checkout-cart-products{}
-
-            .checkout-cart-products .checkout-charges{ padding: 10px 20px;
-                                                       color: #333;}
-            .checkout-cart-item{ border-bottom: 1px solid #eaefe9;
-                                 box-sizing: border-box;
-                                 display: table;
-                                 font-size: 12px;
-                                 padding: 22px 20px;
-                                 width: 100%;}
-            .checkout-item-list{}
-            .checkout-item-count{ float: left; }
-            .checkout-item-img{width: 60px; float: left;}
-            .checkout-item-name-box{ float: left; }
-            .checkout-item-title{ color: #30322f; font-size: 14px;  }
-            .checkout-item-unit{  }
-            .checkout-item-price{float: right;color: #30322f; font-size: 14px; font-weight: 600;}
-
-
-            .checkout-viewmore-btn{padding: 10px; text-align: center;}
-
-            .header-checkout-item{text-align: right; padding-top: 20px;}
-            /*//*/
-            .customcheck {
-                display: block;
-                position: relative;
-                padding-left: 35px;
-                margin-bottom: 12px;
-                margin-top: 0px;
-                cursor: pointer;
-                font-size: 22px;
-                -webkit-user-select: none;
-                -moz-user-select: none;
-                -ms-user-select: none;
-                user-select: none;
-            }
-
-            /* Hide the browser's default checkbox */
-            .customcheck input {
-                position: absolute;
-                opacity: 0;
-                cursor: pointer;
-            }
-
-            /* Create a custom checkbox */
-            .checkmark {
-                position: absolute;
-                top: 0;
-                left: 0;
-                height: 25px;
-                width: 25px;
-                background-color: #eee;
-                border-radius: 5px;
-            }
-
-            /* On mouse-over, add a grey background color */
-            .customcheck:hover input ~ .checkmark {
-                background-color: #ccc;
-            }
-
-            /* When the checkbox is checked, add a blue background */
-            .customcheck input:checked ~ .checkmark {
-                background-color: #02cf32;
-                border-radius: 5px;
-            }
-
-            /* Create the checkmark/indicator (hidden when not checked) */
-            .checkmark:after {
-                content: "";
-                position: absolute;
-                display: none;
-            }
-
-            /* Show the checkmark when checked */
-            .customcheck input:checked ~ .checkmark:after {
-                display: block;
-            }
-
-            /* Style the checkmark/indicator */
-            .customcheck .checkmark:after {
-                left: 9px;
-                top: 5px;
-                width: 5px;
-                height: 10px;
-                border: solid white;
-                border-width: 0 3px 3px 0;
-                -webkit-transform: rotate(45deg);
-                -ms-transform: rotate(45deg);
-                transform: rotate(45deg);
-            }
-        </style>
-    </head>
-    <body>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-2" >
-                    <!--                            side nav bar-->
-                    <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
-                        <a class="navbar-brand" href="#">Sidebar Nav</a>
-                        <button
-                            class="navbar-toggler"
-                            type="button"
-                            data-toggle="collapse"
-                            data-target="#navbarCollapse"
-                            aria-controls="navbarCollapse"
-                            aria-expanded="false"
-                            aria-label="Toggle navigation"
-                            >
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-
-                        <div class="collapse navbar-collapse" id="navbarCollapse">
-                            <ul class="navbar-nav mr-auto sidenav" id="navAccordion">
-                                <!--                                <li class="nav-item active">
-                                                                    <a class="nav-link" href="#"> <i class="fa fa-dashboard fa-lg"></i> Dashboard</a>
-                                                                </li>-->
-                                <br><br>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#tabpanel1" data-toggle="tab"  role="tab">Dashboard</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#tabpanel2" data-toggle="tab"  role="tab">Add New Child </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#tabpanel3" data-toggle="tab"  role="tab">Add Child Record </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#tabpanel4" data-toggle="tab"  role="tab">Search Child </a>
-                                </li>
-                                <!--                                <li class="nav-item">
-                                                                    <a
-                                                                        class="nav-link nav-link-collapse"
-                                                                        href="#"
-                                                                        id="hasSubItems"
-                                                                        data-toggle="collapse"
-                                                                        data-target="#collapseSubItems2"
-                                                                        aria-controls="collapseSubItems2"
-                                                                        aria-expanded="false"
-                                                                        >Child</a>
-                                                                    <ul class="nav-second-level collapse" id="collapseSubItems2" data-parent="#navAccordion">
-                                                                        <li class="nav-item" data-toggle="modal" data-target="#myModal">
-                                                                            <a class="nav-link" href="#tabpanel2" data-toggle="tab" data-target="#tabpanel2" role="tab" aria-selected="true">
-                                                                                <span class="nav-link-text" >Add Child</span>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li class="nav-item">
-                                                                            <a class="nav-link" href="#tabpanel3" data-toggle="tab" role="tab">
-                                                                                <span class="nav-link-text">Search Child</span>
-                                                                            </a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </li>-->
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Item 3</a>
-                                </li>
-                                <!--                                <li class="nav-item">
-                                                                    <a
-                                                                        class="nav-link nav-link-collapse"
-                                                                        href="#"
-                                                                        id="hasSubItems"
-                                                                        data-toggle="collapse"
-                                                                        data-target="#collapseSubItems4"
-                                                                        aria-controls="collapseSubItems4"
-                                                                        aria-expanded="false"
-                                                                        >Growth Tracker</a>
-                                                                    <ul class="nav-second-level collapse" id="collapseSubItems4" data-parent="#navAccordion">
-                                                                        <li class="nav-item" >
-                                                                            <a class="nav-link" href="#tabpaneladdrecord" data-toggle="tab" data-target="tabpaneladdrecord" role="tab" aria-selected="true">
-                                                                                <span class="nav-link-text">Add Record</span>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li class="nav-item">
-                                                                            <a class="nav-link" href="#">
-                                                                                <span class="nav-link-text">Item 4.2</span>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li class="nav-item">
-                                                                            <a class="nav-link" href="#">
-                                                                                <span class="nav-link-text">Item 4.2</span>
-                                                                            </a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </li>-->
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Item 5</a>
-                                </li>
-                            </ul>
-                            <ul class="navbar-nav ml-auto mt-2 mt-md-0"">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">
-                                        <i class="fa fa-bell">
-                                            <span class="badge badge-info">11</span>
-                                        </i>
-                                        Test
+                                    </li>
+                                </ul>
+                                <ul class="navbar-nav ml-auto mt-2 mt-md-0">
+                                    <li class="nav-item">
+                                        <a class="nav-link"  href="<%=request.getContextPath()%>/Logout">
+                                        Logout
                                     </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">
-                                        <i class="fa fa-globe">
-                                            <span class="badge badge-success">11</span>
-                                        </i>
-                                        Test
-                                    </a>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fa fa-envelope-o">
-                                            <span class="badge badge-primary">11</span>
-                                        </i>
-                                        Dropdown
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="#">Action</a>
-                                        <a class="dropdown-item" href="#">Another action</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#">Something else here</a>
-                                    </div>
                                 </li>
                             </ul>
                         </div>
@@ -606,242 +121,180 @@
                 </div>
                 <div class="col-md-10"> 
                     <div class="tab-content pt-0">
+                        <div  style="margin-top: 70px" class="tab-pane fade show active" id="tabpanel0" role="tabpanel">
+                            <div class="container-fluid" id="hedding">
+                                <h1>Dashboard</h1>
+                            </div>
+                            <br>
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <%
+                                        String q1 = "SELECT 'user' tablename, COUNT(*) rows FROM chdr.user UNION SELECT 'child' tablename, COUNT(*) rows FROM chdr.child UNION SELECT 'records' tablename, COUNT(*) rows FROM chdr.record UNION SELECT 'vaccination' tablename, COUNT(*) rows FROM chdr.child_vaccination_details;";
+                                        ResultSet rs1 = querydao.search(q1);
+                                        while (rs1.next()) {%>
+                                    <div class="col-md-3">
+                                        <div class="card-counter">
+                                            <i class="fas fa-clipboard-list"></i>
+                                            <span class="count-numbers"><%= rs1.getString("rows")%></span>
+                                            <span class="count-name"><%= rs1.getString("tablename")%></span>
+                                        </div>
+                                    </div>
+                                    <% } %>
+                                </div>
+                            </div>
+                            <br><br>
+                            <div class="container-fluid">
+                                <h1>Importans</h1>
+                                <div class="row">
+                                    <%
+                                        String q2 = "SELECT count(*) rows FROM chdr.record WHERE weight <3.5 and date BETWEEN '2015-01-01' AND now() AND totalmonths=0";
+                                        ResultSet rs2 = querydao.search(q2);
+                                        while (rs2.next()) {%>
+                                    <div class="col-md-3">
+                                        <div class="card-counter danger">
+                                            <i class="fas fa-clipboard-list"></i>
+                                            <span class="count-numbers"><%= rs2.getString("rows")%></span>
+                                            <span class="count-name">Low Birth Weight Babies </span>
+                                        </div>
+                                    </div>
+                                    <% } %>
 
-
+                                    <%
+                                        String q3 = "SELECT count(*) rows FROM chdr.record WHERE weight >4.4 and date BETWEEN '2015-01-10' AND now() AND totalmonths=0";
+                                        ResultSet rs3 = querydao.search(q3);
+                                        while (rs3.next()) {%>
+                                    <div class="col-md-3">
+                                        <div class="card-counter danger">
+                                            <i class="fas fa-clipboard-list"></i>
+                                            <span class="count-numbers"><%= rs3.getString("rows")%></span>
+                                            <span class="count-name">High Birth Weight Babies </span>
+                                        </div>
+                                    </div>
+                                    <% } %>
+                                </div>
+                            </div>
+                        </div>
                         <div  style="margin-top: 70px" class="tab-pane fade  " id="tabpanel1" role="tabpanel">
-                            <h2>Dashboard</h2>
+                            <div class="container-fluid" id="hedding">
+                                <h1>Add New User</h1>
+                            </div>
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label>
+                                            <p class="label-txt">Guardian NIC</p>
+                                            <input type="text" class="input" name="guardiannic" id="guardiannic">
+                                            <div class="line-box">
+                                                <div class="line"></div>
+                                            </div>
+                                        </label>
+                                    </div>	
+                                    <div class="col-md-4 ">
+                                        <label>
+                                            <p class="label-txt">Guardian Name</p>
+                                            <input type="text" class="input" name="guardianname" id="guardianname">
+                                            <div class="line-box">
+                                                <div class="line"></div>
+                                            </div>
+                                        </label>
+                                    </div>	
+                                    <div class="col-md-4 ">
+                                        <label>
+                                            <p class="label-txt">Contact No</p>
+                                            <input type="text" class="input" name="contactno" id="contactno">
+                                            <div class="line-box">
+                                                <div class="line"></div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label>
+                                            <p class="label-txt">Email</p>
+                                            <input type="text" class="input" name="email" id="email">
+                                            <div class="line-box">
+                                                <div class="line"></div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>
+                                            <p class="label-txt">Password</p>
+                                            <input type="text" class="input" name="password" id="password">
+                                            <div class="line-box">
+                                                <div class="line"></div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <label>
+                                            <p class="label-txt">Address</p>
+                                            <input type="text" class="input" name="address" id="address">
+                                            <div class="line-box">
+                                                <div class="line"></div>
+                                            </div>
+                                        </label>
+                                    </div>	
+
+                                </div>
+                            </div>
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-md-4 ">
+                                        <label>
+                                            <p class="label-txt">Mother's Name</p>
+                                            <input type="text" class="input" name="mothername" id="mothername">
+                                            <div class="line-box">
+                                                <div class="line"></div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <center>  
+                                <button type="button" onclick="userRegistraion();">Submit</button>
+                            </center> 
                         </div>
                         <div  style="margin-top: 70px" class="tab-pane fade" id="tabpanel2" role="tabpanel">
-                            <h2>Add Child</h2><br>
-                            <form action="../ChildRegistraion" method="POST">
-                                <div  class="container-fluid">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <label>
-                                                <p class="label-txt">Health Physician No</p>
-                                                <input type="text" class="input" name="physicianno1">
-                                                <div class="line-box">
-                                                    <div class="line"></div>
-                                                </div>
-                                            </label>
-                                        </div>	
-                                        <div class="col-md-4 ">
-                                            <label>
-                                                <p class="label-txt">Family Health Physician No</p>
-                                                <input type="text" class="input" name="physicianno2">
-                                                <div class="line-box">
-                                                    <div class="line"></div>
-                                                </div>
-                                            </label>
-                                        </div>	
-                                        <div class="col-md-4 ">
-                                            <label>
-                                                <p class="label-txt">Child Birth Registered No</p>
-                                                <input type="text" class="input" name="childbirthregisterno">
-                                                <div class="line-box">
-                                                    <div class="line"></div>
-                                                </div>
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="container-fluid">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <label>
-                                                <p class="label-txt">Guardian NIC</p>
-                                                <input type="text" class="input" name="guardiannic">
-                                                <div class="line-box">
-                                                    <div class="line"></div>
-                                                </div>
-                                            </label>
-                                        </div>	
-                                        <div class="col-md-4 ">
-                                            <label>
-                                                <p class="label-txt">Guardian Name</p>
-                                                <input type="text" class="input" name="guardianname">
-                                                <div class="line-box">
-                                                    <div class="line"></div>
-                                                </div>
-                                            </label>
-                                        </div>	
-                                        <div class="col-md-4 ">
-                                            <label>
-                                                <p class="label-txt">Contact No</p>
-                                                <input type="text" class="input" name="contactno">
-                                                <div class="line-box">
-                                                    <div class="line"></div>
-                                                </div>
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="container-fluid">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <label>
-                                                <p class="label-txt">Email</p>
-                                                <input type="text" class="input" name="email">
-                                                <div class="line-box">
-                                                    <div class="line"></div>
-                                                </div>
-                                            </label>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label>
-                                                <p class="label-txt">Password</p>
-                                                <input type="text" class="input" name="password">
-                                                <div class="line-box">
-                                                    <div class="line"></div>
-                                                </div>
-                                            </label>
-                                        </div>
-                                        <div class="col-md-5">
-                                            <label>
-                                                <p class="label-txt">Address</p>
-                                                <input type="text" class="input" name="address">
-                                                <div class="line-box">
-                                                    <div class="line"></div>
-                                                </div>
-                                            </label>
-                                        </div>	
-
-                                    </div>
-                                </div>
-                                <div class="container-fluid">
-                                    <div class="row">
-                                        <div class="col-md-4 ">
-                                            <label>
-                                                <p class="label-txt">Mother's Name</p>
-                                                <input type="text" class="input" name="mothername">
-                                                <div class="line-box">
-                                                    <div class="line"></div>
-                                                </div>
-                                            </label>
-                                        </div>
-                                        <div class="col-md-2 ">
-                                            <label>
-                                                <p class="label-txt">Mother's Age</p>
-                                                <input type="text" class="input" name="motherage">
-                                                <div class="line-box">
-                                                    <div class="line"></div>
-                                                </div>
-
-                                            </label>
-                                        </div>
-                                        <div class="col-md-3 ">
-                                            <label>
-                                                <p class="label-txt">Number of Children</p>
-                                                <input type="text" class="input" name="nochildren">
-                                                <div class="line-box">
-                                                    <div class="line"></div>
-                                                </div>
-
-                                            </label>
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <div class="container-fluid">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <label>
-                                                <p class="label-txt">Child Name</p>
-                                                <input type="text" class="input" name="childname">
-                                                <div class="line-box">
-                                                    <div class="line"></div>
-                                                </div>
-                                            </label>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <label>
-                                                <p class="label-txt">Gender</p>
-                                                <div  style="color: rgb(120,120,120); padding-top: 28px; padding-left: 20px">
-                                                    <input class="form-check-input" type="radio" name="gender" id="boy" value="boy">
-                                                    Boy &emsp;&emsp;
-                                                    <input class="form-check-input" type="radio" name="gender" id="girl" value="girl">
-                                                    Girl
-                                                </div>
-                                            </label>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label>
-                                                <p class="label-txt">Date of Birth</p>
-                                                <input type="text" class="input" name="childbirthday">
-                                                <div class="line-box">
-                                                    <div class="line"></div>
-                                                </div>
-                                            </label>
-                                        </div>	
-
-                                    </div>
-                                </div>
-                                <div class="container-fluid">
-                                    <div class="row">
-                                        <div class="col-md-1 ">
-                                            <label>
-                                                <p class="label-txt">Age</p>
-                                                <input type="text" class="input" name="childage">
-                                                <div class="line-box">
-                                                    <div class="line"></div>
-                                                </div>
-
-                                            </label>
-                                        </div>
-                                        <div class="col-md-1 ">
-                                            <label>
-                                                <p class="label-txt">Month</p>
-                                                <input type="text" class="input" name="month">
-                                                <div class="line-box">
-                                                    <div class="line"></div>
-                                                </div>
-
-                                            </label>
-                                        </div>
-                                        <div class="col-md-1 ">
-                                            <label>
-                                                <p class="label-txt">Days</p>
-                                                <input type="text" class="input" name="days">
-                                                <div class="line-box">
-                                                    <div class="line"></div>
-                                                </div>
-
-                                            </label>
-                                        </div>
-                                        <div class="col-md-1 ">
-
-                                        </div>
-                                        <div class="col-md-2">
-                                            <label>
-                                                <p class="label-txt">Birth Weight(Kg)</p>
-                                                <input type="text" class="input" name="birthweight">
-                                                <div class="line-box">
-                                                    <div class="line"></div>
-                                                </div>
-                                            </label>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <label>
-                                                <p class="label-txt">Birth Length(cm)</p>
-                                                <input type="text" class="input" name="birthlength">
-                                                <div class="line-box">
-                                                    <div class="line"></div>
-                                                </div>
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <center>  
-                                    <button type="submit">Submit</button>
-                                </center> 
-
-                            </form>
-                        </div>
-                        <br><br>
-                        <div  style="margin-top: 70px" class="tab-pane fade show active" id="tabpanel3" role="tabpanel">
-                            <h2>Add Record</h2><br>
-                            <!--                            <form>-->
+                            <div class="container-fluid" id="hedding">
+                                <h1>Add Child</h1>
+                            </div>
                             <div  class="container-fluid">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label>
+                                            <p class="label-txt">Health Physician No</p>
+                                            <input type="text" class="input" name="physicianno1" id="physicianno1">
+                                            <div class="line-box">
+                                                <div class="line"></div>
+                                            </div>
+                                        </label>
+                                    </div>	
+                                    <div class="col-md-4 ">
+                                        <label>
+                                            <p class="label-txt">Family Health Physician No</p>
+                                            <input type="text" class="input" name="physicianno2" id="physicianno2">
+                                            <div class="line-box">
+                                                <div class="line"></div>
+                                            </div>
+                                        </label>
+                                    </div>	
+                                    <div class="col-md-4 ">
+                                        <label>
+                                            <p class="label-txt">Child Birth Registered No</p>
+                                            <input type="text" class="input" name="childbirthregisterno" id="childbirthregisterno">
+                                            <div class="line-box">
+                                                <div class="line"></div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-md-3">
                                         <label>
@@ -853,7 +306,79 @@
                                         </label>
                                     </div>	
                                     <div class="col-md-2">
-                                        <button id="searchnic" type="submit" onclick="searchgNIC();"><i class="fa fa-search"></i></button>
+                                        <button id="searchnic" type="button" onclick="searchGurdianbyNIC();"><i class="fa fa-search"></i></button>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>
+                                            <p class="label-txt">Guardian Name</p>
+                                            <input type="text" class="input" name="childname" id="guardianName">
+                                            <div class="line-box">
+                                                <div class="line"></div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div  class="container-fluid">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label>
+                                                    <p class="label-txt">Child Name</p>
+                                                    <input type="text" class="input" name="childname" id="childname">
+                                                    <div class="line-box">
+                                                        <div class="line"></div>
+                                                    </div>
+                                                </label>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <label>
+                                                    <p class="label-txt">Gender</p>
+                                                    <div  style="color: rgb(120,120,120); padding-top: 28px; padding-left: 20px">
+                                                        <input class="form-check-input" type="radio" name="gender" id="boy" value="boy">
+                                                        Boy &emsp;&emsp;
+                                                        <input class="form-check-input" type="radio" name="gender" id="girl" value="girl">
+                                                        Girl
+                                                    </div>
+                                                </label>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label>
+                                                    <p class="label-txt">Date of Birth</p>
+                                                    <input type="text" class="input" name="childbirthday" id="childbirthday">
+                                                    <div class="line-box">
+                                                        <div class="line"></div>
+                                                    </div>
+                                                </label>
+                                            </div>	
+
+                                        </div>
+                                    </div>
+
+                                    <center>  
+                                        <button type="button" onclick="childRegistraion();">Submit</button>
+                                    </center> 
+                                </div>
+                            </div>
+                            </form>
+                            </form>
+                        </div>
+                        <div  style="margin-top: 70px" class="tab-pane fade" id="tabpanel3" role="tabpanel">
+                            <div class="container-fluid" id="hedding">
+                                <div class="container-fluid" id="hedding">
+                                    <h1>Add Record</h1>
+                                </div>
+                            </div>
+                            <div  class="container-fluid">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label>
+                                            <p class="label-txt">Search by NIC</p>
+                                            <input type="text" class="input" id="recordNICNo">
+                                            <div class="line-box">
+                                                <div class="line"></div>
+                                            </div>
+                                        </label>
+                                    </div>	
+                                    <div class="col-md-2">
+                                        <button id="searchnic" type="submit" onclick="searchgNICforRecord();"><i class="fa fa-search"></i></button>
                                     </div>
                                     <div class="col-md-3">
                                         <label>
@@ -861,12 +386,7 @@
                                                 <option>Select the Child Name</option>
                                             </select>
                                         </label>
-                                    </div>	
-                                </div>
-                            </div>
-                            <!--                            </form>-->
-                            <div class="container-fluid">
-                                <div class="row">
+                                    </div>
                                     <div class="col-md-3">
                                         <label>
                                             <p class="label-txt">Child Name</p>
@@ -876,10 +396,33 @@
                                             </div>
                                         </label>
                                     </div>
-                                    <div class="col-md-2 ">
+                                </div>
+                            </div>
+                            <div class="container-fluid">
+                                <div class="row">
+
+                                    <div class="col-md-1 ">
                                         <label>
-                                            <p class="label-txt">Age of Child</p>
-                                            <input type="text" class="input" id="ageofchild">
+                                            <p class="label-txt">Years</p>
+                                            <input type="text" class="input" name="childyears" id="years">
+                                            <div class="line-box">
+                                                <div class="line"></div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-1 ">
+                                        <label>
+                                            <p class="label-txt">Months</p>
+                                            <input type="text" class="input" name="months" id="months">
+                                            <div class="line-box">
+                                                <div class="line"></div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-1 ">
+                                        <label>
+                                            <p class="label-txt">Days</p>
+                                            <input type="text" class="input" name="days" id="days">
                                             <div class="line-box">
                                                 <div class="line"></div>
                                             </div>
@@ -922,29 +465,29 @@
                                     <div class="table-responsive col-md-12">
                                         <table id="tableRecordDetails" class="grid table table-bordered table-sortable">
                                             <thead>
-                                                <tr><th>Date</th><th>Weight(Kg)</th><th>Height(cm)</th><th>Age(Years)</th></tr>
+                                                <tr><th>Date</th><th>Weight(Kg)</th><th>Height(cm)</th><th>Age(Months)</th></tr>
                                             </thead>
                                             <tbody id="tableRecordDetailsBody">
-                                                <!--                                                <tr>
-                                                                                                    <td id="dateid">2021/04/07</td>
-                                                                                                    <td><input id="idweight" type="text" value="name 1" class="form-control"></td>
-                                                                                                    <td><input id="idheight" type="text" value="email 1" class="form-control"></td>
-                                                                                                    <td><button class="btn btn-primary"><i class="far fa-edit"></i>Update</button></td>
-                                                                                                </tr>-->
-
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
                             </div>
-                            <center> 
-                                <form action="../WeightAge" method="GET">
-                                    <button type="submit" onclick="viewWA()">View Weight/Age Graph</button>
-                                </form>
-                            </center>
+                            <br><br>
+                            <div class="row"> 
+                                <div class="col-md-6">
+                                    <button type="submit" onclick="showWeightAge()">View Weight/Age Graph</button>
+                                </div>   
+                                <div class="col-md-6">
+                                    <button type="submit" onclick="showHeightAge()">View Height/Age Graph</button>
+                                </div>
+                            </div>
+                            <br><br>     <br><br>
                         </div>
                         <div  style="margin-top: 70px" class="tab-pane fade" id="tabpanel4" role="tabpanel">
-                            <h2>Search Child</h2>
+                            <div class="container-fluid" id="hedding">
+                                <h1>Search Child</h1>
+                            </div>
 
                             <!--                            <form>-->
                             <div  class="container-fluid">
@@ -963,7 +506,8 @@
                                     </div>
                                     <div class="col-md-2">
                                         <label>
-                                            <select class="custom-select" aria-label="Default select example" id="vaccinenameSelector" onchange="setNameToVaccineTextFeild(this)">
+                                            <!--                                            <select class="custom-select" aria-label="Default select example" id="vaccinenameSelector" onchange="setNameToVaccineTextFeild(this)">-->
+                                            <select class="custom-select" aria-label="Default select example" id="vaccinenameSelector" onchange="searchVaccineDetails(this)">
                                                 <option>Child Name</option>
                                             </select>
                                         </label>
@@ -971,7 +515,7 @@
                                     <div class="col-md-2">
                                         <label>
                                             <p class="label-txt">Child Name</p>
-                                            <input type="text" class="input" id="vaccinechildName">
+                                            <input type="text" class="input" id="vaccinechildName" name="vaccinechildName">
                                             <div class="line-box">
                                                 <div class="line"></div>
                                             </div>
@@ -984,7 +528,6 @@
                                             <div class="line-box">
                                                 <div class="line"></div>
                                             </div>
-
                                         </label>
                                     </div>
                                     <div class="col-md-1 ">
@@ -1004,18 +547,8 @@
                                             <div class="line-box">
                                                 <div class="line"></div>
                                             </div>
-
                                         </label>
                                     </div>
-                                    <!--                                    <div class="col-md-2 ">
-                                                                            <label>
-                                                                                <select class="custom-select" aria-label="Default select example" id="vaccinecategorySelector" onchange="loadVaccineDetails(this)">
-                                                                                    <option>Vaccine Category</option>
-                                                                                    <option>At Birth</option>
-                                                                                    <option>2 Months</option>
-                                                                                </select>
-                                                                            </label>
-                                                                        </div>-->
                                 </div>
                             </div>
                             <br><br>
@@ -1023,11 +556,20 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div id="accordion" class="checkout">
+                                            <%
+                                                String vaccinecategotryheaddings = "SELECT * FROM chdr.vaccinecategory";
+                                                ResultSet rs = querydao.search(vaccinecategotryheaddings);
+                                                try {
+
+                                                    while (rs.next()) {
+
+
+                                            %>
                                             <div class="panel checkout-step">
-                                                <div> <span class="checkout-step-number">1</span>
-                                                    <h4 class="checkout-step-title"> <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" >At Birth</a></h4>
+                                                <div> <span class="checkout-step-number"><%=rs.getString("idvaccinecategory")%></span>
+                                                    <h4 class="checkout-step-title"> <a  role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne<%=rs.getString("idvaccinecategory")%>" > <%=rs.getString("vaccinecategory")%></a></h4>
                                                 </div>
-                                                <div id="collapseOne" class="collapse in">
+                                                <div id="collapseOne<%=rs.getString("idvaccinecategory")%>" class="collapse in">
                                                     <div class="checkout-step-body">
                                                         <div class="row">
                                                             <div class="table-responsive col-md-12">
@@ -1035,7 +577,7 @@
                                                                     <thead>
                                                                         <tr><th>Due Date</th><th>Given Date</th><th>Vaccine </th><th>Status</th></tr>
                                                                     </thead>
-                                                                    <tbody id="tableVaccineRecordDetailsBody1">
+                                                                    <tbody id="tableVaccineRecordDetailsBody<%=rs.getString("idvaccinecategory")%>">
 
                                                                     </tbody>
                                                                 </table>
@@ -1044,94 +586,122 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="panel checkout-step">
-                                                <div role="tab" id="headingTwo"> <span class="checkout-step-number">2</span>
-                                                    <h4 class="checkout-step-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" >2 Months </a> </h4>
-                                                </div>
-                                                <div id="collapseTwo" class="panel-collapse collapse">
-                                                    <div class="checkout-step-body">
-                                                        <table class="grid table table-bordered table-sortable">
-                                                            <thead>
-                                                                <tr><th>Due Date</th><th>Given Date</th><th>Vaccine </th><th>Status</th></tr>
-                                                            </thead>
-                                                            <tbody id="tableVaccineRecordDetailsBody2">
-
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="panel checkout-step">
-                                                <div role="tab" id="headingThree"> <span class="checkout-step-number">3</span>
-                                                    <h4 class="checkout-step-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree"  > 4 Months </a> </h4>
-                                                </div>
-                                                <div id="collapseThree" class="panel-collapse collapse">
-                                                    <div class="checkout-step-body">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="panel checkout-step">
-                                                <div role="tab" id="headingFour"> <span class="checkout-step-number">4</span>
-                                                    <h4 class="checkout-step-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour"  > 6 Months </a> </h4>
-                                                </div>
-                                                <div id="collapseFour" class="panel-collapse collapse">
-                                                    <div class="checkout-step-body">
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            <%        }
+                                                } catch (Exception e) {
+                                                    e.printStackTrace();
+                                                }
+                                            %>
+                                            <center>  
+                                                <button type="submit" onclick="saveChildVacinationDetails()">Submit</button>
+                                            </center>
                                         </div>
                                     </div>
+
                                 </div>
-                                <!--                                <div class="row">
-                                                                    <div class="table-responsive col-md-12">
-                                                                        <table id="tableRecordDetails" class="grid table table-bordered table-sortable">
-                                                                            <thead>
-                                                                                <tr><th>Due Date</th><th>Given Date</th><th>Vaccine </th><th>Status</th></tr>
-                                                                            </thead>
-                                                                            <tbody id="tableVaccineRecordDetailsBody">
-                                
-                                                                            </tbody>
-                                                                        </table>
-                                                                    </div>
-                                                                </div>-->
                             </div>
                         </div>
-
-                    </div>
-
-                </div>
-            </div></div>
-
-        <!-- Static Modal -->
-        <!--        <div class="modal modal-static fade" id="myModal" role="dialog" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered modal-lg">
-                        <div class="modal-content">
-        
-                             Modal Header 
-                            <div class="modal-header">
-                                <h4 class="modal-title">Modal Heading</h4>
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <div  style="margin-top: 70px" class="tab-pane fade" id="tabpanel5" role="tabpanel">
+                            <div class="container-fluid" id="hedding">
+                                <h1>Send Reminder</h1>
                             </div>
-        
-                             Modal body 
-                            <div class="modal-body">
-                                <div class="container"><div class="row">
-                                        <div class="col-md-6 ">
-                                            <button id="boy"class="btn btn-gender" name="boy">Its a Boy</button></div>
-                                        <div class="col-md-6 ">
-                                            <button id="girl" class="btn btn-gender" name="girl">Its a Girl</button></div>
+                            <div  class="container-fluid">
+                                <div class="row">
+
+                                    <div class="col-md-3">
+                                        <label>
+                                            <p class="label-txt">Clinic Date</p>
+                                            <input type="text" class="input" id="ClinicDate">
+                                            <div class="line-box">
+                                                <div class="line"></div>
+                                            </div>
+                                        </label>
+                                    </div>	
+                                    <div class="col-md-2">
+                                        <br>
+                                        <button type="submit" onclick="searchForMail();">Search Email</button>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <label>
+                                            <p class="label-txt">To</p>
+                                            <input type="text" class="input" name="to" id="to">
+                                            <div class="line-box">
+                                                <div class="line"></div>
+                                            </div>
+                                        </label>
+                                        <label>
+                                            <p class="label-txt">Subject</p>
+                                            <input type="text" class="input" name="subject" id="subject"> Next Clinic Date
+                                            <div class="line-box">
+                                                <div class="line"></div>
+                                            </div>
+                                        </label>
+                                        <label>
+                                            <p class="label-txt">Content</p>
+                                            <input type="text" class="input" name="physicianno1" id="content">Please Be At 8.30 
+                                            <div class="line-box">
+                                                <div class="line"></div>
+                                            </div>
+                                        </label>
+                                        <button type="button" onclick="sendMail();">Submit</button>
                                     </div>
                                 </div>
                             </div>
-        
-                             Modal footer 
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                        <div  style="margin-top: 70px" class="tab-pane fade" id="tabpanel6" role="tabpanel">
+                            <h2></h2><br>
+                            <div class="container-fluid" id="hedding">
+                                <h1>Search</h1>
                             </div>
-        
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <label>
+                                            <p class="label-txt">Date</p>
+                                            <input type="text" class="input" name="" id="date1">
+                                            <div class="line-box">
+                                                <div class="line"></div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label>
+                                            <p class="label-txt">Between</p>
+
+                                        </label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label>
+                                            <p class="label-txt">Date</p>
+                                            <input type="text" class="input" name="" id="date2">
+                                            <div class="line-box">
+                                                <div class="line"></div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label>
+                                            <!--                                            <select class="custom-select" aria-label="Default select example" id="vaccinenameSelector" onchange="setNameToVaccineTextFeild(this)">-->
+                                            <select class="custom-select" aria-label="Default select example" id="weightSelector" onchange="searchWeightDetails(this)">
+                                                <option value="0">Search By Weight</option>
+                                                <option value="3.5">Birth Weight<3.5</option>
+                                                <option value=""></option>
+                                            </select>
+                                        </label>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <table id="" class="grid table table-bordered table-sortable">
+                                <thead>
+                                    <tr><th>Birth Registration No</th><th>Weight(Kg)</th><th>Height(cm)</th><th>Child Name</th><th> Gender</th><th>Guardian NIC</th><th>Guardian Name</th><th>Contact no</th></tr>
+                                </thead>
+                                <tbody id="searchWeightTable">
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-                </div>-->
+                </div></div>
+        </div>
 
     </body>
     <script>
@@ -1141,7 +711,6 @@
                 $(this).toggleClass('nav-link-show');
             });
         });
-
         //        $(document).ready(function () {
         //            $('.nav-link').click(function () {
         //                $('nav-link').not(this).removeClass('active');
@@ -1155,23 +724,19 @@
             $('.nav-link').click(function () {
                 $('.tab-pane fade').not(this).removeClass('tab-pane fade show active ');
                 $(this).toggleClass('show active');
-
             });
         });
-
         $(document).ready(function () {
 
             $('.input').focus(function () {
                 $(this).parent().find(".label-txt").addClass('label-active');
             });
-
             $(".input").focusout(function () {
                 if ($(this).val() == '') {
                     $(this).parent().find(".label-txt").removeClass('label-active');
                 }
                 ;
             });
-
         });
         //     $( "#m" ).click(function(ev) {
         //    ev.stopImmediatePropagation(); // sometimes click event fires twice in jQuery you can prevent it by this method.
@@ -1183,17 +748,18 @@
 
 
         function searchgNIC() {
-            var nic = $('#NICNo').val();//get nic value
+            var nic = document.getElementById('NICNo').value;//get nic value
+            alert(recordNICNo);
             $('#nameSelector option:gt(0)').remove(); // remove dropdown load options
             var xmlHttpRequest = new XMLHttpRequest();
             xmlHttpRequest.onreadystatechange = function () {
                 if (xmlHttpRequest.readyState === 4 && xmlHttpRequest.status === 200) {
 
                     var response = xmlHttpRequest.responseText;
-                    var child = JSON.parse(response).childName;// get json object values 
+                    var child = JSON.parse(response).childName; // get json object values 
                     for (var i = 0; i < child.length; i++) {// get array values 
 
-                        document.getElementById('nameSelector').appendChild(new Option(child[i], child[i]));//set values to dropdwon option
+                        document.getElementById('nameSelector').appendChild(new Option(child[i], child[i])); //set values to dropdwon option
                     }
                 }
             };
@@ -1203,16 +769,18 @@
 
         function setNameToTextFeild(name) {
 
-            $('#tableRecordDetailsBody tr').remove();// remove tabe rows
-            var childname = document.getElementById('childName').value = name.value;      // set values for textfeild
+            $('#tableRecordDetailsBody tr').remove(); // remove tabe rows
+            var childname = document.getElementById('childName').value = name.value; // set values for textfeild
             var xmlHttpRequest = new XMLHttpRequest();
             xmlHttpRequest.onreadystatechange = function () {
                 if (xmlHttpRequest.readyState === 4 && xmlHttpRequest.status === 200) {
                     var response = xmlHttpRequest.responseText;
                     var rDetails = JSON.parse(response).recordDetails;
                     var rowcount = rDetails.length;
-                    document.getElementById('ageofchild').value = rDetails[0]['childage'];
                     for (var i = 0; i < rowcount; i++) {
+                        document.getElementById('years').value = rDetails[i]['years'];
+                        document.getElementById('months').value = rDetails[i]['months'];
+                        document.getElementById('days').value = rDetails[i]['days'];
                         var table = document.getElementById("tableRecordDetailsBody");
                         var row = table.insertRow(0);
                         var cell1 = row.insertCell(0);
@@ -1222,13 +790,12 @@
                         cell1.innerHTML = rDetails[i]["date"];
                         cell2.innerHTML = rDetails[i]["weight"];
                         cell3.innerHTML = rDetails[i]["height"];
-                        cell4.innerHTML = rDetails[i]["age"];
+                        cell4.innerHTML = rDetails[i]["totalmonths"];
                     }
                 }
             };
             xmlHttpRequest.open("GET", "../AddedRecordDetails?name=" + childname, true);
             xmlHttpRequest.send();
-
         }
 
 
@@ -1237,15 +804,15 @@
             var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
             document.getElementById('dateofMeasurement').value = date;
         });
-
         function saveRecord() {
-            var nic = $('#NICNo').val();//get nic value
+            var nic = document.getElementById("recordNICNo").value;//get nic value
             var childName = $('#childName').val();
             var dateMeasurement = $('#dateofMeasurement').val();
             var weight = $('#weight').val();
             var height = $('#height').val();
-            var ageofchild = $('#ageofchild').val();
-
+            var years = $('#years').val();
+            var months = $('#months').val();
+            var days = $('#days').val();
             var xmlHttpRequest = new XMLHttpRequest();
             xmlHttpRequest.onreadystatechange = function () {
                 if (xmlHttpRequest.readyState === 4 && xmlHttpRequest.status === 200) {
@@ -1264,24 +831,22 @@
                 }
 
             };
-            xmlHttpRequest.open("GET", "../AddChildRecord?NIC=" + nic + "&childName=" + childName + "&dateMeasurement=" + dateMeasurement + "&weight=" + weight + "&height=" + height + "&ageofchild=" + ageofchild, true);
+            xmlHttpRequest.open("GET", "../AddChildRecord?nicNo=" + nic + "&childName=" + childName + "&dateMeasurement=" + dateMeasurement + "&weight=" + weight + "&height=" + height + "&years=" + years + "&months=" + months + "&days=" + days, true);
             xmlHttpRequest.send();
-
-
         }
 
         function searchgNICforVacccine() {
-            var nic = $('#vaccineNicNo').val();//get nic value
+            var nic = $('#vaccineNicNo').val(); //get nic value
             $('#vaccinenameSelector option:gt(0)').remove(); // remove dropdown load options
             var xmlHttpRequest = new XMLHttpRequest();
             xmlHttpRequest.onreadystatechange = function () {
                 if (xmlHttpRequest.readyState === 4 && xmlHttpRequest.status === 200) {
 
                     var response = xmlHttpRequest.responseText;
-                    var child = JSON.parse(response).childName;// get json object values 
+                    var child = JSON.parse(response).childName; // get json object values 
                     for (var i = 0; i < child.length; i++) {// get array values 
 
-                        document.getElementById('vaccinenameSelector').appendChild(new Option(child[i], child[i]));//set values to dropdwon option
+                        document.getElementById('vaccinenameSelector').appendChild(new Option(child[i], child[i])); //set values to dropdwon option
                     }
                 }
             };
@@ -1290,186 +855,377 @@
         }
 
 
-        function setNameToVaccineTextFeild(name) {
-            // $('#tableRecordDetailsBody tr').remove();// remove tabe rows
-            var childname = document.getElementById('vaccinechildName').value = name.value;      // set values for textfeild
+
+        function saveChildVacinationDetails() {
+            var vaccinechildName = $("#vaccinechildName").val();
+            var table2 = document.getElementById("tableVaccineRecordDetailsBody2");
+            var checkBoxes = table2.getElementsByClassName("checkmark");
+
+            var checkedValue = null;
+            var inputElements = table2.getElementsByClassName("checkmark");
+            for (var i = 0; inputElements[i]; ++i) {
+                if (inputElements[i].checked) {
+                    checkedValue = inputElements[i].value;
+                    break;
+                }
+            }
+
+
+            var xmlHttpRequest = new XMLHttpRequest();
+            xmlHttpRequest.onreadystatechange = function () {
+                if (xmlHttpRequest.readyState === 4 && xmlHttpRequest.status === 200) {
+                    var response = xmlHttpRequest.responseText;
+                }
+            };
+            xmlHttpRequest.open("GET", "../AddChildVaccineDetails?vaccinechildName=" + vaccinechildName, true);
+            xmlHttpRequest.send();
+        }
+
+        function searchVaccineDetails(name) {
+            var nic = $('#vaccineNicNo').val();
+            var childname = document.getElementById('vaccinechildName').value = name.value; // set values for textfeild
             var xmlHttpRequest = new XMLHttpRequest();
             xmlHttpRequest.onreadystatechange = function () {
                 if (xmlHttpRequest.readyState === 4 && xmlHttpRequest.status === 200) {
                     var response = xmlHttpRequest.responseText;
                     console.log(response);
-                    var vaccineDetails = JSON.parse(response).vaccinedetails;
+                    var vaccinedetails = JSON.parse(response).loadvaccinedetails;
                     var today = new Date();
                     var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-                    for (var i = 0; i < vaccineDetails.length; i++) {
-                        document.getElementById('yy').value = vaccineDetails[i]['year'];
-                        document.getElementById('mm').value = vaccineDetails[i]['month'];
-                        document.getElementById('dd').value = vaccineDetails[i]['days'];
+                    document.getElementById('yy').value = vaccinedetails.years;
+                    document.getElementById('mm').value = vaccinedetails.months;
+                    document.getElementById('dd').value = vaccinedetails.days;
 
-                        if (i === 0) {
-                            var table = document.getElementById("tableVaccineRecordDetailsBody1");
-
-                            var row = table.insertRow(0);
-                            var cell1 = row.insertCell(0);
-                            var cell2 = row.insertCell(1);
-                            var cell3 = row.insertCell(2);
-                            var cell4 = row.insertCell(3);
-                            cell1.innerHTML = vaccineDetails[i]["duedate"];
-                            cell2.innerHTML = date;
-                            cell3.innerHTML = vaccineDetails[i]["vaccinename"];
-                            cell4.innerHTML = ('<label class="customcheck"><input type="checkbox" checked="checked"><span class="checkmark"></span></label>');
-                        } else if (i === 1) {
-                            var table = document.getElementById("tableVaccineRecordDetailsBody2");
-                            var row = table.insertRow(0);
-                            var cell1 = row.insertCell(0);
-                            var cell2 = row.insertCell(1);
-                            var cell3 = row.insertCell(2);
-                            var cell4 = row.insertCell(3);
-                            cell1.innerHTML = vaccineDetails[i]["duedate"];
-                            cell2.innerHTML = date;
-                            cell3.innerHTML = vaccineDetails[i]["vaccinename"];
-                            cell4.innerHTML = ('<label class="customcheck"><input type="checkbox" checked="checked"><span class="checkmark"></span></label>');
+                    for (var i = 1; i < 9; i++) {
+                        var table = document.getElementById("tableVaccineRecordDetailsBody" + i);
+//                        alert(xx);
+                        if (i === 1) {
+                            for (var j = 0; j < 1; j++) {
+                                var row = table.insertRow(0);
+                                var cell1 = row.insertCell(0);
+                                var cell2 = row.insertCell(1);
+                                var cell3 = row.insertCell(2);
+                                var cell4 = row.insertCell(3);
+                                cell1.innerHTML = vaccinedetails.duedates[0];
+                                cell2.innerHTML = date;
+                                cell3.innerHTML = vaccinedetails.vaccinesName[0][j][1];
+                                cell4.innerHTML = ('<label class="customcheck"><input id="' + vaccinedetails.vaccinesName[0][j][0] + '" type="checkbox" onclick="checkboxstatus(this);"><span class="checkmark"></span></label>');
+                            }
                         } else if (i === 2) {
-                            var table = document.getElementById("tableVaccineRecordDetailsBody2");
-                            var row = table.insertRow(0);
-                            var cell1 = row.insertCell(0);
-                            var cell2 = row.insertCell(1);
-                            var cell3 = row.insertCell(2);
-                            var cell4 = row.insertCell(3);
-                            cell1.innerHTML = vaccineDetails[i]["duedate"];
-                            cell2.innerHTML = date;
-                            cell3.innerHTML = vaccineDetails[i]["vaccinename"];
-                            cell4.innerHTML = ('<label class="customcheck"><input type="checkbox" checked="checked"><span class="checkmark"></span></label>');
+                            for (var j = 0; j < 2; j++) {
+                                var row = table.insertRow(0);
+                                var cell1 = row.insertCell(0);
+                                var cell2 = row.insertCell(1);
+                                var cell3 = row.insertCell(2);
+                                var cell4 = row.insertCell(3);
+                                cell1.innerHTML = vaccinedetails.duedates[1];
+                                cell2.innerHTML = date;
+                                cell3.innerHTML = vaccinedetails.vaccinesName[1][j][1];
+                                cell4.innerHTML = ('<label class="customcheck"><input id="' + vaccinedetails.vaccinesName[1][j][0] + '" type="checkbox" onclick="checkboxstatus(this);"><span class="checkmark"></span></label>');
+                            }
                         } else if (i === 3) {
-                            var table = document.getElementById("tableVaccineRecordDetailsBody2");
-                            var row = table.insertRow(0);
-                            var cell1 = row.insertCell(0);
-                            var cell2 = row.insertCell(1);
-                            var cell3 = row.insertCell(2);
-                            var cell4 = row.insertCell(3);
-                            cell1.innerHTML = vaccineDetails[i]["duedate"];
-                            cell2.innerHTML = date;
-                            cell3.innerHTML = vaccineDetails[i]["vaccinename"];
-                            cell4.innerHTML = ('<label class="customcheck"><input type="checkbox" checked="checked"><span class="checkmark"></span></label>');
+                            for (var j = 0; j < 3; j++) {
+                                var row = table.insertRow(0);
+                                var cell1 = row.insertCell(0);
+                                var cell2 = row.insertCell(1);
+                                var cell3 = row.insertCell(2);
+                                var cell4 = row.insertCell(3);
+                                cell1.innerHTML = vaccinedetails.duedates[2];
+                                cell2.innerHTML = date;
+                                cell3.innerHTML = vaccinedetails.vaccinesName[2][j][1];
+                                cell4.innerHTML = ('<label class="customcheck"><input id="' + vaccinedetails.vaccinesName[2][j][0] + '" type="checkbox" onclick="checkboxstatus(this);"><span class="checkmark"></span></label>');
+                            }
+
                         } else if (i === 4) {
-                            var table = document.getElementById("tableVaccineRecordDetailsBody2");
-                            var row = table.insertRow(0);
-                            var cell1 = row.insertCell(0);
-                            var cell2 = row.insertCell(1);
-                            var cell3 = row.insertCell(2);
-                            var cell4 = row.insertCell(3);
-                            cell1.innerHTML = vaccineDetails[i]["duedate"];
-                            cell2.innerHTML = date;
-                            cell3.innerHTML = vaccineDetails[i]["vaccinename"];
-                            cell4.innerHTML = ('<label class="customcheck"><input type="checkbox" checked="checked"><span class="checkmark"></span></label>');
-                        } else if (i === 5) {
-                            var table = document.getElementById("tableVaccineRecordDetailsBody2");
-                            var row = table.insertRow(0);
-                            var cell1 = row.insertCell(0);
-                            var cell2 = row.insertCell(1);
-                            var cell3 = row.insertCell(2);
-                            var cell4 = row.insertCell(3);
-                            cell1.innerHTML = vaccineDetails[i]["duedate"];
-                            cell2.innerHTML = date;
-                            cell3.innerHTML = vaccineDetails[i]["vaccinename"];
-                            cell4.innerHTML = ('<label class="customcheck"><input type="checkbox" checked="checked"><span class="checkmark"></span></label>');
-                        } else if (i === 6) {
-                            var table = document.getElementById("tableVaccineRecordDetailsBody2");
-                            var row = table.insertRow(0);
-                            var cell1 = row.insertCell(0);
-                            var cell2 = row.insertCell(1);
-                            var cell3 = row.insertCell(2);
-                            var cell4 = row.insertCell(3);
-                            cell1.innerHTML = vaccineDetails[i]["duedate"];
-                            cell2.innerHTML = date;
-                            cell3.innerHTML = vaccineDetails[i]["vaccinename"];
-                        } else if (i === 7) {
-                            var table = document.getElementById("tableVaccineRecordDetailsBody2");
-                            var row = table.insertRow(0);
-                            var cell1 = row.insertCell(0);
-                            var cell2 = row.insertCell(1);
-                            var cell3 = row.insertCell(2);
-                            var cell4 = row.insertCell(3);
-                            cell1.innerHTML = vaccineDetails[i]["duedate"];
-                            cell2.innerHTML = date;
-                            cell3.innerHTML = vaccineDetails[i]["vaccinename"];
-                            cell4.innerHTML = ('<label class="customcheck"><input type="checkbox" checked="checked"><span class="checkmark"></span></label>');
-                        } else if (i === 8) {
-                            var table = document.getElementById("tableVaccineRecordDetailsBody2");
-                            var row = table.insertRow(0);
-                            var cell1 = row.insertCell(0);
-                            var cell2 = row.insertCell(1);
-                            var cell3 = row.insertCell(2);
-                            var cell4 = row.insertCell(3);
-                            cell1.innerHTML = vaccineDetails[i]["duedate"];
-                            cell2.innerHTML = date;
-                            cell3.innerHTML = vaccineDetails[i]["vaccinename"];
-                            cell4.innerHTML = ('<label class="customcheck"><input type="checkbox" checked="checked"><span class="checkmark"></span></label>');
-                        } else {
+                            for (var j = 0; j < 2; j++) {
+                                var row = table.insertRow(0);
+                                var cell1 = row.insertCell(0);
+                                var cell2 = row.insertCell(1);
+                                var cell3 = row.insertCell(2);
+                                var cell4 = row.insertCell(3);
+                                cell1.innerHTML = vaccinedetails.duedates[3];
+                                cell2.innerHTML = date;
+                                cell3.innerHTML = vaccinedetails.vaccinesName[3][j][1];
+                                cell4.innerHTML = ('<label class="customcheck"><input id="' + vaccinedetails.vaccinesName[3][j][0] + '" type="checkbox" onclick="checkboxstatus(this);"><span class="checkmark"></span></label>');
+                            }
 
                         }
 
+                    }
 
+                    vaccinedetails.vaccineCompleted.forEach(function (id) {
+//                        if (id != 1)
+                        document.getElementById(id).checked = true;
+                    });
+
+                }
+            };
+            xmlHttpRequest.open("GET", "../AdminPanelSearchVaccineDetails?childName=" + childname + "&userNIC=" + nic, true);
+            xmlHttpRequest.send();
+        }
+
+        var vaccineIdarray = [];
+
+        function checkboxstatus(checkbox) {
+            var varray = checkbox.id;
+            var checked = checkbox.checked;
+
+            if (checked)
+                vaccineIdarray.push(varray);
+            else {
+                var index = vaccineIdarray.indexOf(varray);
+                if (index !== -1) {
+                    vaccineIdarray.splice(index, 1);
+                }
+            }
+        }
+
+        function saveChildVacinationDetails() {
+            alert(vaccineIdarray);
+            var vaccineNicNo = $("#vaccineNicNo").val();
+            var vaccinechildName = $("#vaccinechildName").val();
+            vaccineIdarray;
+            var xmlHttpRequest = new XMLHttpRequest();
+            xmlHttpRequest.onreadystatechange = function () {
+                if (xmlHttpRequest.readyState === 4 && xmlHttpRequest.status === 200) {
+                    var response = xmlHttpRequest.responseText;
+                    if (response == "OK") {
+                        alert('ok');
+
+                    } else {
+                        alert('hfghok');
+                    }
+
+                }
+            };
+            xmlHttpRequest.open("GET", "../ChildVaccineRegistraion?vaccineNicNo=" + vaccineNicNo + "&vaccinechildName=" + vaccinechildName + "&vaccineIds=" + vaccineIdarray, true);
+            xmlHttpRequest.send();
+        }
+
+
+        function showWeightAge() {
+            var userNIC = document.getElementById("recordNICNo").value;
+            var childName = document.getElementById("childName").value;
+            window.open("http://localhost:8080/KiddieCare/AdminPanel/WeightAgeGraph.jsp?childName=" + childName + "&userNIC=" + userNIC, "Window Name", "width=900,height=950");
+
+        }
+
+        function showHeightAge() {
+            var userNIC = document.getElementById("recordNICNo").value;
+            var childName = document.getElementById("childName").value;
+            window.open("http://localhost:8080/KiddieCare/AdminPanel/HeightAgeGraph.jsp?childName=" + childName + "&userNIC=" + userNIC, "Window Name", "width=900,height=950");
+
+        }
+
+        function userRegistraion() {
+
+            var guardiannic = document.getElementById("guardiannic").value;
+            var guardianName = document.getElementById("guardianname").value;
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+            var contactNo = document.getElementById("contactno").value;
+            var address = document.getElementById("address").value;
+            var motherName = document.getElementById("mothername").value;
+
+            var xmlHttpRequest = new XMLHttpRequest();
+            xmlHttpRequest.onreadystatechange = function () {
+                if (xmlHttpRequest.readyState === 4 && xmlHttpRequest.status === 200) {
+                    var response = xmlHttpRequest.responseText;
+                    if (response == "OK") {
+                        alert('User Succesfully Added');
+                        location.reload();
+                    } else {
+                        alert('Error');
+                    }
+
+                }
+            };
+            xmlHttpRequest.open("GET", "../UserRegisration?guardiannic=" + guardiannic + "&guardianName=" + guardianName + "&email=" + email + "&password=" + password + "&contactNo=" + contactNo + "&address=" + address + "&motherName=" + motherName, true);
+            xmlHttpRequest.send();
+        }
+
+        function searchGurdianbyNIC() {
+            var nic = document.getElementById("NICNo").value;
+            var xmlHttpRequest = new XMLHttpRequest();
+            xmlHttpRequest.onreadystatechange = function () {
+                if (xmlHttpRequest.readyState === 4 && xmlHttpRequest.status === 200) {
+                    var response = xmlHttpRequest.responseText;
+                    if (response != "") {
+                        document.getElementById("guardianName").value = response;
+                    } else {
+                        alert("Not Registed User");
+                    }
+
+                }
+            };
+            xmlHttpRequest.open("GET", "../userName?nic=" + nic, true);
+            xmlHttpRequest.send();
+        }
+
+        function childRegistraion() {
+            var nic = document.getElementById("NICNo").value;
+            var physicianno1 = document.getElementById("physicianno1").value;
+            var physicianno2 = document.getElementById("physicianno2").value;
+            var childbirthregisterno = document.getElementById("childbirthregisterno").value;
+            var childname = document.getElementById("childname").value;
+            var childbirthday = document.getElementById("childbirthday").value;
+            if (document.getElementById("boy").checked) {
+                var gender = document.getElementById("boy").value;
+            } else {
+                var gender = document.getElementById("girl").value;
+            }
+            var xmlHttpRequest = new XMLHttpRequest();
+            xmlHttpRequest.onreadystatechange = function () {
+                if (xmlHttpRequest.readyState === 4 && xmlHttpRequest.status === 200) {
+                    var response = xmlHttpRequest.responseText;
+                    if (response == "Ok") {
+                        alert("Child Registed Succsesfully");
+                        location.reload();
+                    } else {
+                        alert("Error");
+                    }
+                }
+            };
+            xmlHttpRequest.open("GET", "../ChildRegistraion?userNic=" + nic + "&physicianno1=" + physicianno1 + "&physicianno2=" + physicianno2 + "&childbirthregisterno=" + childbirthregisterno + "&childname=" + childname + "&childbirthday=" + childbirthday + "&gender=" + gender, true);
+            xmlHttpRequest.send();
+        }
+
+
+        ////////////////////////////////////////////////////////// 
+        $.fn.jQuerySimpleCounter = function (options) {
+            var settings = $.extend({
+                start: 0,
+                end: 100,
+                easing: 'swing',
+                duration: 400,
+                complete: ''
+            }, options);
+
+            var thisElement = $(this);
+
+            $({count: settings.start}).animate({count: settings.end}, {
+                duration: settings.duration,
+                easing: settings.easing,
+                step: function () {
+                    var mathCount = Math.ceil(this.count);
+                    thisElement.text(mathCount);
+                },
+                complete: settings.complete
+            });
+        };
+
+
+        $('#number1').jQuerySimpleCounter({end: 12, duration: 3000});
+        $('#number2').jQuerySimpleCounter({end: 55, duration: 3000});
+        $('#number3').jQuerySimpleCounter({end: 359, duration: 2000});
+        $('#number4').jQuerySimpleCounter({end: 246, duration: 2500});
+
+
+
+        /* AUTHOR LINK */
+        $('.about-me-img').hover(function () {
+            $('.authorWindowWrapper').stop().fadeIn('fast').find('p').addClass('trans');
+        }, function () {
+            $('.authorWindowWrapper').stop().fadeOut('fast').find('p').removeClass('trans');
+        });
+
+
+        function searchgNICforRecord() {
+            var nic = document.getElementById('recordNICNo').value;//get nic value
+            alert(nic);
+            $('#nameSelector option:gt(0)').remove(); // remove dropdown load options
+            var xmlHttpRequest = new XMLHttpRequest();
+            xmlHttpRequest.onreadystatechange = function () {
+                if (xmlHttpRequest.readyState === 4 && xmlHttpRequest.status === 200) {
+
+                    var response = xmlHttpRequest.responseText;
+                    var child = JSON.parse(response).childName; // get json object values 
+                    for (var i = 0; i < child.length; i++) {// get array values 
+
+                        document.getElementById('nameSelector').appendChild(new Option(child[i], child[i])); //set values to dropdwon option
+                    }
+                }
+            };
+            xmlHttpRequest.open("GET", "../SearchChild?NIC=" + nic, true);
+            xmlHttpRequest.send();
+        }
+
+
+        function searchWeightDetails() {
+            var date1 = document.getElementById('date1').value;
+            var date2 = document.getElementById('date2').value;
+            var x = document.getElementById("weightSelector").selectedIndex;
+            var weightSelector = document.getElementById("weightSelector").options[x].value;
+            var xmlHttpRequest = new XMLHttpRequest();
+            xmlHttpRequest.onreadystatechange = function () {
+                if (xmlHttpRequest.readyState === 4 && xmlHttpRequest.status === 200) {
+
+                    var response = xmlHttpRequest.responseText;
+                    var SearchWeightDetails = JSON.parse(response).SearchWeightDetails;
+                    console.log(SearchWeightDetails);
+
+                    var rowcount = SearchWeightDetails.length;
+                    for (var i = 0; i < rowcount; i++) {
+                        var table = document.getElementById("searchWeightTable");
+                        var row = table.insertRow(0);
+                        var cell1 = row.insertCell(0);
+                        var cell2 = row.insertCell(1);
+                        var cell3 = row.insertCell(2);
+                        var cell4 = row.insertCell(3);
+                        var cell5 = row.insertCell(4);
+                        var cell6 = row.insertCell(5);
+                        var cell7 = row.insertCell(6);
+                        var cell8 = row.insertCell(7);
+                        cell1.innerHTML = SearchWeightDetails[i]["birthregisterNo"];
+                        cell2.innerHTML = SearchWeightDetails[i]["weight"];
+                        cell3.innerHTML = SearchWeightDetails[i]["height"];
+                        cell4.innerHTML = SearchWeightDetails[i]["child_name"];
+                        cell5.innerHTML = SearchWeightDetails[i]["gender"];
+                        cell6.innerHTML = SearchWeightDetails[i]["nic"];
+                        cell7.innerHTML = SearchWeightDetails[i]["guardian_name"];
+                        cell8.innerHTML = SearchWeightDetails[i]["contact_no"];
 
                     }
                 }
             };
-            xmlHttpRequest.open("GET", "../SearchChildAge?name=" + childname, true);
+            xmlHttpRequest.open("GET", "../SearchWeightDetails?date1=" + date1 + "&date2=" + date2 + "&weightSelector=" + weightSelector, true);
             xmlHttpRequest.send();
 
         }
+        function sendMail() {
+            var to = document.getElementById('to').value;
+            var subject = document.getElementById('subject').value;
+            var content = document.getElementById('content').value;
+            var xmlHttpRequest = new XMLHttpRequest();
+            xmlHttpRequest.onreadystatechange = function () {
+                if (xmlHttpRequest.readyState === 4 && xmlHttpRequest.status === 200) {
 
-//        function loadVaccineDetails(category) {
-//            var nic = $('#vaccineNicNo').val();//get nic value
-//            $('#tableVaccineRecordDetailsBody tr').remove();// remove tabe rows
-//            var xmlHttpRequest = new XMLHttpRequest();
-//            xmlHttpRequest.onreadystatechange = function () {
-//                if (xmlHttpRequest.readyState === 4 && xmlHttpRequest.status === 200) {
-//                    var response = xmlHttpRequest.responseText;
-//                    var vaccineNames = JSON.parse(response).due_date;
-//                    for (var i = 0; i < due_date.length; i++) {
-//                        var table = document.getElementById("tableVaccineRecordDetailsBody");
-//                        alert();
-//                        var row = table.insertRow(0);
-//                        var cell3 = row.insertCell(0);
-//                        //                        cell1.innerHTML = rDetails[i]["date"];
-//                        //                        cell2.innerHTML = rDetails[i]["weight"];
-//                        cell3.innerHTML = vaccineNames[i];
-//                        //                        cell4.innerHTML = rDetails[i]["age"];
-//                    }
-//
-//
-//
-//                }
-//            };
-//            xmlHttpRequest.open("GET", "../SearchChildforVaccine?NIC=" + nic + "&vaccinecategory=" + category.value, true);
-//            xmlHttpRequest.send();
-//
-//        }
+                    var response = xmlHttpRequest.responseText;
+                }
+            };
+            xmlHttpRequest.open("POST", "../EmailSendingServlet", true);
+            xmlHttpRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xmlHttpRequest.send("to=" + to + "&subject=" + subject + "&content=" + content);
 
-        //        function SearchChildforVaccine() {
-        //            var nic = $('#vaccineNicNo').val();//get nic value
-        //            $('#vaccinenameSelector option:gt(0)').remove(); // remove dropdown load options
-        //            var xmlHttpRequest = new XMLHttpRequest();
-        //            xmlHttpRequest.onreadystatechange = function () {
-        //                if (xmlHttpRequest.readyState === 4 && xmlHttpRequest.status === 200) {
-        //
-        //                    var response = xmlHttpRequest.responseText;
-        //                    var child = JSON.parse(response).childName;// get json object values 
-        //                    for (var i = 0; i < child.length; i++) {// get array values 
-        //
-        //                        document.getElementById('vaccinenameSelector').appendChild(new Option(child[i], child[i]));//set values to dropdwon option
-        //                    }
-        //                }
-        //            }
-        //            ;
-        //                    xmlHttpRequest.open("GET", "../SearchChildforVaccine?NIC=" + nic + "&vaccine=" + , true);
-        //            xmlHttpRequest.send();
-        //            }
+        }
+        function searchForMail() {
+            var ClinicDate = document.getElementById("ClinicDate").value;
+            var xmlHttpRequest = new XMLHttpRequest();
+            xmlHttpRequest.onreadystatechange = function () {
+                if (xmlHttpRequest.readyState === 4 && xmlHttpRequest.status === 200) {
 
-function viewWA() {
-    
-    
-}
+                    var response = xmlHttpRequest.responseText;
+                    var emails = JSON.parse(response).emails;
+                    for (var i = 0; i < emails.length; i++) {
+                        document.getElementById('to').value = emails[i];
+
+                    }
+
+                }
+            };
+            xmlHttpRequest.open("GET", "../SearchforMail?ClinicDate=" + ClinicDate, true);
+            xmlHttpRequest.send();
+        }
+
     </script>
 </html>

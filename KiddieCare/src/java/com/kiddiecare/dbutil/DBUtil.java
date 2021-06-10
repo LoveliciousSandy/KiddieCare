@@ -35,7 +35,8 @@ public class DBUtil {
                 System.err.print("Wrong schema");
             } 
        } catch (Exception e) {
-           System.err.print("Wrong schema");
+           e.printStackTrace();
+           
        }
        return conn;
     

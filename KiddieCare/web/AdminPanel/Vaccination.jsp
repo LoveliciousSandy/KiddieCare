@@ -180,6 +180,23 @@
 
 .btn span.checkBoxAllow {
   display: none;
+  
+  
+  input .ckc{
+   position: absolute;
+                top: 0;
+                left: 0;
+                height: 25px;
+                width: 25px;
+                background-color: #eee;
+                border-radius: 5px;   
+  }
+  input #ck{
+      
+      height: 25px;
+                width: 25px;
+  }
+  
 }
         </style>
     </head>
@@ -189,6 +206,7 @@
             <div class="container work-process  pb-5 pt-5">
                 <div class="title mb-5 text-center">
                     <h3>Our <span class="site-color">Few Process</span></h3>
+                    <input checked  type="checkbox" style="width: 30px; height: 30px;">
                 </div>
                 <!-- ============ step 1 =========== -->
                 <div class="row">
